@@ -19,6 +19,8 @@ import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
 import co.prj.Aproject.member.command.LoginCommandForm;
 import co.prj.Aproject.member.command.MemberInsertCommand;
+import co.prj.Aproject.member.command.MemberYn;
+import co.prj.Aproject.member.command.MemberYnForm;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -37,6 +39,8 @@ public class FrontController extends HttpServlet {
 		map.put("/emailSend.do", new EmailSendCommand());
 		map.put("/login.do", new LoginCommand());
 		map.put("/memberInsert.do", new MemberInsertCommand());
+		map.put("/memberYnForm.do", new MemberYnForm());
+		map.put("/memberYn.do", new MemberYn());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -16,4 +16,8 @@ public interface MemberMapper {
 	public void memberUpdate(MemberVO vo);
 	
 	public void memberDelete(MemberVO vo);
+
+	public List<MemberVO> memberYnSelectList();
+
+	public void memberYnUpdate(MemberVO vo);
 }
