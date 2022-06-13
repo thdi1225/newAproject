@@ -16,8 +16,8 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailService {
 	//String user, password 있을 자리
-	String user = "mplv261@gmail.com";
-	String password = "mooecsnjsxbnubfg";
+	String user = "";
+	String password = "";
 	
 
 	public boolean gmailSend(String to, String title, String subject) {
