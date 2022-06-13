@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.prj.Aproject.calendar.command.CalendarCommand;
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
@@ -26,6 +27,7 @@ public class FrontController extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/login.do", new LoginCommand());
+		map.put("/calendar.do", new CalendarCommand());
 		map.put("/home.do", new HomeCommand());
 	}
 
@@ -41,7 +43,7 @@ public class FrontController extends HttpServlet {
 		if (!viewPage.endsWith(".do") && !viewPage.equals(null)) {
 			if(viewPage.equals("login")) {
 				viewPage =  "/WEB-INF"+"/views/"+viewPage + ".jsp";
-			}else {
+			} else {
 				viewPage = viewPage + ".tiles";
 			}
 		}
