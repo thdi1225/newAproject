@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.prj.Aproject.comm.Command;
+import co.prj.Aproject.email.command.EmailRecieve;
+import co.prj.Aproject.email.command.EmailSendCommand;
+import co.prj.Aproject.email.command.EmailServiceCommand;
 import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
 
@@ -25,6 +28,9 @@ public class FrontController extends HttpServlet {
 	}
 
 	public void init(ServletConfig config) throws ServletException {
+		map.put("/emailRecieve.do", new EmailRecieve());
+		map.put("/emailService.do", new EmailServiceCommand());
+		map.put("/emailSend.do", new EmailSendCommand());
 		map.put("/login.do", new LoginCommand());
 		map.put("/home.do", new HomeCommand());
 	}
