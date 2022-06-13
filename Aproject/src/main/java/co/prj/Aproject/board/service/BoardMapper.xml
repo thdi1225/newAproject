@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.prj.Aproject.board.service.BoardMapper">
+	
+
+    <select id="boardList" resultType="co.prj.Aproject.board.vo.BoardVO">
+        SELECT *
+          FROM BOARD
+    </select>
+
+    <select id="boardDetail" parameterType="int" resultType="co.prj.Aproject.board.vo.BoardVO">
+        SELECT *
+          FROM BOARD
+         WHERE BOARD_ID = #{BOARD_ID}
+    </select>
+
+    <insert id="boardInsert" parameterType="co.prj.Aproject.board.vo.BoardVO">
+        INSERT INTO BOARD_TEST (BOARD_ID, BOARD_TITLE, BOARD_SUBJECT, BOARD_DATE,)
+             VALUES(#{board_id}, #{board_title}, #{board_subject}, #{board_date}) 
+    </insert>
+
+    <update id="boardUpdate" parameterType="co.prj.Aproject.board.vo.BoardVO">
+        UPDATE BOARD
+           SET
+        <if test="subject != null">
+            BOARD_SUBJECT = #{board_subject}
+        </if>
+        <if test="subject != null and title != null"> , </if>
+        <if test="title != null">
+            BOARD_TITLE = #{BOARD_TITLE}
+        </if>
+        WHERE BOARD_ID = #{BOARD_ID}
+    </update>
+
+    <delete id="boardDelete" parameterType="int">
+        DELETE FROM BOARD_TEST WHERE BOARD_ID = #{BOARD_ID}
+    </delete>
+
+	<select id="noticeSearchList" resultType="co.prj.Aproject.board.vo.BoardVO">
+		SELECT * FROM BOARD
+		WHERE 
+		 <if test="key == 1">1 = 1</if>
+		 <if test="key == 2">WRITER = #{val}</if>
+		 <if test="key == 3">TITLE LIKE '%'||#{val}||'%'</if>
+		 <if test="key == 4">SUBJECT LIKE '%'||#{val}||'%'</if>
+		ORDER BY ID DESC
+	</select>
+</mapper>
