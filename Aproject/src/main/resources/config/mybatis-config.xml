@@ -13,6 +13,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="co/micol/prj/student/service/student-map.xml" />
+		<mapper resource="co/prj/Aproject/member/service/memberMapper.xml" />
 	</mappers>
 </configuration>

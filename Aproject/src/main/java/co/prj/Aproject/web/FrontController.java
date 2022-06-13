@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
+import co.prj.Aproject.member.command.LoginCommandForm;
+import co.prj.Aproject.member.command.MemberInsertCommand;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -25,8 +27,10 @@ public class FrontController extends HttpServlet {
 	}
 
 	public void init(ServletConfig config) throws ServletException {
-		map.put("/login.do", new LoginCommand());
+		map.put("/loginForm.do", new LoginCommandForm());
 		map.put("/home.do", new HomeCommand());
+		map.put("/login.do", new LoginCommand());
+		map.put("/memberInsert.do", new MemberInsertCommand());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +43,7 @@ public class FrontController extends HttpServlet {
 		String viewPage = command.exec(request, response);
 		
 		if (!viewPage.endsWith(".do") && !viewPage.equals(null)) {
-			if(viewPage.equals("login")) {
+			if(viewPage.equals("loginForm")) {
 				viewPage =  "/WEB-INF"+"/views/"+viewPage + ".jsp";
 			}else {
 				viewPage = viewPage + ".tiles";
