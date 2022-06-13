@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.home.command.HomeCommand;
+import co.prj.Aproject.member.command.LoginCommand;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -24,6 +25,7 @@ public class FrontController extends HttpServlet {
 	}
 
 	public void init(ServletConfig config) throws ServletException {
+		map.put("/login.do", new LoginCommand());
 		map.put("/home.do", new HomeCommand());
 	}
 
@@ -35,9 +37,13 @@ public class FrontController extends HttpServlet {
 
 		Command command = map.get(page);
 		String viewPage = command.exec(request, response);
-
+		
 		if (!viewPage.endsWith(".do") && !viewPage.equals(null)) {
-			viewPage = viewPage + ".tiles";
+			if(viewPage.equals("login")) {
+				viewPage =  "/WEB-INF"+"/views/"+viewPage + ".jsp";
+			}else {
+				viewPage = viewPage + ".tiles";
+			}
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
