@@ -18,5 +18,6 @@
 	<mappers>
 		<mapper resource="co/prj/Aproject/member/service/memberMapper.xml" />
 		<mapper resource="co/prj/Aproject/calendar/Calendar-map.xml" />
+		<mapper resource="co/prj/Aproject/board/service/BoardMapper.xml" />
 	</mappers>
 </configuration>
