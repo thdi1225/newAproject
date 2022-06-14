@@ -18,7 +18,7 @@ import co.prj.Aproject.board.command.BoardInput;
 import co.prj.Aproject.board.command.BoardInputForm;
 import co.prj.Aproject.board.command.BoardList;
 import co.prj.Aproject.comm.Command;
-import co.prj.Aproject.email.command.EmailRecieve;
+import co.prj.Aproject.email.command.EmailRecieveCommand;
 import co.prj.Aproject.email.command.EmailSendCommand;
 import co.prj.Aproject.email.command.EmailServiceCommand;
 import co.prj.Aproject.home.command.HomeCommand;
@@ -50,7 +50,9 @@ public class FrontController extends HttpServlet {
 		map.put("/calendar.do", new CalendarCommand());
 		map.put("/calendarInput.do", new CalendarInput());
 		map.put("/home.do", new HomeCommand());
-		map.put("/emailRecieve.do", new EmailRecieve());
+		
+		//이메일
+		map.put("/emailRecieve.do", new EmailRecieveCommand());
 		map.put("/emailService.do", new EmailServiceCommand());
 		map.put("/emailSend.do", new EmailSendCommand());
 		
