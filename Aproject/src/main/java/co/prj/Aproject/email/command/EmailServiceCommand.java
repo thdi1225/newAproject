@@ -4,13 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.prj.Aproject.comm.Command;
-import co.prj.Aproject.email.service.EmailService;
+import co.prj.Aproject.email.service.EmailFunc;
 
 public class EmailServiceCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		EmailService es = new EmailService();
+		EmailFunc es = new EmailFunc();
 		String to = request.getParameter("to");
 		String title = request.getParameter("title");
 		String subject = request.getParameter("subject");

@@ -4,9 +4,9 @@ import java.util.List;
 
 import co.prj.Aproject.email.vo.EmailVO;
 
-public interface EmailService {
+public interface EmailMapper {
 	List<EmailVO> emailSelectListAll();
-	
+		
 	int emailInsert(EmailVO vo);
 	int emailDelete(EmailVO vo);
 }
