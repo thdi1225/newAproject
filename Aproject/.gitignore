@@ -1,1 +1,5 @@
 /target/
+/Dev/
+.project
+.classpath
+README.md
