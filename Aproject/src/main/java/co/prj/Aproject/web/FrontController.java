@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.prj.Aproject.calendar.CalendarInput;
 import co.prj.Aproject.calendar.command.CalendarCommand;
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.home.command.HomeCommand;
@@ -28,6 +29,7 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/login.do", new LoginCommand());
 		map.put("/calendar.do", new CalendarCommand());
+		map.put("/calendarInput.do", new CalendarInput());
 		map.put("/home.do", new HomeCommand());
 	}
 
@@ -43,6 +45,11 @@ public class FrontController extends HttpServlet {
 		if (!viewPage.endsWith(".do") && !viewPage.equals(null)) {
 			if(viewPage.equals("login")) {
 				viewPage =  "/WEB-INF"+"/views/"+viewPage + ".jsp";
+			} else if(viewPage.startsWith("ajax:")) {
+				response.setContentType("text/html; charset=UTF-8");
+				viewPage = viewPage.substring(5);
+				response.getWriter().append(viewPage);
+				return;
 			} else {
 				viewPage = viewPage + ".tiles";
 			}
