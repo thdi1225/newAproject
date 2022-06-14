@@ -11,7 +11,7 @@
 	
 	<insert id="emailInsert" parameterType="co.prj.Aproject.email.vo.EmailVO">
 		insert into email
-		values(email_id_seq.nextval,#{emailTo},#{emailFrom},#{emailTitle},#{emailSubject},#{emailDate},0)
+		values(email_id_seq.nextval,#{emailTo},#{emailFrom},#{emailTitle},#{emailSubject},#{emailDate},0,#{emailUid})
 	</insert>
 	
 	<delete id="emailDelete" parameterType="co.prj.Aproject.email.vo.EmailVO">

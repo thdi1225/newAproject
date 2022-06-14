@@ -7,26 +7,31 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Address;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.NoSuchProviderException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
+import javax.mail.UIDFolder;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.search.FlagTerm;
 
 import co.prj.Aproject.email.serviceImpl.EmailServiceImpl;
 import co.prj.Aproject.email.vo.EmailVO;
 
 public class EmailFunc {
 	// String user, password 있을 자리
-	String user = "";
-	String password = "";
+	String user = "mplv261@gmail.com";
+	String password = "mooecsnjsxbnubfg";
 
 	EmailService dao = new EmailServiceImpl();
 
@@ -51,6 +56,10 @@ public class EmailFunc {
 		prop.put("mail.smtp.auth", "true");
 		prop.put("mail.smtp.ssl.enable", "true");
 		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+		prop.put("mail.smtp.socketFactory.port", "465");
+		prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		prop.put("mail.smtp.socketFactory.fallback", "false");
 
 		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -81,14 +90,106 @@ public class EmailFunc {
 		return false;
 	}
 
+	private List<EmailVO> gmailIMAPRecieve() {
+		List<EmailVO> newEmails = new ArrayList<EmailVO>();
+		Folder folder = null;
+		Store store = null;
+//	        String filePath = "c:/temp/mail/";
+		try {
+			Properties props = System.getProperties();
+			props.setProperty("mail.store.protocol", "imaps");
+
+			Session session = Session.getDefaultInstance(props, null);
+			store = session.getStore("imaps");
+			store.connect("imap.gmail.com", user, password);
+			folder = store.getFolder("Inbox"); // inbox : 받은 메일함 폴더
+			folder.open(Folder.READ_WRITE);
+			UIDFolder uf = (UIDFolder) folder; // uid 얻기 위한 용도
+
+			// 안 읽은 것만 가져오기
+//            Message messages[] = folder.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
+			// 읽은 것도 가져오기
+			Message messages[] = folder.getMessages();
+
+			for (Message msg : messages) {
+				EmailVO vo = new EmailVO();
+				vo.setEmailFrom(getSender(msg)); // 주소
+				vo.setEmailDate(msg.getReceivedDate()); // 날짜
+				vo.setEmailTitle(msg.getSubject()); // 제목
+				// 내용 가져오기
+//				try {
+//					String body = ((MimeMultipart) msg.getContent()).getBodyPart(0).getContent().toString();
+//					System.out.println(body);
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+				
+				// uid
+				vo.setEmailUid(uf.getUID(msg));
+
+				System.out.println("Saving : " + msg.getSubject());
+				newEmails.add(vo);
+			}
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		} finally {
+			if (folder != null) {
+				try {
+					folder.close(true);
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				}
+			}
+			if (store != null) {
+				try {
+					store.close();
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return newEmails;
+	}
+
+	private String getSender(Message msg) {
+		String from = "unknown";
+		try {
+			if (msg.getReplyTo().length >= 1) {
+				from = msg.getReplyTo()[0].toString();
+			} else if (msg.getFrom().length >= 1) {
+				from = msg.getFrom()[0].toString();
+			}
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		return from;
+	}
+
+	private void saveParts(long uId, Object content) {
+		if (content instanceof Multipart) {
+			Multipart multi = ((Multipart) content);
+			int parts = multi.getCount();
+			System.out.println("parts:" + parts);
+			for (int j = 0; j < parts; ++j) {
+				MimeBodyPart part = (MimeBodyPart) multi.getBodyPart(j);
+				if (part.getContent() instanceof Multipart) {
+					saveParts(uId, part.getContent(), fileName, filePath);
+				}
+			}
+		}
+	}
+
 	// Gmail의 메일을 전부 불러오는 메소드
-	private List<EmailVO> gmailTitleRecieve() {
+	private List<EmailVO> gmailPOPRecieve() {
 		Properties prop = System.getProperties();
-		prop.put("mail.pop3.host", "pop.gmail.com"); // 이메일 발송을 처리해줄 STMP 서버
+		prop.put("mail.pop3.host", "pop.gmail.com");
 		prop.put("mail.pop3.port", 995);
 		prop.put("mail.pop3.auth", "true");
 		prop.put("mail.pop3.starttls.enable", "true");
 		prop.put("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+		prop.put("mail.pop3.socketFactory.fallback", "false");
+		prop.put("mail.pop3.socketFactory.port", "995");
 
 		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -99,7 +200,6 @@ public class EmailFunc {
 		Store store;
 		Folder folder;
 		List<EmailVO> emails = new ArrayList<EmailVO>();
-		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 		try {
 			store = session.getStore("pop3");
@@ -112,16 +212,17 @@ public class EmailFunc {
 			for (Message message : messages) {
 				EmailVO vo = new EmailVO();
 				vo.setEmailDate(message.getSentDate());
-				
-				//내용 넣는 부분
-				String subject = recieveSubject(message);
 
+				// 내용 넣는 부분
+//				String subject = recieveSubject(message);
+
+				// from 주소 인코딩
 				Address sendAddr[] = message.getFrom();
 				InternetAddress addr = null;
 				if ((sendAddr != null) && (sendAddr.length > 0)) {
 					addr = (InternetAddress) sendAddr[0];
 				}
-				vo.setEmailFrom(addr.getAddress()); // 어디서 온 메일인지
+				vo.setEmailFrom(addr.getAddress()); // 주소
 
 				vo.setEmailTitle(message.getSubject()); // 제목
 				emails.add(vo);
@@ -164,7 +265,9 @@ public class EmailFunc {
 	// 기존 db랑
 	public void saveEmailsInDB() {
 		// origin 이메일함 가져오기
-		List<EmailVO> newEmails = gmailTitleRecieve(); // origin 메일에서 가져오기
+		gmailIMAPRecieve();
+//		List<EmailVO> newEmails = gmailPOPRecieve(); // (POP) origin 메일에서 가져오기
+		List<EmailVO> newEmails = gmailIMAPRecieve(); // (IMAP) origin 메일에서 가져오기
 		List<EmailVO> dbEmails = dao.emailSelectListAll(); // db에서 가져오기
 
 		if (dbEmails.size() == 0) { // 처음 로그인할 때
