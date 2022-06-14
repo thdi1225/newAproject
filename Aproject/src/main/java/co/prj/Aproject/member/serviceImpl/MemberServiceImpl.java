@@ -40,13 +40,13 @@ public class MemberServiceImpl implements MemberService{
 	//회원수정
 	@Override
 	public void memberUpdate(MemberVO vo) {
-		
+		mapper.memberUpdate(vo);
 	}
 
 	//회원삭제
 	@Override
-	public void memberDelete(MemberVO vo) {
-		
+	public int memberDelete(MemberVO vo) {
+		return mapper.memberDelete(vo);
 	}
 
 	@Override
@@ -57,6 +57,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void memberYnUpdate(MemberVO vo) {
 		mapper.memberYnUpdate(vo);
+	}
+
+	@Override
+	public int memberPwReset(MemberVO vo) {
+		return mapper.memberPwReset(vo);
 	}
 
 }

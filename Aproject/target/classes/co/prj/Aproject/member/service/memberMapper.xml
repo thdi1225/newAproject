@@ -43,9 +43,9 @@
 			member_email = #{member_email},
 			member_name = #{member_name},
 			member_phone = #{member_phone},
-			member_date = #{member_date},
 			member_job = #{member_job},
-			section_id = #{section_id}
+			section_id = #{section_id},
+			member_auth = #{member_auth}
 		where member_num = #{member_num}
 	</update>
 	
@@ -63,5 +63,11 @@
 		update member set
 		member_yn = 'Y'
 		where member_num = #{member_num}
+	</update>
+	
+	<update id="memberPwReset" parameterType="co.prj.Aproject.member.vo.MemberVO">
+		update member set
+		member_pw = '1234'
+		where member_num = #{member_num} 
 	</update>
 </mapper>

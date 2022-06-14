@@ -15,7 +15,7 @@
 	rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
-</head>
+
 <body>
 	<div id="wrapper">
 
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 		<!-- Core plugin JavaScript-->

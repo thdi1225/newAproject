@@ -24,7 +24,14 @@ import co.prj.Aproject.email.command.EmailServiceCommand;
 import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
 import co.prj.Aproject.member.command.LoginCommandForm;
+import co.prj.Aproject.member.command.MemberAdminInputForm;
+import co.prj.Aproject.member.command.MemberDelete;
 import co.prj.Aproject.member.command.MemberInsertCommand;
+import co.prj.Aproject.member.command.MemberInsertForm;
+import co.prj.Aproject.member.command.MemberPwReset;
+import co.prj.Aproject.member.command.MemberSelect;
+import co.prj.Aproject.member.command.MemberSelectList;
+import co.prj.Aproject.member.command.MemberUpdate;
 import co.prj.Aproject.member.command.MemberYn;
 import co.prj.Aproject.member.command.MemberYnForm;
 
@@ -46,15 +53,30 @@ public class FrontController extends HttpServlet {
 		map.put("/emailRecieve.do", new EmailRecieve());
 		map.put("/emailService.do", new EmailServiceCommand());
 		map.put("/emailSend.do", new EmailSendCommand());
+		
+		//로그인
+		map.put("/loginForm.do", new LoginCommandForm());
 		map.put("/login.do", new LoginCommand());
+		
+		//회원가입
 		map.put("/memberInsert.do", new MemberInsertCommand());
+		
+		//회원관리
 		map.put("/memberYnForm.do", new MemberYnForm());
 		map.put("/memberYn.do", new MemberYn());
+		map.put("/memberSelectList.do", new MemberSelectList());
+		map.put("/memberInsertForm.do", new MemberInsertForm());
+		map.put("/memberDelete.do", new MemberDelete());
+		map.put("/memberUpdate.do", new MemberUpdate());
+		map.put("/memberPwReset.do", new MemberPwReset());
+		map.put("/memberSelect.do", new MemberSelect());
+		map.put("/memberAdminInputForm.do", new MemberAdminInputForm());
 		
 		map.put("/boardInputForm.do", new BoardInputForm()); //게시글 입력폼
 		map.put("/boardInput.do", new BoardInput()); //게시글 저장
 		map.put("/boardList.do", new BoardList()); //게시글 목록
 		map.put("/ajaxSearchList.do", new AjaxSearchList()); //게시글 검색
+
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
