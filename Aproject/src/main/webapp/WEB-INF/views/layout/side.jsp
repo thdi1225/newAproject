@@ -29,7 +29,7 @@
 	        <div id="memberPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 	            <div class="bg-white py-2 collapse-inner rounded">
 	                <a class="collapse-item" href="memberSelectList.do">회원 목록</a>
-	                <a class="collapse-item" href="memberInsertForm.do">회원 등록</a>
+	                <a class="collapse-item" href="memberAdminInputForm.do">회원 등록</a>
 	                <a class="collapse-item" href="memberYnForm.do">가입 승인</a>
 	                <div class="collapse-divider"></div>
 	            </div>
