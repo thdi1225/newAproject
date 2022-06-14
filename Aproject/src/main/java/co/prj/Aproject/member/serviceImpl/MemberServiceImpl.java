@@ -49,4 +49,14 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
+	@Override
+	public List<MemberVO> memberYnSelectList() {
+		return mapper.memberYnSelectList();
+	}
+
+	@Override
+	public void memberYnUpdate(MemberVO vo) {
+		mapper.memberYnUpdate(vo);
+	}
+
 }
