@@ -19,7 +19,7 @@ public class EmailService {
 	String user = "";
 	String password = "";
 	
-
+	//메일 전송 method
 	public boolean gmailSend(String to, String title, String subject) {
 		//mail user와 password 보안용 코드
 //		Properties mailProp = new Properties();
@@ -71,13 +71,14 @@ public class EmailService {
 		return false;
 	}
 	
+	//메일받는 method
 	public void gmailRecieve() {
 		Properties prop = System.getProperties();
-		prop.put("mail.smtp.host","smtp.gmail.com"); //이메일 발송을 처리해줄 STMP 서버
-		prop.put("mail.smtp.port",995);
-		prop.put("mail.smtp.auth", "true");
-		prop.put("mail.smtp.ssl.enable", "true");
-		prop.put("mail.smtp.ssl.trust", "pop.gmail.com");
+		prop.put("mail.pop3.host","pop.gmail.com"); //이메일 발송을 처리해줄 STMP 서버
+		prop.put("mail.pop3.port",995);
+		prop.put("mail.pop3.auth", "true");
+		prop.put("mail.pop3.ssl.enable", "true");
+		prop.put("mail.pop3.ssl.trust", "pop.gmail.com");
 		
 		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
