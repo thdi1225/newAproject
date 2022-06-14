@@ -25,8 +25,8 @@ import co.prj.Aproject.email.vo.EmailVO;
 
 public class EmailFunc {
 	// String user, password 있을 자리
-	String user = "mplv261@gmail.com";
-	String password = "mooecsnjsxbnubfg";
+	String user = "";
+	String password = "";
 
 	EmailService dao = new EmailServiceImpl();
 
