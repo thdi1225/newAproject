@@ -11,13 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.prj.Aproject.calendar.CalendarInput;
-import co.prj.Aproject.calendar.command.CalendarCommand;
 import co.prj.Aproject.board.command.AjaxSearchList;
 import co.prj.Aproject.board.command.BoardInput;
 import co.prj.Aproject.board.command.BoardInputForm;
 import co.prj.Aproject.board.command.BoardList;
+import co.prj.Aproject.calendar.CalendarInput;
+import co.prj.Aproject.calendar.command.CalendarCommand;
 import co.prj.Aproject.comm.Command;
+import co.prj.Aproject.commute.command.CommuteEndInsert;
+import co.prj.Aproject.commute.command.CommuteSelectList;
+import co.prj.Aproject.commute.command.CommuteStartInsert;
 import co.prj.Aproject.email.command.EmailRecieveCommand;
 import co.prj.Aproject.email.command.EmailSendCommand;
 import co.prj.Aproject.email.command.EmailServiceCommand;
@@ -79,6 +82,9 @@ public class FrontController extends HttpServlet {
 		map.put("/boardList.do", new BoardList()); //게시글 목록
 		map.put("/ajaxSearchList.do", new AjaxSearchList()); //게시글 검색
 
+		map.put("/commuteSelectList.do", new CommuteSelectList());
+		map.put("/commuteStartInsert.do", new CommuteStartInsert());
+		map.put("/commuteEndInsert.do", new CommuteEndInsert());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
