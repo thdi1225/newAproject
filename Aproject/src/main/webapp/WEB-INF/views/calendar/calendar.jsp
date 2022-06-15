@@ -23,7 +23,6 @@
 			<div>
 				<h1>${message }</h1>
 			</div>
-			<span>X</span>
 			<h1>일정 등록</h1>
 			<form id="frm" action="calendarInput.do" method="post"
 				enctype="application/x-www-form-urlencoded">
