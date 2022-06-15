@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.prj.Aproject.board.command.AjaxSearchList;
+import co.prj.Aproject.board.command.BoardDetail;
 import co.prj.Aproject.board.command.BoardInput;
 import co.prj.Aproject.board.command.BoardInputForm;
 import co.prj.Aproject.board.command.BoardList;
@@ -46,6 +47,7 @@ public class FrontController extends HttpServlet {
 		map.put("/boardInput.do", new BoardInput()); //게시글 저장
 		map.put("/boardList.do", new BoardList()); //게시글 목록
 		map.put("/ajaxSearchList.do", new AjaxSearchList()); //게시글 검색
+		map.put("/boardDetail.do", new BoardDetail()); // 게시글 상세
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,7 +60,7 @@ public class FrontController extends HttpServlet {
 		System.out.println(page);
 		Command command = map.get(page);
 		String viewPage = command.exec(request, response);
-		
+		System.out.println(viewPage);
 		if(viewPage == null) {
 	         viewPage = "404/404page.tiles";
 	      }else if(viewPage.startsWith("ajax:")) {
