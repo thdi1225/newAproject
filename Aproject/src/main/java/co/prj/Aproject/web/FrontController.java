@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.prj.Aproject.comm.Command;
+import co.prj.Aproject.commute.command.CommuteEndInsert;
+import co.prj.Aproject.commute.command.CommuteSelectList;
+import co.prj.Aproject.commute.command.CommuteStartInsert;
 import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
 
@@ -27,6 +30,9 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/login.do", new LoginCommand());
 		map.put("/home.do", new HomeCommand());
+		map.put("/commuteSelectList.do", new CommuteSelectList());
+		map.put("/commuteStartInsert.do", new CommuteStartInsert());
+		map.put("/commuteEndInsert.do", new CommuteEndInsert());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
