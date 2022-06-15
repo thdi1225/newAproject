@@ -70,4 +70,30 @@
 		member_pw = '1234'
 		where member_num = #{member_num} 
 	</update>
+	
+	<insert id="memberAdminInput" parameterType="co.prj.Aproject.member.vo.MemberVO">
+		insert into member (
+			member_num,
+			member_email,
+			member_pw,
+			member_name,
+			member_phone,
+			member_date,
+			member_job,
+			section_id,
+			member_yn,
+			member_auth
+		)values(
+			member_num_seq.nextval,
+			#{member_email},
+			#{member_pw},
+			#{member_name},
+			#{member_phone},
+			sysdate,
+			#{member_job},
+			#{section_id},
+			'Y',
+			#{member_auth}
+		)
+	</insert>
 </mapper>

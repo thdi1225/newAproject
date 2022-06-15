@@ -22,4 +22,6 @@ public interface MemberMapper {
 	public void memberYnUpdate(MemberVO vo);
 
 	public int memberPwReset(MemberVO vo);
+
+	public int memberAdminInput(MemberVO vo);
 }

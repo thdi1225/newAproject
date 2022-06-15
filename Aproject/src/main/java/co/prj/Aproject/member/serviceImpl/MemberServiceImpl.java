@@ -64,4 +64,9 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.memberPwReset(vo);
 	}
 
+	@Override
+	public int memberAdminInput(MemberVO vo) {
+		return mapper.memberAdminInput(vo);
+	}
+
 }

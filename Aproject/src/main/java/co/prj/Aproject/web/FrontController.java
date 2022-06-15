@@ -27,6 +27,7 @@ import co.prj.Aproject.email.command.EmailServiceCommand;
 import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
 import co.prj.Aproject.member.command.LoginCommandForm;
+import co.prj.Aproject.member.command.MemberAdminInput;
 import co.prj.Aproject.member.command.MemberAdminInputForm;
 import co.prj.Aproject.member.command.MemberDelete;
 import co.prj.Aproject.member.command.MemberInsertCommand;
@@ -37,6 +38,12 @@ import co.prj.Aproject.member.command.MemberSelectList;
 import co.prj.Aproject.member.command.MemberUpdate;
 import co.prj.Aproject.member.command.MemberYn;
 import co.prj.Aproject.member.command.MemberYnForm;
+import co.prj.Aproject.section.command.SectionDelete;
+import co.prj.Aproject.section.command.SectionInsert;
+import co.prj.Aproject.section.command.SectionInsertForm;
+import co.prj.Aproject.section.command.SectionSelect;
+import co.prj.Aproject.section.command.SectionSelectList;
+import co.prj.Aproject.section.command.SectionUpdate;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -76,7 +83,16 @@ public class FrontController extends HttpServlet {
 		map.put("/memberPwReset.do", new MemberPwReset());
 		map.put("/memberSelect.do", new MemberSelect());
 		map.put("/memberAdminInputForm.do", new MemberAdminInputForm());
+		map.put("/memberAdminInput.do", new MemberAdminInput());
 		
+		//부서관리
+		map.put("/sectionSelectList.do", new SectionSelectList());
+		map.put("/sectionSelect.do", new SectionSelect());
+		map.put("/sectionUpdate.do", new SectionUpdate());
+		map.put("/sectionDelete.do", new SectionDelete());
+		map.put("/sectionInsertForm.do", new SectionInsertForm());
+		map.put("/sectionInsert.do", new SectionInsert());
+	
 		map.put("/boardInputForm.do", new BoardInputForm()); //게시글 입력폼
 		map.put("/boardInput.do", new BoardInput()); //게시글 저장
 		map.put("/boardList.do", new BoardList()); //게시글 목록
@@ -98,19 +114,20 @@ public class FrontController extends HttpServlet {
 		
 		if(viewPage == null) {
 	         viewPage = "404/404page.tiles";
-	      }else if(viewPage.startsWith("ajax:")) {
+	    }else if(viewPage.startsWith("ajax:")) {
 	         response.setContentType("text/html; charset=UTF-8");
 	         viewPage = viewPage.substring(5);
 	         response.getWriter().append(viewPage);
 	         return;
-	      }else {
+	    }else {
 	         if(viewPage.equals("loginForm")) {
 	            viewPage =  "/WEB-INF/views/"+viewPage + ".jsp";
 	         }else {
 	            viewPage = viewPage + ".tiles";
 	         }
-	      }
-
+	    }
+		
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}
