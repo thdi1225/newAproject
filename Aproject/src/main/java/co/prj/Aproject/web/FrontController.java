@@ -18,6 +18,7 @@ import co.prj.Aproject.board.command.BoardInput;
 import co.prj.Aproject.board.command.BoardInputForm;
 import co.prj.Aproject.board.command.BoardList;
 import co.prj.Aproject.comm.Command;
+import co.prj.Aproject.email.command.EmailDeleteCommand;
 import co.prj.Aproject.email.command.EmailRecieveCommand;
 import co.prj.Aproject.email.command.EmailSendCommand;
 import co.prj.Aproject.email.command.EmailServiceCommand;
@@ -55,6 +56,7 @@ public class FrontController extends HttpServlet {
 		map.put("/emailRecieve.do", new EmailRecieveCommand());
 		map.put("/emailService.do", new EmailServiceCommand());
 		map.put("/emailSend.do", new EmailSendCommand());
+		map.put("/emailDelete.do", new EmailDeleteCommand());
 		
 		//로그인
 		map.put("/loginForm.do", new LoginCommandForm());

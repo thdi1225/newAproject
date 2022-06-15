@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.prj.Aproject.email.service.EmailMapper">
-	<select id="emailSelectListAll" resultType = "co.prj.Aproject.email.vo.EmailVO">
+	<select id="emailSelectListAll" resultType = "co.prj.Aproject.email.vo.EmailVO" parameterType="int">
 		select email_id as emailId, email_to as emailTo, email_from as emailFrom,
-		email_title as emailTitle, email_subject as emailSubject, email_date as emailDate, member_num as memberNum
+		email_title as emailTitle, email_subject as emailSubject, email_date as emailDate, member_num as memberNum, email_file as emailFile
 		from email
-		where member_num = 0
+		where member_num = #{memberNum}
 		order by email_date desc
 	</select>
 	
 	<insert id="emailInsert" parameterType="co.prj.Aproject.email.vo.EmailVO">
 		insert into email
-		values(email_id_seq.nextval,#{emailTo},#{emailFrom},#{emailTitle},#{emailSubject},#{emailDate},0,#{emailUid})
+		values(#{emailId},#{emailTo},#{emailFrom},#{emailTitle},#{emailSubject},#{emailDate},#{memberNum},#{emailFile})
 	</insert>
 	
 	<delete id="emailDelete" parameterType="co.prj.Aproject.email.vo.EmailVO">
 		delete email
-		where email_title=#{emailTitle}
-		and email_date=#{emailDate}
-		and email_id = #{emailId}
+		where email_id = #{emailId}
+		and member_num = #{memberNum}
 	</delete>
 
 </mapper>
