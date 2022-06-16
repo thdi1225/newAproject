@@ -2,12 +2,13 @@ package co.prj.Aproject.member.service;
 
 import java.util.List;
 
+import co.prj.Aproject.member.vo.MemberPage;
 import co.prj.Aproject.member.vo.MemberVO;
 
 public interface MemberService {
 	public MemberVO login(MemberVO vo);
 	
-	public List<MemberVO> memberSelectList();
+	public List<MemberVO> memberSelectList(MemberPage page);
 	
 	public MemberVO memberSelect(MemberVO vo);
 	
@@ -24,4 +25,6 @@ public interface MemberService {
 	public int memberPwReset(MemberVO vo);
 
 	public int memberAdminInput(MemberVO vo);
+
+	public int memberSelectListCount(MemberPage page);
 }

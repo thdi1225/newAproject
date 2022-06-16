@@ -26,18 +26,19 @@ import co.prj.Aproject.email.command.EmailSendCommand;
 import co.prj.Aproject.email.command.EmailServiceCommand;
 import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
-import co.prj.Aproject.member.command.LoginCommandForm;
+import co.prj.Aproject.member.command.LoginFormCommand;
+import co.prj.Aproject.member.command.LogoutCommand;
 import co.prj.Aproject.member.command.MemberAdminInput;
 import co.prj.Aproject.member.command.MemberAdminInputForm;
-import co.prj.Aproject.member.command.MemberDelete;
+import co.prj.Aproject.member.command.MemberDeleteCommand;
 import co.prj.Aproject.member.command.MemberInsertCommand;
-import co.prj.Aproject.member.command.MemberInsertForm;
-import co.prj.Aproject.member.command.MemberPwReset;
-import co.prj.Aproject.member.command.MemberSelect;
-import co.prj.Aproject.member.command.MemberSelectList;
-import co.prj.Aproject.member.command.MemberUpdate;
-import co.prj.Aproject.member.command.MemberYn;
-import co.prj.Aproject.member.command.MemberYnForm;
+import co.prj.Aproject.member.command.MemberInsertFormCommand;
+import co.prj.Aproject.member.command.MemberPwResetCommand;
+import co.prj.Aproject.member.command.MemberSelectCommand;
+import co.prj.Aproject.member.command.MemberSelectListCommand;
+import co.prj.Aproject.member.command.MemberUpdateCommand;
+import co.prj.Aproject.member.command.MemberYnCommand;
+import co.prj.Aproject.member.command.MemberYnFormCommand;
 import co.prj.Aproject.section.command.SectionDelete;
 import co.prj.Aproject.section.command.SectionInsert;
 import co.prj.Aproject.section.command.SectionInsertForm;
@@ -55,8 +56,10 @@ public class FrontController extends HttpServlet {
 	}
 
 	public void init(ServletConfig config) throws ServletException {
-		map.put("/loginForm.do", new LoginCommandForm());
+		map.put("/loginForm.do", new LoginFormCommand());
 		map.put("/login.do", new LoginCommand());
+		map.put("/logout.do", new LogoutCommand());
+		
 		map.put("/calendar.do", new CalendarCommand());
 		map.put("/calendarInput.do", new CalendarInput());
 		map.put("/home.do", new HomeCommand());
@@ -67,21 +70,21 @@ public class FrontController extends HttpServlet {
 		map.put("/emailSend.do", new EmailSendCommand());
 		
 		//로그인
-		map.put("/loginForm.do", new LoginCommandForm());
+		map.put("/loginForm.do", new LoginFormCommand());
 		map.put("/login.do", new LoginCommand());
 		
 		//회원가입
 		map.put("/memberInsert.do", new MemberInsertCommand());
 		
 		//회원관리
-		map.put("/memberYnForm.do", new MemberYnForm());
-		map.put("/memberYn.do", new MemberYn());
-		map.put("/memberSelectList.do", new MemberSelectList());
-		map.put("/memberInsertForm.do", new MemberInsertForm());
-		map.put("/memberDelete.do", new MemberDelete());
-		map.put("/memberUpdate.do", new MemberUpdate());
-		map.put("/memberPwReset.do", new MemberPwReset());
-		map.put("/memberSelect.do", new MemberSelect());
+		map.put("/memberYnForm.do", new MemberYnFormCommand());
+		map.put("/memberYn.do", new MemberYnCommand());
+		map.put("/memberSelectList.do", new MemberSelectListCommand());
+		map.put("/memberInsertForm.do", new MemberInsertFormCommand());
+		map.put("/memberDelete.do", new MemberDeleteCommand());
+		map.put("/memberUpdate.do", new MemberUpdateCommand());
+		map.put("/memberPwReset.do", new MemberPwResetCommand());
+		map.put("/memberSelect.do", new MemberSelectCommand());
 		map.put("/memberAdminInputForm.do", new MemberAdminInputForm());
 		map.put("/memberAdminInput.do", new MemberAdminInput());
 		
@@ -119,17 +122,15 @@ public class FrontController extends HttpServlet {
 	         viewPage = viewPage.substring(5);
 	         response.getWriter().append(viewPage);
 	         return;
-	    }else {
-	         if(viewPage.equals("loginForm")) {
+	    }else if(!viewPage.endsWith(".do")){
+	       if(viewPage.equals("loginForm")) {
 	            viewPage =  "/WEB-INF/views/"+viewPage + ".jsp";
-	         }else {
+	       }else {
 	            viewPage = viewPage + ".tiles";
-	         }
+	       }         
 	    }
-		
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
-		dispatcher.forward(request, response);
+        dispatcher.forward(request, response);
 	}
 
 }

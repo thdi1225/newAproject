@@ -10,7 +10,7 @@ import co.prj.Aproject.member.service.MemberService;
 import co.prj.Aproject.member.serviceImpl.MemberServiceImpl;
 import co.prj.Aproject.member.vo.MemberVO;
 
-public class MemberYnForm implements Command {
+public class MemberYnFormCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {

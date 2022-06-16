@@ -22,15 +22,17 @@ public class LoginCommand implements Command {
 		vo = service.login(vo);
 		HttpSession session = request.getSession();
 		
+		
 		if(vo != null && vo.getMember_yn().equals("Y")) {
 			session.setAttribute("memberVO", vo);
-			return "home/home";
+			
+			return "home.do";
 		}else if(vo != null && vo.getMember_yn().equals("N")){
 			request.setAttribute("message", "승인 받지 못한 회원입니다. 관리자에게 문의하여 주세요.");
-			return "loginForm";
+			return "loginForm.do";
 		}else {
 			request.setAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
-			return "loginForm";
+			return "loginForm.do";
 		}
 	}
 

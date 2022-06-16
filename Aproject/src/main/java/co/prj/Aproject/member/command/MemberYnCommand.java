@@ -8,7 +8,7 @@ import co.prj.Aproject.member.service.MemberService;
 import co.prj.Aproject.member.serviceImpl.MemberServiceImpl;
 import co.prj.Aproject.member.vo.MemberVO;
 
-public class MemberYn implements Command {
+public class MemberYnCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {

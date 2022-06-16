@@ -8,7 +8,27 @@
 	</select>
 
 	<select id="memberSelectList" resultType="co.prj.Aproject.member.vo.MemberVO">
-		select * from member
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						select * from member
+						<if test='search != null &amp;&amp; search != ""'>
+							where member_name like '%'||#{search}||'%'
+						</if>
+						) A
+				)
+		<if test='start != null &amp;&amp; start != ""'>
+			WHERE RN BETWEEN #{start} AND #{end}
+		</if>
+		
+	</select>
+	
+	<select id="memberSelectListCount" resultType="int">
+		select count(*) from member
+		<if test='search != null &amp;&amp; search != ""'>
+			where member_name like '%'||#{search}||'%'
+		</if>
 	</select>
 	
 	<select id="memberSelect" parameterType="co.prj.Aproject.member.vo.MemberVO" resultType="co.prj.Aproject.member.vo.MemberVO">

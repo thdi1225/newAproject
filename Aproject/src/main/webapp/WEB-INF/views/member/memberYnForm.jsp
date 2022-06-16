@@ -6,14 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 </head>
 <body>
@@ -38,7 +30,7 @@
 					<td>${list.member_date}</td>
 					<td>${list.section_id}</td>
 					<td>${list.member_job}</td>
-					<td><button type="button" onclick="memberYn(${list.member_name}, ${list.member_num})">승인</button></td>
+					<td><button type="button" onclick="memberYn('${list.member_name}', '${list.member_num}')">승인</button></td>
 				</tr>
 			</c:forEach>
 		</table>

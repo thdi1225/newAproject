@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import co.prj.Aproject.comm.DataSource;
 import co.prj.Aproject.member.service.MemberMapper;
 import co.prj.Aproject.member.service.MemberService;
+import co.prj.Aproject.member.vo.MemberPage;
 import co.prj.Aproject.member.vo.MemberVO;
 
 public class MemberServiceImpl implements MemberService{
@@ -21,8 +22,8 @@ public class MemberServiceImpl implements MemberService{
 
 	//목록조회
 	@Override
-	public List<MemberVO> memberSelectList() {
-		return mapper.memberSelectList();
+	public List<MemberVO> memberSelectList(MemberPage page) {
+		return mapper.memberSelectList(page);
 	}
 
 	//단건조회
@@ -67,6 +68,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int memberAdminInput(MemberVO vo) {
 		return mapper.memberAdminInput(vo);
+	}
+
+	@Override
+	public int memberSelectListCount(MemberPage page) {
+		return mapper.memberSelectListCount(page);
 	}
 
 }

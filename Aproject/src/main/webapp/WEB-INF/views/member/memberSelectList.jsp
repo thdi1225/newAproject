@@ -6,17 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 	<div align="center">
+		<form action="memberSelectList.do" method="post">
+			검색 : <input type="text" id="search" name="search">
+			<button type="submit">검색</button>
+		</form>
 		<table border="1" id="memberList">
 			<tr>
 				<th>번호</th>
@@ -43,8 +39,7 @@
 					<td><c:if test="${list.member_auth == 0}">관리자</c:if> <c:if
 							test="${list.member_auth == 1}">일반 사용자</c:if></td>
 					<td><button type="button"
-							onclick="memberSelect(${list.member_num})" data-toggle="modal"
-							data-target="#memberUpdateModal">수정</button></td>
+							onclick="memberSelect(${list.member_num})" data-toggle="modal" data-target="#memberUpdateModal">수정</button></td>
 					<td><button type="button"
 							onclick="memberDelete(${list.member_num})">삭제</button></td>
 					<td><button type="button"
@@ -52,6 +47,24 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<div style="display: block; text-align: center;">		
+			<c:if test="${paging.startPage != 1 }">
+				<a href="memberSelectList.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+			</c:if>
+			<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+				<c:choose>
+					<c:when test="${p == paging.nowPage }">
+						<b>${p }</b>
+					</c:when>
+					<c:when test="${p != paging.nowPage }">
+						<a href="memberSelectList.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${paging.endPage != paging.lastPage}">
+				<a href="memberSelectList.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+			</c:if>
+		</div>
 	</div>
 	
 	<!-- 회원 수정 모달 -->
@@ -71,32 +84,28 @@
 					<input id="member_update_num" name="member_update_num" type="text"
 						class="input">
 					<div class="group">
-						<label for="section_id" class="label">section</label> <select
-							id="section_id" name="section_id" class="select">
-							<option value="1">테스트 1</option>
-							<option value="2">테스트 2</option>
-							<option value="3">테스트 3</option>
+						<label for="section_id" class="label">section</label>
+						<select id="section_id" name="section_id" class="select">
+							<c:forEach items="${sectionList}" var="list">
+								<option value="${list.section_id}">${list.section_name}</option>
+							</c:forEach>
 						</select>
 					</div>
 					<div class="group">
 						<label for="member_update_email" class="label">email</label> <input
-							id="member_update_email" name="member_update_email" type="text"
-							class="input">
+							id="member_update_email" name="member_update_email" type="email" class="input">
 					</div>
 					<div class="group">
-						<label for="member_update_name" class="label">name</label> <input
-							id="member_update_name" name="member_update_name" type="text"
-							class="input">
+						<label for="member_update_name" class="label">name</label> 
+						<input id="member_update_name" name="member_update_name" type="text" class="input">
 					</div>
 					<div class="group">
-						<label for="member_update_phone" class="label">phone</label> <input
-							id="member_update_phone" name="member_update_phone" type="text"
-							class="input">
+						<label for="member_update_phone" class="label">phone</label> 
+						<input id="member_update_phone" name="member_update_phone" type="tel" class="input">
 					</div>
 					<div class="group">
-						<label for="member_update_job" class="label">job</label> <input
-							id="member_update_job" name="member_update_job" type="text"
-							class="input">
+						<label for="member_update_job" class="label">job</label> 
+						<input id="member_update_job" name="member_update_job" type="text" class="input">
 					</div>
 					<div class="group">
 						<label for="member_update_auth" class="label">auth</label>

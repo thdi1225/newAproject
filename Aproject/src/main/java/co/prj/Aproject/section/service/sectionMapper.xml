@@ -10,18 +10,20 @@
 						SELECT * 
 						FROM section 
 						<if test='search != null &amp;&amp; search != ""'>
-							where section_name = #{search}
+							where section_name like '%'||#{search}||'%'
 						</if>
 						ORDER BY section_sort ASC 
 						) A
 				)
-		WHERE RN BETWEEN #{start} AND #{end}
+		<if test='start != null &amp;&amp; start != ""'>
+			WHERE RN BETWEEN #{start} AND #{end}
+		</if>
 	</select>
 
 	<select id="sectionSelectListCount" resultType="int">
 		select count(*) from section
 		<if test='search != null &amp;&amp; search != ""'>
-			where section_name = #{search}
+			where section_name like '%'||#{search}||'%'
 		</if>
 	</select>
 	
