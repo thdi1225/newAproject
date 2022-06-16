@@ -14,5 +14,5 @@ public class EmailVO { //emailVO
 	private String emailTitle;
 	private String emailSubject;
 	private Date emailDate;
-	private int memeberNum;
+	private int memberNum;
 }

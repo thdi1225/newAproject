@@ -22,5 +22,6 @@
 		<mapper resource="co/prj/Aproject/board/service/BoardMapper.xml" />
 		<mapper resource="co/prj/Aproject/email/service/email-map.xml"/>
 		<mapper resource="co/prj/Aproject/commute/service/Commute-map.xml" />
+		<mapper resource="co/prj/Aproject/board/service/CommentMapper.xml" />
 	</mappers>
 </configuration>

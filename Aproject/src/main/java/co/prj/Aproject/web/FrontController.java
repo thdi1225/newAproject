@@ -12,17 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.prj.Aproject.board.command.AjaxSearchList;
+import co.prj.Aproject.board.command.BoardDetail;
 import co.prj.Aproject.board.command.BoardInput;
 import co.prj.Aproject.board.command.BoardInputForm;
 import co.prj.Aproject.board.command.BoardList;
+import co.prj.Aproject.board.command.BoardReplyInsert;
 import co.prj.Aproject.calendar.CalendarInput;
 import co.prj.Aproject.calendar.command.CalendarCommand;
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.commute.command.CommuteEndInsert;
 import co.prj.Aproject.commute.command.CommuteSelectList;
 import co.prj.Aproject.commute.command.CommuteStartInsert;
+import co.prj.Aproject.email.command.EmailDeleteCommand;
+import co.prj.Aproject.email.command.EmailDetailCommand;
 import co.prj.Aproject.email.command.EmailRecieveCommand;
 import co.prj.Aproject.email.command.EmailSendCommand;
+import co.prj.Aproject.email.command.EmailSentMailCommand;
 import co.prj.Aproject.email.command.EmailServiceCommand;
 import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
@@ -68,6 +73,9 @@ public class FrontController extends HttpServlet {
 		map.put("/emailRecieve.do", new EmailRecieveCommand());
 		map.put("/emailService.do", new EmailServiceCommand());
 		map.put("/emailSend.do", new EmailSendCommand());
+		map.put("/emailDelete.do", new EmailDeleteCommand());
+		map.put("/emailDetail.do", new EmailDetailCommand());
+		map.put("/emailSentMail.do", new EmailSentMailCommand());
 		
 		//로그인
 		map.put("/loginForm.do", new LoginFormCommand());
@@ -104,6 +112,8 @@ public class FrontController extends HttpServlet {
 		map.put("/commuteSelectList.do", new CommuteSelectList());
 		map.put("/commuteStartInsert.do", new CommuteStartInsert());
 		map.put("/commuteEndInsert.do", new CommuteEndInsert());
+		map.put("/boardDetail.do", new BoardDetail()); // 게시글 상세		
+		map.put("/boardReplyInsert.do", new BoardReplyInsert()); // 댓글등록
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -114,7 +124,7 @@ public class FrontController extends HttpServlet {
 		
 		Command command = map.get(page);
 		String viewPage = command.exec(request, response);
-		
+		System.out.println(viewPage);
 		if(viewPage == null) {
 	         viewPage = "404/404page.tiles";
 	    }else if(viewPage.startsWith("ajax:")) {

@@ -14,11 +14,6 @@ public class EmailServiceImpl implements EmailService {
 	private EmailMapper map = sqlSession.getMapper(EmailMapper.class);
 
 	@Override
-	public List<EmailVO> emailSelectListAll() {
-		return map.emailSelectListAll();
-	}
-	
-	@Override
 	public int emailInsert(EmailVO vo) {
 		return map.emailInsert(vo);
 	}
@@ -26,6 +21,16 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public int emailDelete(EmailVO vo) {
 		return map.emailDelete(vo);
+	}
+
+	@Override
+	public List<EmailVO> emailSelectListAll(int memeberNum,int sent) {
+		return map.emailSelectListAll(memeberNum,sent);
+	}
+
+	@Override
+	public EmailVO emailSelectOne(EmailVO vo) {
+		return map.emailSelectOne(vo);
 	}
 
 	
