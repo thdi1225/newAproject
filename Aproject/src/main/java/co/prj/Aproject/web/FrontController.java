@@ -11,7 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.prj.Aproject.calendar.CalendarDelete;
 import co.prj.Aproject.calendar.CalendarInput;
+import co.prj.Aproject.calendar.CalendarList;
+import co.prj.Aproject.calendar.CalendarSearch;
+import co.prj.Aproject.calendar.CalendarSelect;
+import co.prj.Aproject.calendar.CalendarUpdate;
 import co.prj.Aproject.calendar.command.CalendarCommand;
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.home.command.HomeCommand;
@@ -29,7 +34,12 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/login.do", new LoginCommand());
 		map.put("/calendar.do", new CalendarCommand());
+		map.put("/calendarList.do", new CalendarList());
 		map.put("/calendarInput.do", new CalendarInput());
+		map.put("/calendarUpdate.do", new CalendarUpdate());
+		map.put("/calendarDelete.do", new CalendarDelete());
+		map.put("/calendarSelect.do", new CalendarSelect());
+		map.put("/calendarSearch.do", new CalendarSearch());
 		map.put("/home.do", new HomeCommand());
 	}
 

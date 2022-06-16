@@ -11,16 +11,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import co.prj.Aproject.comm.Command;
 
-public class AjaxSearchList implements Command {
+public class CalendarSearch implements Command {
 	
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		CalenderService dao = new CalendarServiceImpl();
 		List<CalendarVO> list = new ArrayList<CalendarVO>();
 		ObjectMapper mapper = new ObjectMapper();
+		
 		String key = request.getParameter("key");
-		String val = request.getParameter("val");
-		list = dao.calendarSearchList(key, val);
+		list = dao.calendarSearchList(key);
 		String jsonData = "";
 		
 		try {
