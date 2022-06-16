@@ -17,6 +17,7 @@ import co.prj.Aproject.board.command.BoardInput;
 import co.prj.Aproject.board.command.BoardInputForm;
 import co.prj.Aproject.board.command.BoardList;
 import co.prj.Aproject.board.command.BoardReplyInsert;
+import co.prj.Aproject.board.command.BoardUpdate;
 import co.prj.Aproject.calendar.CalendarInput;
 import co.prj.Aproject.calendar.command.CalendarCommand;
 import co.prj.Aproject.comm.Command;
@@ -89,6 +90,7 @@ public class FrontController extends HttpServlet {
 		map.put("/commuteEndInsert.do", new CommuteEndInsert());
 		map.put("/boardDetail.do", new BoardDetail()); // 게시글 상세		
 		map.put("/boardReplyInsert.do", new BoardReplyInsert()); // 댓글등록
+		map.put("/boardUpdate.do", new BoardUpdate());
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
