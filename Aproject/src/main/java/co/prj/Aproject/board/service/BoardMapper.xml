@@ -4,13 +4,32 @@
 	
 
     <select id="boardSelectList" resultType="co.prj.Aproject.board.vo.BoardVO">
-        SELECT * FROM BOARD ORDER BY BOARD_ID DESC
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.* 
+				FROM (
+					SELECT * 
+					FROM BOARD 
+					<if test='search != null &amp;&amp; search != ""'>
+						where board_title like '%'||#{search}||'%'
+					</if>
+					ORDER BY BOARD_ID DESC
+			) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+    </select>
+    
+    <select id="boardListCount" resultType="int">
+    	select count(*) from board
+    	<if test='search != null &amp;&amp; search != ""'>
+			where board_title like '%'||#{search}||'%'
+		</if>
     </select>
 
-    <select id="boardDetail" parameterType="int" resultType="co.prj.Aproject.board.vo.BoardVO">
+    <select id="boardDetail" parameterType="co.prj.Aproject.board.vo.BoardVO" resultType="co.prj.Aproject.board.vo.BoardVO">
         SELECT *
           FROM BOARD
-         WHERE BOARD_ID = #{BOARD_ID}
+         WHERE BOARD_ID = #{board_id}
     </select>
 
     <insert id="boardInsert" parameterType="co.prj.Aproject.board.vo.BoardVO">
@@ -22,20 +41,24 @@
         UPDATE BOARD
            SET
         <if test="subject != null">
-            BOARD_SUBJECT = #{BOARD_SUBJECT}
+            BOARD_SUBJECT = #{board_subject}
         </if>
         <if test="subject != null and title != null"> , </if>
         <if test="title != null">
-            BOARD_TITLE = #{BOARD_TITLE}
+            BOARD_TITLE = #{board_title}
         </if>
-        WHERE BOARD_ID = #{BOARD_ID}
+        WHERE BOARD_ID = #{board_id}
     </update>
 
     <delete id="boardDelete" parameterType="int">
-        DELETE FROM BOARD WHERE BOARD_ID = #{BOARD_ID}
+        DELETE FROM BOARD WHERE BOARD_ID = #{board_id}
     </delete>
 
 	<select id="boardSearchList" resultType="co.prj.Aproject.board.vo.BoardVO">
+SELECT * 
+	FROM (
+		SELECT ROWNUM RN, A.* 
+		FROM (
 		SELECT * FROM BOARD
 		WHERE 
 		 <if test="key == 1">1 = 1</if>
@@ -43,9 +66,12 @@
 		 <if test="key == 3">BOARD_TITLE LIKE '%'||#{val}||'%'</if>
 		 <if test="key == 4">BOARD_SUBJECT LIKE '%'||#{val}||'%'</if>
 		ORDER BY BOARD_ID DESC
+) A
+)
+WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
 	<update id="boardHitUpdate" parameterType="int">
-		UPDATE BOARD SET HIT = HIT + 1 WHERE BOARD_ID = #{BOARD_ID}
+		UPDATE BOARD SET HIT = HIT + 1 WHERE BOARD_ID = #{board_id}
 	</update>
 </mapper>

@@ -16,7 +16,7 @@
 					<tr>
 						<th width="150">작성자</th>
 						<td width="150">
-							<input type="text" id="writer" name="writer" required="required">
+							<input type="text" id="writer" name="writer" value="${memberVO.member_name}" required="required">
 						</td>
 						<!-- <th width="150">작성일자</th>
 						<td width="150">
