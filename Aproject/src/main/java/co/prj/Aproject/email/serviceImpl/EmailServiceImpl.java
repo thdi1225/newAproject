@@ -24,8 +24,13 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public List<EmailVO> emailSelectListAll(int memeberNum) {
-		return map.emailSelectListAll(memeberNum);
+	public List<EmailVO> emailSelectListAll(int memeberNum,int sent) {
+		return map.emailSelectListAll(memeberNum,sent);
+	}
+
+	@Override
+	public EmailVO emailSelectOne(EmailVO vo) {
+		return map.emailSelectOne(vo);
 	}
 
 	

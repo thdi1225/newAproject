@@ -23,14 +23,14 @@ public class EmailRecieveCommand implements Command {
 		
 		MemberVO member = (MemberVO) session.getAttribute("memberVO");
 		int memberNum = member.getMember_num();
-		System.out.println("memberNum : "+memberNum);
+		
 		if(type.equals("refresh")) {
 			EmailFunc f = new EmailFunc();
 			f.saveEmailsInDB(memberNum);
-		}		
+		}
 		//기본 동작
-		List<EmailVO> emails = dao.emailSelectListAll(memberNum);
-		request.setAttribute("memberNum", memberNum);
+		List<EmailVO> emails = dao.emailSelectListAll(memberNum,0);
+//		request.setAttribute("memberNum", memberNum);
 		request.setAttribute("emails", emails);
 		
 		return "email/emailRecieve";

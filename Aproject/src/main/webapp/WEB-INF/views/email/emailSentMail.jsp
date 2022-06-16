@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +17,13 @@
 </head>
 <body>
 	<div align="center">
-		<input type="button" onclick="location.href='emailRecieve.do?type=refresh'" value="새로고침">
 		<input type="button" value="선택 삭제" id="selectDelete">
 		<table border="1">
 			<thead>
 				<tr>
 					<th width="100"><input type="checkbox" id="allCheck"></th>
 					<th width="100">No.</th>
-					<th width="200">보낸사람</th>
+					<th width="200">받은 사람</th>
 					<th width="300">제목</th>
 					<th width="200">전송 시간</th>
 					<th width="100">삭제</th>
@@ -38,7 +37,7 @@
 							<input type="checkbox" id="oneCheck">
 						</td>
 						<td>${fn:length(emails) - status.index}</td>
-						<td>${email.emailFrom}</td>
+						<td>${email.emailTo}</td>
 						<td>${email.emailTitle}</td>
 						<td><fmt:formatDate value="${email.emailDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 						<td><input type="button" value="삭제" id="deleteEmail"></td>
@@ -49,6 +48,7 @@
 		</table>
 	</div>
 	<script type="text/javascript">
+		
         var delCols = document.querySelectorAll("#deleteEmail");
         for (var i = 0; i < delCols.length; i++) {
             delCols[i].addEventListener("click", delEmail);
@@ -56,7 +56,7 @@
 
         function delEmail(e) {
             let emailId = e.target.parentElement.parentElement.children[0].children[0].value; //id값이 있는 위치!!
-            let param = 'emailId='+emailId+'&toFrom=to';;
+            let param = 'emailId='+emailId+'&toFrom=from';
             e.target.parentElement.parentElement.remove();
             fetch('emailDelete.do',{
             	method : 'post',
@@ -100,24 +100,23 @@
 		        });
 		        
         function detEmail(e){ //POST 방식으로 페이지 이동
-        	console.log(this.children[0].children[0].value);
             let id = this.children[0].children[0].value;
             
             let frmId = document.createElement('form');
 
-            let obj;
-            obj = document.createElement('input');
-            obj.setAttribute('type','hidden');
-            obj.setAttribute('name','emailId');
-            obj.setAttribute('value',id);
-			
+            let idObj;
+            idObj = document.createElement('input');
+            idObj.setAttribute('type','hidden');
+            idObj.setAttribute('name','emailId');
+            idObj.setAttribute('value',id);
+            
             let toFromObj;
             toFromObj = document.createElement('input');
             toFromObj.setAttribute('type','hidden');
             toFromObj.setAttribute('name','toFromObj');
-            toFromObj.setAttribute('value','0');
-            
-            frmId.appendChild(obj);
+            toFromObj.setAttribute('value','1');
+
+            frmId.appendChild(idObj);
             frmId.appendChild(toFromObj);
             frmId.setAttribute('method','post');
             frmId.setAttribute('action','emailDetail.do');
@@ -131,7 +130,7 @@
 	        let cbarr = [];
 	        cbxs.forEach(cb => {
 	            if(cb.checked){
-	            	cbarr.push(cb.parentElement.parentElement.children[0].children[0].value);
+	                cbarr.push(cb.parentElement.parentElement.children[0].children[0].value);
 	                cb.parentElement.parentElement.remove();
 	            }
 	        });
@@ -151,6 +150,5 @@
 	        })
 	    })
 	</script>
-    
 </body>
 </html>

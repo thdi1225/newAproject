@@ -68,8 +68,7 @@
 	                <h6 class="collapse-header">EMAIL</h6>
 	                <a class="collapse-item" href="emailSend.do">메일 전송</a>
 	                <a class="collapse-item" href="emailRecieve.do?type=db">받은 메일함</a>
-	                <a class="collapse-item" href="buttons.html">내게 쓴 메일함</a>
-	                <a class="collapse-item" href="cards.html">휴지통?</a>
+	                <a class="collapse-item" href="emailSentMail.do">보낸 메일함</a>
 	            </div>
 	        </div>
 	    </li>

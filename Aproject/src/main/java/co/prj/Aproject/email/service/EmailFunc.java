@@ -1,7 +1,6 @@
 package co.prj.Aproject.email.service;
 
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -71,7 +70,7 @@ public class EmailFunc {
 
 	// 기존 db랑
 	public void saveEmailsInDB(int memberNum) {
-		List<EmailVO> dbEmails = dao.emailSelectListAll(memberNum); // db에서 가져오기
+		List<EmailVO> dbEmails = dao.emailSelectListAll(memberNum,0); // db에서 가져오기
 		memNum = memberNum;
 		List<EmailVO> newEmails;
 		if (dbEmails.size() == 0) { // 처음 로그인할 때
@@ -100,10 +99,8 @@ public class EmailFunc {
 				}
 			}
 			if (dFlag) {
-				System.out.println("값 삭제/ uid : "+de.getEmailId());
+				System.out.println("email에 없는 값 삭제 => uid : "+de.getEmailId());
 				dao.emailDelete(de);
-				//파일도 삭제
-				deleteFile(de);
 			}
 		}
 
@@ -128,23 +125,5 @@ public class EmailFunc {
 			}
 		}
 	}
-	
-	//파일 삭제 메소드
-	private void deleteFile(EmailVO vo) {
-		String[] fileType = {".txt",".html",".png"};
-		for(String ft : fileType) {
-			System.out.println(vo.getEmailFile());
-			File file = new File("c:/Temp/mail/"+vo.getEmailFile()+ft);
-			if(file.exists() ){
-	    		if(file.delete()){
-	    			System.out.println(ft+" : 파일삭제 성공");
-	    		}else{
-	    			System.out.println("파일삭제 실패");
-	    		}
-	    	}else{
-	    		System.out.println(ft+"파일이 존재하지 않습니다.");
-	    	}
-		}
-	}
-		        
+	        
 }
