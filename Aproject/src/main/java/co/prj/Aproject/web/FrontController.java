@@ -16,6 +16,7 @@ import co.prj.Aproject.board.command.BoardDetail;
 import co.prj.Aproject.board.command.BoardInput;
 import co.prj.Aproject.board.command.BoardInputForm;
 import co.prj.Aproject.board.command.BoardList;
+import co.prj.Aproject.board.command.BoardReplyInsert;
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.email.command.EmailRecieve;
 import co.prj.Aproject.email.command.EmailSendCommand;
@@ -47,7 +48,8 @@ public class FrontController extends HttpServlet {
 		map.put("/boardInput.do", new BoardInput()); //게시글 저장
 		map.put("/boardList.do", new BoardList()); //게시글 목록
 		map.put("/ajaxSearchList.do", new AjaxSearchList()); //게시글 검색
-		map.put("/boardDetail.do", new BoardDetail()); // 게시글 상세
+		map.put("/boardDetail.do", new BoardDetail()); // 게시글 상세		
+		map.put("/boardReplyInsert.do", new BoardReplyInsert()); // 댓글등록
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

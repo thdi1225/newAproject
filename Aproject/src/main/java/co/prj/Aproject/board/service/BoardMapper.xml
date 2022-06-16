@@ -11,7 +11,7 @@
 					SELECT * 
 					FROM BOARD 
 					<if test='search != null &amp;&amp; search != ""'>
-						where board_title = #{search}
+						where board_title like '%'||#{search}||'%'
 					</if>
 					ORDER BY BOARD_ID DESC
 			) A
@@ -22,7 +22,7 @@
     <select id="boardListCount" resultType="int">
     	select count(*) from board
     	<if test='search != null &amp;&amp; search != ""'>
-			where board_title = #{search}
+			where board_title like '%'||#{search}||'%'
 		</if>
     </select>
 
