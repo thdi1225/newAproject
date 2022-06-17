@@ -15,8 +15,8 @@
 	rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/all.css" rel="stylesheet">
 </head>
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
 	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
@@ -37,7 +37,7 @@
 				<div>
 					<tiles:insertAttribute name="header" />
 				</div>
-				<div style="min-height: 90vh;">
+				<div class="main_container">
 					<tiles:insertAttribute name="body" />
 				</div>
 				<div>
