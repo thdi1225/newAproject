@@ -36,9 +36,8 @@ public class BoardInput implements Command {
 												new DefaultFileRenamePolicy());
 				dirFile = (multi).getFilesystemName("file"); //물리공간에 저장될 파일명
 				originalFile = multi.getOriginalFileName("file"); //실제 파일명
-				
+				vo.setMember_num(Integer.parseInt(multi.getParameter("member_num")));
 				vo.setBoard_writer(multi.getParameter("writer"));
-//				vo.setBoard_date(Date.valueOf(multi.getParameter("wdate")));
 				vo.setBoard_title(multi.getParameter("title"));
 				vo.setBoard_subject(multi.getParameter("subject"));
 				vo.setFileName(originalFile);
@@ -47,6 +46,7 @@ public class BoardInput implements Command {
 				e.printStackTrace();
 			}
 			
+			System.out.println(vo.toString());
 			int n = dao.boardInsert(vo);
 			
 			List<BoardVO> list = new ArrayList<BoardVO>();

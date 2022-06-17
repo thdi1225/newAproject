@@ -12,15 +12,13 @@
 	<div>
 		<form id="frm" action="boardInput.do" method="post" enctype="multipart/form-data">
 			<div>
+			<input type="hidden" id="member_num" name="member_num" value="${memberVO.member_num}">
 				<table border="1">
 					<tr>
 						<th width="150">작성자</th>
-						<td width="150">							<input type="text" id="writer" name="writer" required="required">
+						<td width="150">							
+							<input type="text" id="writer" name="writer" required="required">
 						</td>
-						<!-- <th width="150">작성일자</th>
-						<td width="150">
-							<input type="date" id="wdate" name="wdate" required="required">
-						</td> -->
 					</tr>
 					<tr>
 						<th>제목</th>

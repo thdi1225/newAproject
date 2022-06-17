@@ -16,6 +16,6 @@ public interface BoardService {
 	int boardUpdate(BoardVO vo);
 	int boardDelete(BoardVO vo);
 	
-	int boardHitUpdate(int id); // 조회수 증가
+	int boardHitUpdate(BoardVO vo); // 조회수 증가
 	int boardListCount(BoardPage page); // 리스트전체개수
 }

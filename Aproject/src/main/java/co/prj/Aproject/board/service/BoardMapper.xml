@@ -34,17 +34,17 @@
 
     <insert id="boardInsert" parameterType="co.prj.Aproject.board.vo.BoardVO">
         INSERT INTO BOARD
-                     VALUES(board_id_seq.nextval,#{board_title},#{board_subject},default,0,#{hit},#{fileName},#{dirFileName},#{board_writer}) 
+                     VALUES(board_id_seq.nextval,#{board_title},#{board_subject},default,#{member_num},#{hit},#{fileName},#{dirFileName},#{board_writer}) 
     </insert>
 
     <update id="boardUpdate" parameterType="co.prj.Aproject.board.vo.BoardVO">
         UPDATE BOARD
            SET
-        <if test="subject != null">
+        <if test="board_subject != null">
             BOARD_SUBJECT = #{board_subject}
         </if>
-        <if test="subject != null and title != null"> , </if>
-        <if test="title != null">
+        <if test="board_subject != null and board_title != null"> , </if>
+        <if test="board_title != null">
             BOARD_TITLE = #{board_title}
         </if>
         WHERE BOARD_ID = #{board_id}

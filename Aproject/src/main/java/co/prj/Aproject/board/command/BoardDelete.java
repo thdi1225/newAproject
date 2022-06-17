@@ -11,7 +11,7 @@ import co.prj.Aproject.board.serviceImpl.BoardServiceImpl;
 import co.prj.Aproject.board.vo.BoardVO;
 import co.prj.Aproject.comm.Command;
 
-public class BoardUpdate implements Command {
+public class BoardDelete implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
@@ -19,14 +19,12 @@ public class BoardUpdate implements Command {
 		BoardVO vo = new BoardVO();
 		
 		vo.setBoard_id(Integer.parseInt(request.getParameter("board_id")));
-		vo.setBoard_title(request.getParameter("board_title"));
-		vo.setBoard_subject(request.getParameter("board_subject"));
+		
+		int result = service.boardDelete(vo);
 		
 		Gson gson = new GsonBuilder().create();
-		service.boardUpdate(vo);
 		
-		return "ajax:" + gson.toJson(vo);
-		
+		return "ajax:" + gson.toJson(result);
 	}
 
 }

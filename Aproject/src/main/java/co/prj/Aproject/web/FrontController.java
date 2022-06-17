@@ -13,11 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import co.prj.Aproject.board.command.AjaxSearchList;
+import co.prj.Aproject.board.command.BoardDelete;
 import co.prj.Aproject.board.command.BoardDetail;
 import co.prj.Aproject.board.command.BoardInput;
 import co.prj.Aproject.board.command.BoardInputForm;
 import co.prj.Aproject.board.command.BoardList;
+import co.prj.Aproject.board.command.BoardReplyDelete;
 import co.prj.Aproject.board.command.BoardReplyInsert;
+import co.prj.Aproject.board.command.BoardReplyUpdate;
+import co.prj.Aproject.board.command.BoardUpdate;
 import co.prj.Aproject.calendar.CalendarDelete;
 import co.prj.Aproject.calendar.CalendarInput;
 import co.prj.Aproject.calendar.CalendarList;
@@ -33,6 +37,11 @@ import co.prj.Aproject.commute.command.CommuteSelectList;
 import co.prj.Aproject.commute.command.CommuteStartInsert;
 import co.prj.Aproject.email.command.EmailDeleteCommand;
 import co.prj.Aproject.email.command.EmailDetailCommand;
+import co.prj.Aproject.email.command.EmailEmptyCommand;
+import co.prj.Aproject.email.command.EmailLoginCommand;
+import co.prj.Aproject.email.command.EmailLoginServiceCommand;
+import co.prj.Aproject.email.command.EmailLogoutCommand;
+import co.prj.Aproject.email.command.EmailLogoutService;
 import co.prj.Aproject.email.command.EmailRecieveCommand;
 import co.prj.Aproject.email.command.EmailSendCommand;
 import co.prj.Aproject.email.command.EmailSentMailCommand;
@@ -110,31 +119,41 @@ public class FrontController extends HttpServlet {
 		map.put("/emailDelete.do", new EmailDeleteCommand());
 		map.put("/emailDetail.do", new EmailDetailCommand());
 		map.put("/emailSentMail.do", new EmailSentMailCommand());
+		map.put("/emailLogin.do", new EmailLoginCommand());
+		map.put("/emailLoginService.do", new EmailLoginServiceCommand());
+		map.put("/emailLogout.do", new EmailLogoutCommand());
+		map.put("/emailLogoutService.do", new EmailLogoutService());
+		map.put("/emailEmpty.do", new EmailEmptyCommand());
 		
 		//일정관리
-		map.put("/calendarList.do", new CalendarList());
 		map.put("/calendar.do", new CalendarCommand());
+		map.put("/calendarList.do", new CalendarList());
 		map.put("/calendarInput.do", new CalendarInput());
 		map.put("/calendarUpdate.do", new CalendarUpdate());
 		map.put("/calendarDelete.do", new CalendarDelete());
 		map.put("/calendarSelect.do", new CalendarSelect());
 		map.put("/calendarSearch.do", new CalendarSearch());
-		map.put("/test.do", new Test());
 		
 		//게시판 관리
+		map.put("/boardDetail.do", new BoardDetail()); 		
+		map.put("/boardReplyInsert.do", new BoardReplyInsert()); 
+		map.put("/boardUpdate.do", new BoardUpdate());
 		map.put("/boardInputForm.do", new BoardInputForm());
 		map.put("/boardInput.do", new BoardInput());
 		map.put("/boardList.do", new BoardList()); 
 		map.put("/ajaxSearchList.do", new AjaxSearchList());
-		map.put("/boardDetail.do", new BoardDetail()); 		
-		map.put("/boardReplyInsert.do", new BoardReplyInsert()); 
+		map.put("/boardReplyUpdate.do", new BoardReplyUpdate()); // 댓글수정
+		map.put("/boardReplyDelete.do", new BoardReplyDelete()); // 댓글삭제
+		map.put("/boardDelete.do", new BoardDelete()); // 게시글 삭제
 		
 		//출퇴근 관리
 		map.put("/commuteSelectList.do", new CommuteSelectList());
 		map.put("/commuteStartInsert.do", new CommuteStartInsert());
 		map.put("/commuteEndUpdate.do", new CommuteEndUpdate());
 		map.put("/commuteSelectDate.do", new CommuteSelectDate());
+//		map.put("/commuteEndInsert.do", new CommuteEndInsert());
 		
+
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

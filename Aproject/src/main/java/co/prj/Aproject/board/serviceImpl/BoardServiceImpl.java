@@ -50,8 +50,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int boardHitUpdate(int id) {
-		return map.boardHitUpdate(id);
+	public int boardHitUpdate(BoardVO vo) {
+		return map.boardHitUpdate(vo);
 	}
 
 	@Override

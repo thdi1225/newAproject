@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CommentVO {
+public class ReplyVO {
 	private int board_reply_id;
 	private String board_reply_subject;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
