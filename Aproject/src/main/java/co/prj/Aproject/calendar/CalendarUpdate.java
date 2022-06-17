@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import co.prj.Aproject.comm.Command;
 
-public class CalendarInput implements Command {
+public class CalendarUpdate implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
@@ -20,16 +20,16 @@ public class CalendarInput implements Command {
 
 		String calendar_title = request.getParameter("calendar_title");
 		String calendar_subject = request.getParameter("calendar_subject");
-		
 		Date calendar_start_date = Date.valueOf(request.getParameter("calendar_start_date"));
 		Date calendar_end_date = Date.valueOf(request.getParameter("calendar_end_date"));
 
+		vo.setCalendar_id(Integer.valueOf(request.getParameter("calendar_id")));
 		vo.setCalendar_title(calendar_title);
 		vo.setCalendar_subject(calendar_subject);
 		vo.setCalendar_start_date(calendar_start_date);
 		vo.setCalendar_end_date(calendar_end_date);
 
-		int n = dao.calendarInsert(vo);
+		int n = dao.calendarUpdate(vo);
 
 		String jsonData = "";
 
@@ -38,34 +38,14 @@ public class CalendarInput implements Command {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-
-		System.out.println("Input|||||||||||||||" + jsonData);
+		
+		System.out.println("Update|||||||||||||||" + jsonData);
 
 		if (n != 0) {
-			request.setAttribute("message", "등록 완료");
+			request.setAttribute("message", "수정 완료");
 		} else {
-			request.setAttribute("message", "등록 실패");
+			request.setAttribute("message", "수정 실패");
 		}
-
-		// 저장하기
-
-		/*
-		 * try { vo.setCalendar_title(request.getParameter("calendar_title"));
-		 * vo.setCalendar_subject(request.getParameter("calendar_subject"));
-		 * vo.setCalendar_end_date(Date.valueOf(request.getParameter("calendar_end_date"
-		 * ))); vo.setCalendar_start_date(Date.valueOf(request.getParameter(
-		 * "calendar_start_date")));
-		 * 
-		 * System.out.println(request.getParameter("calendar_title"));
-		 * System.out.println(request.getParameter("calendar_subject"));
-		 * 
-		 * } catch (Exception e) { e.printStackTrace(); }
-		 * 
-		 * int n = dao.calendarInsert(vo);
-		 * 
-		 * if (n != 0) { request.setAttribute("message", "등록 완료"); } else {
-		 * request.setAttribute("message", "등록 실패"); }
-		 */
 
 		return "ajax:" + jsonData;
 	}

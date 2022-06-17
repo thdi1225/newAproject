@@ -14,12 +14,13 @@ public class CalendarVO {
 	private String calendar_title;
 	private String calendar_subject;
 	
-	@JsonFormat(pattern = "yy-MM-dd",timezone = "Asia/Seoul")	
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Seoul")	
 	private Date calendar_start_date;
-	@JsonFormat(pattern = "yy-MM-dd",timezone = "Asia/Seoul")	
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Seoul")	
 	private Date calendar_end_date;
 	
-	/*
-	 * private int member_num; private int section_id;
-	 */
+	
+	private int member_num; 
+	private int section_id;
+	
 }

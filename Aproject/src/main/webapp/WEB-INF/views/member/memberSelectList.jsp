@@ -42,11 +42,11 @@
 					<td>${list.member_job}</td>
 					<td><c:if test="${list.member_auth == 0}">관리자</c:if> <c:if
 							test="${list.member_auth == 1}">일반 사용자</c:if></td>
-					<td><button type="button"
+					<td><button class="table-btn" type="button"
 							onclick="memberSelect(${list.member_num})" data-toggle="modal" data-target="#memberUpdateModal">수정</button></td>
-					<td><button type="button"
+					<td><button class="table-btn" type="button"
 							onclick="memberDelete(${list.member_num})">삭제</button></td>
-					<td><button type="button"
+					<td><button class="table-btn" type="button"
 							onclick="memberPwReset(${list.member_num})">비밀번호 초기화</button></td>
 				</tr>
 			</c:forEach>
@@ -127,7 +127,7 @@
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button"
 						data-dismiss="modal">Cancel</button>
-					<button onclick="memberUpdate()">수정</button>
+					<button class="table-btn" onclick="memberUpdate()">수정</button>
 				</div>
 			</div>
 		</div>

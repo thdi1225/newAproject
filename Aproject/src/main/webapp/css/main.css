@@ -1,0 +1,26 @@
+@charset "UTF-8";
+#main_container .testbox {
+    width: 100%;
+    height: 100%;
+}
+
+#main_container #box1 {
+    width: 100%;
+}
+
+#main_container #box2 {
+display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+#main_container #box3 {
+    background: blue;
+    height: 50%;
+}
+
+#main_container #box4 {
+    background: pink;
+    height: 50%;
+}

@@ -16,28 +16,28 @@ public class CalendarServiceImpl implements CalenderService {
 	}
 
 	@Override
-	public List<CalendarVO> calendarSearchList(String key, String val) {
-		// TODO Auto-generated method stub
-		return map.calendarSearchList(key, val);
+	public List<CalendarVO> calendarSearchList(String key) {
+		return map.calendarSearchList(key);
 	}
 
 	@Override
 	public int calendarInsert(CalendarVO vo) {
-		// TODO Auto-generated method stub
-		System.out.println("ㅎㅇㅎㅇ555");
 		return map.calendarInsert(vo);
 	}
 
 	@Override
 	public int calendarUpdate(CalendarVO vo) {
-		// TODO Auto-generated method stub
 		return map.calendarUpdate(vo);
 	}
 
 	@Override
 	public int calendarDelete(CalendarVO vo) {
-		// TODO Auto-generated method stub
 		return map.calendarDelete(vo);
+	}
+
+	@Override
+	public CalendarVO calendarSelect(CalendarVO vo) {
+		return map.calendarSelect(vo);
 	}
 
 }

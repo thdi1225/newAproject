@@ -18,7 +18,12 @@ import co.prj.Aproject.board.command.BoardInput;
 import co.prj.Aproject.board.command.BoardInputForm;
 import co.prj.Aproject.board.command.BoardList;
 import co.prj.Aproject.board.command.BoardReplyInsert;
+import co.prj.Aproject.calendar.CalendarDelete;
 import co.prj.Aproject.calendar.CalendarInput;
+import co.prj.Aproject.calendar.CalendarList;
+import co.prj.Aproject.calendar.CalendarSearch;
+import co.prj.Aproject.calendar.CalendarSelect;
+import co.prj.Aproject.calendar.CalendarUpdate;
 import co.prj.Aproject.calendar.command.CalendarCommand;
 import co.prj.Aproject.calendar.command.Test;
 import co.prj.Aproject.comm.Command;
@@ -107,8 +112,13 @@ public class FrontController extends HttpServlet {
 		map.put("/emailSentMail.do", new EmailSentMailCommand());
 		
 		//일정관리
+		map.put("/calendarList.do", new CalendarList());
 		map.put("/calendar.do", new CalendarCommand());
 		map.put("/calendarInput.do", new CalendarInput());
+		map.put("/calendarUpdate.do", new CalendarUpdate());
+		map.put("/calendarDelete.do", new CalendarDelete());
+		map.put("/calendarSelect.do", new CalendarSelect());
+		map.put("/calendarSearch.do", new CalendarSearch());
 		map.put("/test.do", new Test());
 		
 		//게시판 관리
@@ -125,10 +135,6 @@ public class FrontController extends HttpServlet {
 		map.put("/commuteEndUpdate.do", new CommuteEndUpdate());
 		map.put("/commuteSelectDate.do", new CommuteSelectDate());
 		
-
-		map.put("/boardDetail.do", new BoardDetail()); // 게시글 상세		
-		map.put("/boardReplyInsert.do", new BoardReplyInsert()); // 댓글등록
-
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

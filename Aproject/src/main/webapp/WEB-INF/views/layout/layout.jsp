@@ -14,7 +14,9 @@
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
 	rel="stylesheet">
 <!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/all.css" rel="stylesheet">
+</head>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
 	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
@@ -35,7 +37,9 @@
 				<div>
 					<tiles:insertAttribute name="header" />
 				</div>
-				<div class="container" style="min-height: 90vh;">
+
+<!-- 				<div class="container" style="min-height: 90vh;"> -->
+				<div class="main_container">
 					<tiles:insertAttribute name="body" />
 				</div>
 				<div>
