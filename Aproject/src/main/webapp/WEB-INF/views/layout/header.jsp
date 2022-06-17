@@ -177,7 +177,7 @@
 						Logout
 					</a>
 				</div></li>
-
+				<a href="logout.do">logout</a>
 		</ul>
 
 	</nav>

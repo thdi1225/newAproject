@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.prj.Aproject.board.service.BoardMapper">
+	
+
+    <select id="boardSelectList" resultType="co.prj.Aproject.board.vo.BoardVO">
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.* 
+				FROM (
+					SELECT * 
+					FROM BOARD 
+					<if test='search != null &amp;&amp; search != ""'>
+						where board_title like '%'||#{search}||'%'
+					</if>
+					ORDER BY BOARD_ID DESC
+			) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+    </select>
+    
+    <select id="boardListCount" resultType="int">
+    	select count(*) from board
+    	<if test='search != null &amp;&amp; search != ""'>
+			where board_title like '%'||#{search}||'%'
+		</if>
+    </select>
+
+    <select id="boardDetail" parameterType="co.prj.Aproject.board.vo.BoardVO" resultType="co.prj.Aproject.board.vo.BoardVO">
+        SELECT *
+          FROM BOARD
+         WHERE BOARD_ID = #{board_id}
+    </select>
+
+    <insert id="boardInsert" parameterType="co.prj.Aproject.board.vo.BoardVO">
+        INSERT INTO BOARD
+                     VALUES(board_id_seq.nextval,#{board_title},#{board_subject},default,0,#{hit},#{fileName},#{dirFileName},#{board_writer}) 
+    </insert>
+
+    <update id="boardUpdate" parameterType="co.prj.Aproject.board.vo.BoardVO">
+        UPDATE BOARD
+           SET
+        <if test="subject != null">
+            BOARD_SUBJECT = #{board_subject}
+        </if>
+        <if test="subject != null and title != null"> , </if>
+        <if test="title != null">
+            BOARD_TITLE = #{board_title}
+        </if>
+        WHERE BOARD_ID = #{board_id}
+    </update>
+
+    <delete id="boardDelete" parameterType="int">
+        DELETE FROM BOARD WHERE BOARD_ID = #{board_id}
+    </delete>
+
+	<select id="boardSearchList" resultType="co.prj.Aproject.board.vo.BoardVO">
+SELECT * 
+	FROM (
+		SELECT ROWNUM RN, A.* 
+		FROM (
+		SELECT * FROM BOARD
+		WHERE 
+		 <if test="key == 1">1 = 1</if>
+		 <if test="key == 2">BOARD_WRITER = #{val}</if>
+		 <if test="key == 3">BOARD_TITLE LIKE '%'||#{val}||'%'</if>
+		 <if test="key == 4">BOARD_SUBJECT LIKE '%'||#{val}||'%'</if>
+		ORDER BY BOARD_ID DESC
+) A
+)
+WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<update id="boardHitUpdate" parameterType="int">
+		UPDATE BOARD SET HIT = HIT + 1 WHERE BOARD_ID = #{board_id}
+	</update>
+</mapper>

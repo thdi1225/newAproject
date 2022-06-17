@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.prj.Aproject.email.service.EmailMapper">
+	<select id="emailSelectListAll" resultType = "co.prj.Aproject.email.vo.EmailVO" parameterType="int">
+		select email_id as emailId, email_to as emailTo, email_from as emailFrom,
+		email_title as emailTitle, email_date as emailDate, member_num as memberNum,email_subject as emailSubject
+		from email
+		where member_num = #{memberNum}
+		and
+		<choose>
+			<when test="sent==1">email_from is null</when>
+			<when test="sent==0">email_to is null</when>
+		</choose>
+		order by email_date desc
+	</select>
+	
+	<select id="emailSelectOne" parameterType="co.prj.Aproject.email.vo.EmailVO" resultType="co.prj.Aproject.email.vo.EmailVO">
+		select email_id as emailId, email_to as emailTo, email_from as emailFrom,
+		email_title as emailTitle, email_date as emailDate, member_num as memberNum,email_subject as emailSubject
+		from email
+		where member_num = #{memberNum}
+		and email_id = #{emailId}
+		and email_to
+		<choose>
+			<when test="emailTo == null"> is null</when>
+			<when test="emailTo != null">is not null</when>
+		</choose>
+	</select>
+	
+	<insert id="emailInsert" parameterType="co.prj.Aproject.email.vo.EmailVO">
+		insert into email
+		values(
+		<choose>
+			<when test="emailTo == null">#{emailId},</when>
+			<otherwise>email_sent_seq.nextval,</otherwise>
+		</choose>
+		#{emailTo},#{emailFrom},#{emailTitle},
+		<choose>
+			<when test="emailTo == null">#{emailDate}</when>
+			<otherwise>sysdate</otherwise>
+		</choose>
+		,#{memberNum},#{emailSubject})
+	</insert>
+	
+	<delete id="emailDelete" parameterType="co.prj.Aproject.email.vo.EmailVO">
+		delete email
+		where email_id = #{emailId}
+		and member_num = #{memberNum}
+		and email_to
+		<choose>
+			<when test="emailTo == null"> is null</when>
+			<when test="emailTo != null">is not null</when>
+		</choose>
+	</delete>
+
+</mapper>
