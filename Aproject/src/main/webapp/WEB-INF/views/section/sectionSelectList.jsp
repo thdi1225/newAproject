@@ -10,10 +10,14 @@
 <body>
 	<div align="center">
 		<form action="sectionSelectList.do" method="post">
-			검색 : <input type="text" id="search" name="search">
-			<button type="submit">검색</button>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" id="search" name="search" placeholder="부서명으로 검색하실 수 있습니다." aria-label="Recipient's username" aria-describedby="searchButton">
+				<div class="input-group-append">
+				  <button class="btn btn-outline-secondary" type="submit" id="searchButton">검색</button>
+				</div>
+			</div>
 		</form>
-		<table border="1" id="sectionList">
+		<table class="table" id="sectionList">
 			<tr>
 				<th>번호</th>
 				<th>부서명</th>

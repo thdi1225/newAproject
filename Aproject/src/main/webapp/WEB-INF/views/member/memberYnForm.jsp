@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div align="center">
-		<table border="1">
+		<table class="table">
 			<tr>
 				<th>번호</th>
 				<th>메일</th>

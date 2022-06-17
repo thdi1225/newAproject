@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.prj.Aproject.board.command.AjaxSearchList;
 import co.prj.Aproject.board.command.BoardDetail;
@@ -61,30 +62,16 @@ public class FrontController extends HttpServlet {
 	}
 
 	public void init(ServletConfig config) throws ServletException {
-		map.put("/loginForm.do", new LoginFormCommand());
-		map.put("/login.do", new LoginCommand());
-		map.put("/logout.do", new LogoutCommand());
-		
-		map.put("/calendar.do", new CalendarCommand());
-		map.put("/calendarInput.do", new CalendarInput());
-		map.put("/home.do", new HomeCommand());
-		
-		//이메일
-		map.put("/emailRecieve.do", new EmailRecieveCommand());
-		map.put("/emailService.do", new EmailServiceCommand());
-		map.put("/emailSend.do", new EmailSendCommand());
-		map.put("/emailDelete.do", new EmailDeleteCommand());
-		map.put("/emailDetail.do", new EmailDetailCommand());
-		map.put("/emailSentMail.do", new EmailSentMailCommand());
-		
 		//로그인
 		map.put("/loginForm.do", new LoginFormCommand());
 		map.put("/login.do", new LoginCommand());
-		
-		//회원가입
-		map.put("/memberInsert.do", new MemberInsertCommand());
+		map.put("/logout.do", new LogoutCommand());
+
+		//메인화면
+		map.put("/home.do", new HomeCommand());
 		
 		//회원관리
+		map.put("/memberInsert.do", new MemberInsertCommand());
 		map.put("/memberYnForm.do", new MemberYnFormCommand());
 		map.put("/memberYn.do", new MemberYnCommand());
 		map.put("/memberSelectList.do", new MemberSelectListCommand());
@@ -103,20 +90,43 @@ public class FrontController extends HttpServlet {
 		map.put("/sectionDelete.do", new SectionDelete());
 		map.put("/sectionInsertForm.do", new SectionInsertForm());
 		map.put("/sectionInsert.do", new SectionInsert());
-	
-		map.put("/boardInputForm.do", new BoardInputForm()); //게시글 입력폼
-		map.put("/boardInput.do", new BoardInput()); //게시글 저장
-		map.put("/boardList.do", new BoardList()); //게시글 목록
-		map.put("/ajaxSearchList.do", new AjaxSearchList()); //게시글 검색
-
+		
+		//이메일
+		map.put("/emailRecieve.do", new EmailRecieveCommand());
+		map.put("/emailService.do", new EmailServiceCommand());
+		map.put("/emailSend.do", new EmailSendCommand());
+		map.put("/emailDelete.do", new EmailDeleteCommand());
+		map.put("/emailDetail.do", new EmailDetailCommand());
+		map.put("/emailSentMail.do", new EmailSentMailCommand());
+		
+		//일정관리
+		map.put("/calendar.do", new CalendarCommand());
+		map.put("/calendarInput.do", new CalendarInput());
+		
+		//게시판 관리
+		//게시글 입력폼
+		map.put("/boardInputForm.do", new BoardInputForm());
+		//게시글 저장
+		map.put("/boardInput.do", new BoardInput());
+		//게시글 목록
+		map.put("/boardList.do", new BoardList()); 
+		//게시글 검색
+		map.put("/ajaxSearchList.do", new AjaxSearchList());
+		// 게시글 상세
+		map.put("/boardDetail.do", new BoardDetail()); 		
+		// 댓글등록
+		map.put("/boardReplyInsert.do", new BoardReplyInsert()); 
+		
+		//출퇴근 관리
 		map.put("/commuteSelectList.do", new CommuteSelectList());
 		map.put("/commuteStartInsert.do", new CommuteStartInsert());
 		map.put("/commuteEndInsert.do", new CommuteEndInsert());
-		map.put("/boardDetail.do", new BoardDetail()); // 게시글 상세		
-		map.put("/boardReplyInsert.do", new BoardReplyInsert()); // 댓글등록
+		
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
 		request.setCharacterEncoding("utf-8");
 		String uri = request.getRequestURI();
 		String contextPath = request.getContextPath();
@@ -124,21 +134,30 @@ public class FrontController extends HttpServlet {
 		
 		Command command = map.get(page);
 		String viewPage = command.exec(request, response);
-		System.out.println(viewPage);
+		
 		if(viewPage == null) {
 	         viewPage = "404/404page.tiles";
 	    }else if(viewPage.startsWith("ajax:")) {
-	         response.setContentType("text/html; charset=UTF-8");
-	         viewPage = viewPage.substring(5);
-	         response.getWriter().append(viewPage);
-	         return;
+	        if(session.getAttribute("memberVO") == null) {
+	            viewPage =  "/WEB-INF/views/loginForm.jsp";	        	
+	        } else {
+	        	response.setContentType("text/html; charset=UTF-8");
+		        viewPage = viewPage.substring(5);
+		        response.getWriter().append(viewPage);
+		        return;
+	        }
 	    }else if(!viewPage.endsWith(".do")){
 	       if(viewPage.equals("loginForm")) {
-	            viewPage =  "/WEB-INF/views/"+viewPage + ".jsp";
+	           viewPage =  "/WEB-INF/views/loginForm.jsp";
 	       }else {
-	            viewPage = viewPage + ".tiles";
+	    	   if(session.getAttribute("memberVO") == null) {
+	    		   viewPage =  "/WEB-INF/views/loginForm.jsp";
+	    	   }else {
+	    		   viewPage = viewPage + ".tiles";   
+	    	   }
 	       }         
 	    }
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
         dispatcher.forward(request, response);
 	}
