@@ -15,8 +15,7 @@
 				<table border="1">
 					<tr>
 						<th width="150">작성자</th>
-						<td width="150">
-							<input type="text" id="writer" name="writer" required="required">
+						<td width="150">							<input type="text" id="writer" name="writer" required="required">
 						</td>
 						<!-- <th width="150">작성일자</th>
 						<td width="150">
@@ -50,5 +49,5 @@
 		</form>
 	</div>
 </div>
-</body>
+</body> 
 </html>
