@@ -8,6 +8,7 @@ import co.prj.Aproject.comm.DataSource;
 import co.prj.Aproject.commute.service.CommuteMapper;
 import co.prj.Aproject.commute.service.CommuteService;
 import co.prj.Aproject.commute.vo.CommuteVO;
+import co.prj.Aproject.member.vo.MemberVO;
 
 public class CommuteImpl implements CommuteService{
 
@@ -15,33 +16,40 @@ public class CommuteImpl implements CommuteService{
 	private CommuteMapper map = sqlSession.getMapper(CommuteMapper.class);
 	
 	@Override
-	public List<CommuteVO> commuteSelectList() {
-		return map.commuteSelectList();
-	}
-
-
-	@Override
-	public int commuteStartInsert() {
-		return map.commuteStartInsert();
+	public List<CommuteVO> commuteSelectList(MemberVO vo) {
+		return map.commuteSelectList(vo);
 	}
 
 	@Override
-	public int commuteEndInsert() {
-		return map.commuteEndInsert();
-	}
-
-
-	@Override
-	public CommuteVO commuteStartTimeSelect(CommuteVO vo) {
+	public List<CommuteVO> commuteSearchList(String key, String val) {
 		
-		return map.commuteStartTimeSelect(vo);
+		return map.commuteSearchList(key, val);
 	}
-
+	
+	@Override
+	public CommuteVO commuteSelectDate(MemberVO vo) {
+		
+		return map.commuteSelectDate(vo);
+	}
 
 	@Override
-	public CommuteVO commuteEndTimeSelect(CommuteVO vo) {
-		return map.commuteEndTimeSelect(vo);
+	public int commuteStartInsert(MemberVO vo) {
+		return map.commuteStartInsert(vo);
 	}
+
+	@Override
+	public int commuteEndUpdate(MemberVO vo) {
+		return map.commuteEndUpdate(vo);
+	}
+
+
+
+
+
+
+
+
+
 
 
 	

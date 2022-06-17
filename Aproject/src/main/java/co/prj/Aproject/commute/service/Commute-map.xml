@@ -2,42 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.prj.Aproject.commute.service.CommuteMapper">
 
-	<select id="commuteSelectList" resultType="co.prj.Aproject.commute.vo.CommuteVO">
+	<select id="commuteSelectList" resultType="co.prj.Aproject.commute.vo.CommuteVO" parameterType="co.prj.Aproject.member.vo.MemberVO">
 		
-		select* from commute order by 1
+		SELECT* FROM COMMUTE 
+		WHERE MEMBER_NUM = #{member_num}
+		ORDER BY 1
 	
 	</select>
 	
-	<select id="commuteStartTimeSelect" resultType="co.prj.Aproject.commute.vo.CommuteVO">
+	<select id="commuteSearchList" resultType="co.prj.Aproject.commute.vo.CommuteVO"  parameterType="co.prj.Aproject.member.vo.MemberVO">
 	
-		SELECT TO_CHAR(COMMUTE_START_TIME,'""HH24"시 "MI"분 "SS"초"') AS COMMUTE_START_TIME
-		FROM COMMUTE
-		WHERE COMMUTE_ID = #{commute_Id}
-	
-	</select>
-	
-	<select id="commuteEndTimeSelect" resultType="co.prj.Aproject.commute.vo.CommuteVO">
-	
-		SELECT TO_CHAR(COMMUTE_END_TIME,'""HH24"시 "MI"분 "SS"초"') AS COMMUTE_END_TIME
-		FROM COMMUTE
-		WHERE COMMUTE_ID = #{commute_Id}
-	
+		select * from commute 
+		WHERE 
+		<if test='key==1'>commute_date like '%'||'22/01'||'%'</if>
+		<if test='key==2'>commute_date like '%'||'22/02'||'%'</if>
+		<if test='key==3'>commute_date like '%'||'22/03'||'%'</if>
+		<if test='key==4'>commute_date like '%'||'22/04'||'%'</if>
+		<if test='key==5'>commute_date like '%'||'22/05'||'%'</if>
+		<if test='key==6'>commute_date like '%'||'22/06'||'%'</if>
+		<if test='key==7'>commute_date like '%'||'22/07'||'%'</if>
+		<if test='key==8'>commute_date like '%'||'22/08'||'%'</if>
+		<if test='key==9'>commute_date like '%'||'22/09'||'%'</if>
+		<if test='key==10'>commute_date like '%'||'22/10'||'%'</if>
+		<if test='key==11'>commute_date like '%'||'22/11'||'%'</if>
+		<if test='key==12'>commute_date like '%'||'22/12'||'%'</if>
+		ORDER BY 1
 	</select>
 
-	<insert id="commuteStartInsert" >
+
+	<insert id="commuteStartInsert" parameterType="co.prj.Aproject.member.vo.MemberVO">
 	
-		    INSERT INTO COMMUTE(COMMUTE_ID,COMMUTE_DATE,COMMUTE_START_TIME)
-		VALUES(COMMUTE_SEQ.NEXTVAL,SYSDATE,SYSDATE)
+		    INSERT INTO COMMUTE(COMMUTE_ID,COMMUTE_DATE,COMMUTE_START_TIME ,MEMBER_NUM)
+		VALUES(COMMUTE_SEQ.NEXTVAL,SYSDATE,SYSDATE,#{member_num})
+	</insert>
+	
+	
+	<update id="commuteEndUpdate"  parameterType="co.prj.Aproject.member.vo.MemberVO">
+	
+			UPDATE COMMUTE SET COMMUTE_END_TIME = SYSDATE
+			WHERE MEMBER_NUM = #{member_num} AND to_char(SYSDATE,'YY/MM/DD') = to_char(commute_date,'YY/MM/DD')
 		
-	</insert>
+	</update>
 	
-	
-	<insert id="commuteEndInsert" parameterType="co.prj.Aproject.commute.vo.CommuteVO">
-	
-		    INSERT INTO COMMUTE(COMMUTE_ID,COMMUTE_DATE,COMMUTE_End_TIME)
-		VALUES(COMMUTE_SEQ.NEXTVAL,SYSDATE,SYSDATE)
-	 
-	</insert>
-	
+
 
 </mapper>
