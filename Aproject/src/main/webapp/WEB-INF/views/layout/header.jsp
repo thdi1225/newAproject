@@ -178,10 +178,9 @@
 					</a>
 				</div></li>
 				<a href="logout.do">logout</a>
+				<a href="myPage.do">myPage</a>
 		</ul>
 
 	</nav>
-	
-	<!-- End of Topbar -->
 </body>
 </html>

@@ -20,6 +20,7 @@ import co.prj.Aproject.board.command.BoardList;
 import co.prj.Aproject.board.command.BoardReplyInsert;
 import co.prj.Aproject.calendar.CalendarInput;
 import co.prj.Aproject.calendar.command.CalendarCommand;
+import co.prj.Aproject.calendar.command.Test;
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.commute.command.CommuteEndInsert;
 import co.prj.Aproject.commute.command.CommuteSelectList;
@@ -39,12 +40,14 @@ import co.prj.Aproject.member.command.MemberAdminInputForm;
 import co.prj.Aproject.member.command.MemberDeleteCommand;
 import co.prj.Aproject.member.command.MemberInsertCommand;
 import co.prj.Aproject.member.command.MemberInsertFormCommand;
+import co.prj.Aproject.member.command.MemberMyPage;
 import co.prj.Aproject.member.command.MemberPwResetCommand;
 import co.prj.Aproject.member.command.MemberSelectCommand;
 import co.prj.Aproject.member.command.MemberSelectListCommand;
 import co.prj.Aproject.member.command.MemberUpdateCommand;
 import co.prj.Aproject.member.command.MemberYnCommand;
 import co.prj.Aproject.member.command.MemberYnFormCommand;
+import co.prj.Aproject.member.command.MyPage;
 import co.prj.Aproject.section.command.SectionDelete;
 import co.prj.Aproject.section.command.SectionInsert;
 import co.prj.Aproject.section.command.SectionInsertForm;
@@ -82,6 +85,8 @@ public class FrontController extends HttpServlet {
 		map.put("/memberSelect.do", new MemberSelectCommand());
 		map.put("/memberAdminInputForm.do", new MemberAdminInputForm());
 		map.put("/memberAdminInput.do", new MemberAdminInput());
+		map.put("/myPage.do", new MyPage());
+		map.put("/memberMyPage.do", new MemberMyPage());
 		
 		//부서관리
 		map.put("/sectionSelectList.do", new SectionSelectList());
@@ -102,6 +107,7 @@ public class FrontController extends HttpServlet {
 		//일정관리
 		map.put("/calendar.do", new CalendarCommand());
 		map.put("/calendarInput.do", new CalendarInput());
+		map.put("/test.do", new Test());
 		
 		//게시판 관리
 		//게시글 입력폼

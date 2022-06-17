@@ -27,4 +27,6 @@ public interface MemberService {
 	public int memberAdminInput(MemberVO vo);
 
 	public int memberSelectListCount(MemberPage page);
+
+	public void memberMyPage(MemberVO vo);
 }
