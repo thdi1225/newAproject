@@ -20,4 +20,6 @@ public class MemberVO {
 	private String member_job;
 	private String member_yn;
 	private int member_auth;
+	private String member_mail_email;
+	private String member_mail_pw;
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,9 +61,15 @@
 	        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	            <div class="bg-white py-2 collapse-inner rounded">
 	                <h6 class="collapse-header">EMAIL</h6>
-	                <a class="collapse-item" href="emailSend.do">메일 전송</a>
-	                <a class="collapse-item" href="emailRecieve.do?type=db">받은 메일함</a>
-	                <a class="collapse-item" href="emailSentMail.do">보낸 메일함</a>
+	                <c:if test="${empty memberVO.member_mail_email}">
+		                <a class="collapse-item" href="emailLogin.do">메일 계정 로그인</a>
+	                </c:if>
+	                <c:if test="${not empty memberVO.member_mail_email}">
+	                	<a class="collapse-item" href="emailSend.do">메일 전송</a>
+	                	<a class="collapse-item" href="emailRecieve.do">받은 메일함</a>
+	                	<a class="collapse-item" href="emailSentMail.do">보낸 메일함</a>
+		                <a class="collapse-item" href="emailLogout.do">메일 계정 로그아웃</a>
+	                </c:if>
 	            </div>
 	        </div>
 	    </li>

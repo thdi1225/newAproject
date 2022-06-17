@@ -16,10 +16,17 @@
 </style>
 </head>
 <body>
-	<div align="center">
-		<input type="button" onclick="location.href='emailRecieve.do?type=refresh'" value="새로고침">
+	<div class="spinner-border" role="status" align="center" id="loading">
+	  	<span class="visually-hidden"></span>
+	</div>
+	<div id = "con" align="center">
+		<input type="button" id="refreshBtn" value="새로고침">
 		<input type="button" value="선택 삭제" id="selectDelete">
-		<table border="1">
+		<form action="emailRecieve.do" method="post">
+			검색 : <input type="text" id="search" name="search">
+			<button type="submit">검색</button>
+		</form>
+		<table border="1" id="tb">
 			<thead>
 				<tr>
 					<th width="100"><input type="checkbox" id="allCheck"></th>
@@ -47,8 +54,42 @@
 				
 			</tbody>
 		</table>
+		<div style="display: block; text-align: center;">		
+			<c:if test="${paging.startPage != 1 }">
+				<a href="emailRecieve.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+			</c:if>
+			<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+				<c:choose>
+					<c:when test="${p == paging.nowPage }">
+						<b>${p }</b>
+					</c:when>
+					<c:when test="${p != paging.nowPage }">
+						<a href="emailRecieve.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${paging.endPage != paging.lastPage}">
+				<a href="emailRecieve.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+			</c:if>
+		</div>
 	</div>
 	<script type="text/javascript">
+	
+		//로딩 페이지
+		var loader = document.getElementById('loading');
+		var con = document.getElementById('con');
+		loader.style.display="none";
+		
+		function loadingPageOn(){
+			loader.style.display="block";
+			con.style.display="none";
+		}
+		
+		function loadingPageOff(){
+			loader.style.display="none";
+			con.style.display="block";
+		}
+		
         var delCols = document.querySelectorAll("#deleteEmail");
         for (var i = 0; i < delCols.length; i++) {
             delCols[i].addEventListener("click", delEmail);
@@ -56,16 +97,42 @@
 
         function delEmail(e) {
             let emailId = e.target.parentElement.parentElement.children[0].children[0].value; //id값이 있는 위치!!
-            let param = 'emailId='+emailId+'&toFrom=to';;
             e.target.parentElement.parentElement.remove();
-            fetch('emailDelete.do',{
-            	method : 'post',
-  			  	headers : {'Content-Type':'application/x-www-form-urlencoded'},
-  			  	body : param
+            loadingPageOn();
+            $.ajax({
+            	url:"emailDelete.do",
+            	type:"post",
+            	data:{"emailId":emailId,"toFrom":"to"},
+            	dataType:"json",
+            	success:function(res){
+  			  		location.reload();
+  			  		loadingPageOff();
+            	}
             })
+            
             e.stopPropagation();
         }
 		
+        //새로고침 페이지
+        document.getElementById('refreshBtn').addEventListener('click',e=>{
+        	loadingPageOn();
+        	$.ajax({
+        		url:'emailRecieve.do',
+        		type:"POST",
+        		data:{"type":"refresh"},
+        		dataType:"json",
+        		success:function(res){
+					loadingPageOff();
+					location.reload();
+        		},
+        		error:function(){
+        			console.log("data가 없다...");
+        			location.href='emailEmpty.do';
+        		}
+        	})
+        })   	
+        
+        
         //전체선택했을 때 체크박스 개인
         document.querySelector('#allCheck').addEventListener('click',function(e){
                     let cbxs = document.querySelectorAll('#oneCheck');
@@ -124,9 +191,11 @@
             document.body.appendChild(frmId);
             frmId.submit();
         }
+		
 
 	    //선택삭제 버튼 누르면 체크한거 삭제
 	    document.querySelector('#selectDelete').addEventListener('click',e => {
+	    	loadingPageOn();
 	        let cbxs = document.querySelectorAll('#oneCheck');
 	        let cbarr = [];
 	        cbxs.forEach(cb => {
@@ -139,12 +208,14 @@
 	        $.ajax({
 	            url : "emailDelete.do",
 	            type: "POST",
-	            data : "emailId="+JSON.stringify(cbarr),
+	            data : {"emailId":JSON.stringify(cbarr),"toFrom":"to"},
 	            dataType : "json",
 	            success : function(res){
-	                console.log(res)
+	            	location.reload();
+	                loadingPageOff();
 	            },
 	            error : function(){
+	            	loadingPageOff();
 	                console.log("실패")
 	            }
 	
