@@ -22,13 +22,14 @@
 /* } */
 
 .button {
-  background-color: #008CBA;
+	width:100px;
+  background-color: #3b61d0;
   border: none;
   color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: inline;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
@@ -50,6 +51,35 @@
 	float: right;
 	overflow: auto;
 }
+.sb{
+ background-color: #3b61d0;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.eb{
+ background-color: #3b61d0;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.month-font{
+	display: inline;
+	font-size: 50px;
+}
 </style>
 </head>
 <script>
@@ -69,7 +99,7 @@
 		}
 
 		if (currentSeconds >= 50) {
-			currentSeconds = '<span style="color:#de1951;">' + currentSeconds
+			currentSeconds = '<span style="color:#3b61d0;">' + currentSeconds
 					+ '</span>'
 		}
 
@@ -100,11 +130,11 @@
 			<input type="hidden" value="${checkInt}" id="commuteCheck">
 		
 			<form action="commuteStartInsert.do" method="post" style="display: inline-block;">
-				<input type="button" id="startButton" value="출근하기"  onclick="start_button();">
+				<input type="button" id="startButton" value="출근하기"  onclick="start_button();" class="sb">
 			</form>
 			<form action="commuteEndUpdate.do" method="post"
 				style="display: inline-block;">
-				<input type="button" id="endButton"  value="퇴근하기"  onclick="end_button();">
+				<input type="button" id="endButton"  value="퇴근하기"  onclick="end_button();" class="eb">
 			</form>
 			
 			
@@ -118,9 +148,9 @@
 			<div class="col-md-12">
 				<div class="table-wrap">
 				
-				<button type="button" onclick="lastMonth();">지난 달</button>
-			  	<h1><span id="number" ></span></h1>
-				<button type="button" onclick="nextMonth();">다음 달</button>
+				<button type="button" onclick="lastMonth();" class="button"><</button>
+			  	<h1 class="month-font"><strong><span id="number" ></span></strong></h1>
+				<button type="button" onclick="nextMonth();"class="button">></button>
 				
 				
 					<table class="table" id="ta">

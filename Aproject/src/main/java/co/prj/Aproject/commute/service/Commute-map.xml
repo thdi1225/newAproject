@@ -26,6 +26,8 @@
 		<if test='key==10'>commute_date like '%'||'22/10'||'%'</if>
 		<if test='key==11'>commute_date like '%'||'22/11'||'%'</if>
 		<if test='key==12'>commute_date like '%'||'22/12'||'%'</if>
+		
+		and MEMBER_NUM = #{member_num} 
 		ORDER BY 1
 	</select>
 
