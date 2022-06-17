@@ -16,7 +16,7 @@
 			
 			<button type="submit">전송</button>
 		</form>
-		<input type="button" value="메일 목록" onClick="location.href='emailRecieve.do'">
+		<input type="button" value="메일 목록" onClick="location.href='emailRecieve.do?type=db'">
 	</div>
 </body>
 </html>

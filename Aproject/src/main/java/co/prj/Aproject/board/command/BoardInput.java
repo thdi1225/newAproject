@@ -50,7 +50,7 @@ public class BoardInput implements Command {
 			int n = dao.boardInsert(vo);
 			
 			List<BoardVO> list = new ArrayList<BoardVO>();
-			list = dao.boardSelectList();
+			list = dao.boardSelectList(null);
 			request.setAttribute("list", list);
 			
 			return "board/boardList";

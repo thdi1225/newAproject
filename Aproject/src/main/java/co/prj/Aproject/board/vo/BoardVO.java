@@ -15,11 +15,12 @@ public class BoardVO {
 	private String board_title;
 	private String board_subject;
 	
+	
 	private int member_num;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date board_date;
 	private int hit;
 	private String fileName;
 	private String dirFileName;
-
+	
 }

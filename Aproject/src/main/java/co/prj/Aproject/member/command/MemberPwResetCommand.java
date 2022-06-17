@@ -11,7 +11,7 @@ import co.prj.Aproject.member.service.MemberService;
 import co.prj.Aproject.member.serviceImpl.MemberServiceImpl;
 import co.prj.Aproject.member.vo.MemberVO;
 
-public class MemberPwReset implements Command {
+public class MemberPwResetCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {

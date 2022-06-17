@@ -1,24 +1,30 @@
 package co.prj.Aproject.member.command;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.member.service.MemberService;
 import co.prj.Aproject.member.serviceImpl.MemberServiceImpl;
 import co.prj.Aproject.member.vo.MemberVO;
 
-public class MemberSelectList implements Command {
+public class MemberSelectCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		MemberService service = new MemberServiceImpl();
-		List<MemberVO> list = service.memberSelectList();
+		MemberVO vo = new MemberVO();
 		
-		request.setAttribute("list", list);
-		return "member/memberSelectList";
+		vo.setMember_num(Integer.parseInt(request.getParameter("member_num")));
+		
+		MemberVO result = service.memberSelect(vo);
+			
+		Gson gson = new GsonBuilder().create();
+		
+		return "ajax:" + gson.toJson(result);
 	}
 
 }
