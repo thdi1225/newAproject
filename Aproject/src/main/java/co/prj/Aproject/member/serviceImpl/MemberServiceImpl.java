@@ -75,4 +75,9 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.memberSelectListCount(page);
 	}
 
+	@Override
+	public void memberMyPage(MemberVO vo) {
+		mapper.memberMyPage(vo);
+	}
+
 }

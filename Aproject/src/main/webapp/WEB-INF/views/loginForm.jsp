@@ -25,7 +25,6 @@
 						<label for="member_pw" class="label">password</label>
 						<input id="member_pw" name="member_pw" type="password" class="input" data-type="password" maxlength="20">
 						최대 20자
-						<img alt="svg" src="img\undraw_posting_photo.svg">
 					</div>
 					<div class="group">
 						<input type="submit" class="button" value="Sign In">
