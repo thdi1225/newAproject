@@ -12,11 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.prj.Aproject.board.command.AjaxSearchList;
+import co.prj.Aproject.board.command.BoardDelete;
 import co.prj.Aproject.board.command.BoardDetail;
 import co.prj.Aproject.board.command.BoardInput;
 import co.prj.Aproject.board.command.BoardInputForm;
 import co.prj.Aproject.board.command.BoardList;
+import co.prj.Aproject.board.command.BoardReplyDelete;
 import co.prj.Aproject.board.command.BoardReplyInsert;
+import co.prj.Aproject.board.command.BoardReplyUpdate;
 import co.prj.Aproject.board.command.BoardUpdate;
 import co.prj.Aproject.calendar.CalendarInput;
 import co.prj.Aproject.calendar.command.CalendarCommand;
@@ -90,7 +93,10 @@ public class FrontController extends HttpServlet {
 		map.put("/commuteEndInsert.do", new CommuteEndInsert());
 		map.put("/boardDetail.do", new BoardDetail()); // 게시글 상세		
 		map.put("/boardReplyInsert.do", new BoardReplyInsert()); // 댓글등록
-		map.put("/boardUpdate.do", new BoardUpdate());
+		map.put("/boardUpdate.do", new BoardUpdate()); // 게시글 수정
+		map.put("/boardDelete.do", new BoardDelete()); // 게시글 삭제
+		map.put("/boardReplyUpdate.do", new BoardReplyUpdate()); // 댓글수정
+		map.put("/boardReplyDelete.do", new BoardReplyDelete()); // 댓글삭제
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

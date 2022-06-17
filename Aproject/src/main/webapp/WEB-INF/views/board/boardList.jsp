@@ -15,12 +15,6 @@
 		</div>
 		<div>
 			<form action="boardList.do">
-<!-- 				<select id="key" name="key"> -->
-<!-- 					<option value="1">전체</option> -->
-<!-- 					<option value="2">작성자</option> -->
-<!-- 					<option value="3">제목</option> -->
-<!-- 					<option value="4">내용</option> -->
-<!-- 				</select>&nbsp;  -->
 				<input type="text" id="search" name="search">&nbsp; 
 				<input type="submit" value="검색">
 			</form>
@@ -85,72 +79,6 @@
 		frmm.board_id.value = board_id;
 		frmm.submit();
 	}
-	
-// 	function search() {
-// 		let fields = ['board_id','board_writer','board_title','board_date','hit','fileName'];
-// 		let allTr = document.querySelectorAll('tbody>tr');
-// 		let k = document.getElementById("key").value;  //key 값
-// 		let v = document.getElementById("val").value;  //val 값
-
-// 		allTr.forEach(function (tr) {
-// 		   	 tr.remove();
-// 		    });
-		
-// 		let list = document.querySelector('tbody');
-		
-// 		fetch('ajaxSearchList.do',{
-// 			 method: 'POST',
-// 			 headers: {
-// 				'Content-Type' : 'application/x-www-form-urlencoded', 
-// 			 },
-// 			 body : 'key='+k+'&val='+v
-// 			})
-// 		 .then(response => response.json())  //json type으로 결과 받음
-// 		 .then(data => {
-// 			 console.log(data);
-// 			 data.forEach(d => {  //json data를 한행식 읽음
-// 			 let tr = document.createElement('tr'); //<tr> 태그 생성
-// 			 fields.forEach(f => {       //한행의 데이터 에서
-// 		       let td = document.createElement('td'); //<td>를 만들면서
-// 		       td.innerHTML = d[f];  //필드값과 일치 키값에서 데이터를 가져와서 td에 넣고
-// 		       tr.appendChild(td);    //tr에 td를 추가
-// 			 })
-// 				 list.appendChild(tr);  //그리고 tbody에 tr을 추가한다.
-// 			 })
-// 		 })
-// 	}
-	
-// 	function search2() {
-// 		$.ajax({
-// 			url : "ajaxSearchList.do",
-// 			type : "post",
-// 			data : {"key":$("#key").val(),"val":$("#val").val()},
-// 			dataType : "json",
-// 			success : function(data){
-// 				htmlConvert(data);
-// 				},
-// 			error : function(){
-// 				//실패시 구현
-// 			}
-// 		});	
-// 	}
-	
-// 	function htmlConvert(data){
-// 		$("tbody").remove();  //tbody 제거
-// 		let tb = $("<tbody />");
-// 		$.each(data, function(index,item){
-// 			let tr = $("<tr />").append(
-// 					$("<td align='center' />").text(item.board_id),
-// 					$("<td align='center' />").text(item.board_writer),
-// 					$("<td />").text(item.board_title),
-// 					$("<td align='center' />").text(item.board_date),
-// 					$("<td align='center' />").text(item.hit),
-// 					$("<td />").text(item.fileName)
-// 			);
-// 			tb.append(tr);
-// 		});
-// 		$("#ta").append(tb);
-// 	}
 </script>
 </body>
 </html>

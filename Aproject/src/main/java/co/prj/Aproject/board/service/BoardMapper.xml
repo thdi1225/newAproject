@@ -40,11 +40,11 @@
     <update id="boardUpdate" parameterType="co.prj.Aproject.board.vo.BoardVO">
         UPDATE BOARD
            SET
-        <if test="subject != null">
+        <if test="board_subject != null">
             BOARD_SUBJECT = #{board_subject}
         </if>
-        <if test="subject != null and title != null"> , </if>
-        <if test="title != null">
+        <if test="board_subject != null and board_title != null"> , </if>
+        <if test="board_title != null">
             BOARD_TITLE = #{board_title}
         </if>
         WHERE BOARD_ID = #{board_id}
