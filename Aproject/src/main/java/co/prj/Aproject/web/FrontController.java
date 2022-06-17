@@ -25,6 +25,11 @@ import co.prj.Aproject.commute.command.CommuteSelectList;
 import co.prj.Aproject.commute.command.CommuteStartInsert;
 import co.prj.Aproject.email.command.EmailDeleteCommand;
 import co.prj.Aproject.email.command.EmailDetailCommand;
+import co.prj.Aproject.email.command.EmailEmptyCommand;
+import co.prj.Aproject.email.command.EmailLoginCommand;
+import co.prj.Aproject.email.command.EmailLoginServiceCommand;
+import co.prj.Aproject.email.command.EmailLogoutCommand;
+import co.prj.Aproject.email.command.EmailLogoutService;
 import co.prj.Aproject.email.command.EmailRecieveCommand;
 import co.prj.Aproject.email.command.EmailSendCommand;
 import co.prj.Aproject.email.command.EmailSentMailCommand;
@@ -76,6 +81,11 @@ public class FrontController extends HttpServlet {
 		map.put("/emailDelete.do", new EmailDeleteCommand());
 		map.put("/emailDetail.do", new EmailDetailCommand());
 		map.put("/emailSentMail.do", new EmailSentMailCommand());
+		map.put("/emailLogin.do", new EmailLoginCommand());
+		map.put("/emailLoginService.do", new EmailLoginServiceCommand());
+		map.put("/emailLogout.do", new EmailLogoutCommand());
+		map.put("/emailLogoutService.do", new EmailLogoutService());
+		map.put("/emailEmpty.do", new EmailEmptyCommand());
 		
 		//로그인
 		map.put("/loginForm.do", new LoginFormCommand());
@@ -124,7 +134,6 @@ public class FrontController extends HttpServlet {
 		
 		Command command = map.get(page);
 		String viewPage = command.exec(request, response);
-		System.out.println(viewPage);
 		if(viewPage == null) {
 	         viewPage = "404/404page.tiles";
 	    }else if(viewPage.startsWith("ajax:")) {

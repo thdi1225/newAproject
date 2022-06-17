@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -15,19 +16,16 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import co.prj.Aproject.email.serviceImpl.EmailServiceImpl;
+import co.prj.Aproject.email.vo.EmailPage;
 import co.prj.Aproject.email.vo.EmailVO;
 
 public class EmailFunc {
-	// String user, password 있을 자리
-	String user = "";
-	String password = "";
-
 	EmailService dao = new EmailServiceImpl();
 	EmailImapRecieve eir = new EmailImapRecieve();
 	int memNum = 0;
 
 	// 메일 전송 method
-	public boolean gmailSend(String to, String title, String subject) {
+	public boolean gmailSend(String to, String title, String subject,String user, String password) {
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com"); // 이메일 발송을 처리해줄 STMP 서버
 		prop.put("mail.smtp.port", 465);
@@ -39,7 +37,7 @@ public class EmailFunc {
 //		prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 //		prop.put("mail.smtp.socketFactory.fallback", "false");
 
-		Session sessionSend = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+		Session sessionSend = Session.getInstance(prop, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(user, password);
 			}
@@ -58,8 +56,14 @@ public class EmailFunc {
 			message.setText(subject);
 
 			// send the message
-			Transport.send(message);
-			return true;
+			try {
+				Transport.send(message);
+				return true;
+			}catch(AuthenticationFailedException e1) {
+				System.out.println("구글 로그인에 실패했습니다.");
+				return false;
+			}
+			
 		} catch (AddressException e) {
 			e.printStackTrace();
 		} catch (MessagingException e) {
@@ -69,26 +73,29 @@ public class EmailFunc {
 	}
 
 	// 기존 db랑
-	public void saveEmailsInDB(int memberNum) {
-		List<EmailVO> dbEmails = dao.emailSelectListAll(memberNum,0); // db에서 가져오기
+	public void saveEmailsInDB(int memberNum,String user, String password) {
+		EmailPage paging = new EmailPage();
+		paging.setMemberNum(memberNum);
+		paging.setSent(0);
+		List<EmailVO> dbEmails = dao.emailSelectListAll(paging); // db에서 가져오기
 		memNum = memberNum;
 		List<EmailVO> newEmails;
 		if (dbEmails.size() == 0) { // 처음 로그인할 때
-			newEmails = eir.getMailAll(1,null,memberNum);
+			newEmails = eir.getMailAll(1,null,memberNum,user,password);
 			for (int i = 0; i < newEmails.size(); i++) {
 				System.out.println(i + "번째 삽입");
 				dao.emailInsert(newEmails.get(i));
 			}
 			System.out.println("메일을 db에 저장 완료");
 		} else { // 기존에 데이터가 있을 때
-			newEmails = eir.getMailAll(0,null,memberNum); //id값 다 받아오기
-			compareEmails(dbEmails, newEmails);
+			newEmails = eir.getMailAll(0,null,memberNum,user,password); //id값 다 받아오기
+			compareEmails(dbEmails, newEmails,user,password);
 			System.out.println("업데이트 된 메일 db에 수정 완료");
 		}
 	}
 	
 	// 이메일 비교하기
-	private void compareEmails(List<EmailVO> dbEmails, List<EmailVO> newEmails) {
+	private void compareEmails(List<EmailVO> dbEmails, List<EmailVO> newEmails,String user, String password) {
 		// db를 검사
 		for (EmailVO de : dbEmails) {
 			boolean dFlag = true;
@@ -118,12 +125,14 @@ public class EmailFunc {
 				idList.add(ne.getEmailId());
 			}
 		}
-		List<EmailVO> neList = eir.getMailAll(1, idList,memNum);
+		List<EmailVO> neList = eir.getMailAll(1, idList,memNum,user,password);
 		if(neList != null) {
 			for(EmailVO ne : neList) {
 				dao.emailInsert(ne);
 			}
 		}
 	}
+	
+	
 	        
 }

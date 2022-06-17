@@ -21,6 +21,8 @@ public class EmailDeleteCommand implements Command {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("memberVO");
 		int memberNum = member.getMember_num();
+		String user = member.getMember_mail_email();
+		String password = member.getMember_mail_pw();
 		
 		EmailService dao = new EmailServiceImpl();
 		EmailImapRecieve eir = new EmailImapRecieve();
@@ -28,8 +30,10 @@ public class EmailDeleteCommand implements Command {
 		
 		String emailId = request.getParameter("emailId");
 		String toFrom = request.getParameter("toFrom");
+		System.out.println(emailId);
+		System.out.println(toFrom);
 		if(emailId != null) {
-			if(toFrom.equals("to") && emailId.startsWith("[")) {
+			if(emailId.startsWith("[")) {
 				emailId = emailId.replace('[', ' ');
 				emailId = emailId.replace(']', ' ');
 				emailId = emailId.replace('"', ' ');
@@ -43,8 +47,8 @@ public class EmailDeleteCommand implements Command {
 				idList.add(Integer.parseInt(emailId));
 			}
 			
-			if(toFrom.equals("to")) {
-				eir.getMailAll(3, idList,memberNum);				
+			if(toFrom.equals("to")) {//나한테 온 메일함이면 gmail에서도 지우기
+				eir.getMailAll(3, idList,memberNum,user,password);				
 			}
 		}
 		//db에서 삭제
@@ -59,7 +63,8 @@ public class EmailDeleteCommand implements Command {
 			dao.emailDelete(vo);
 			System.out.println("db 삭제 완료");
 		}
-		return "email/emailRecieve";
+		
+		return "ajax:true";
 	}
 
 }
