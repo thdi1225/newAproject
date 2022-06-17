@@ -112,7 +112,7 @@
 			<option value="100">부서1</option>
 			<option value="200">부서2</option>
 			<option value="300">부서3</option>
-		</select> <input type="button" onclick="calendarSearch();" value="검색">
+		</select> <input type="button" id="search" onclick="calendarSearch();" value="검색">
 	</form>
 	<table border="1" id="ta">
 		<thead>
@@ -142,6 +142,108 @@
 	<div id='calendar'></div>
 
 	<script>
+ 		
+ 	document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth'
+      },
+      initialDate: '2022-06-15',
+      selectable: true,
+      selectMirror: true,
+      select: function(arg) { // 등록 이벤트
+    	  console.log(arg);
+    	  var start = arg.startStr;
+    	  $("#calendar_start_date").val(start);
+    	 const modal = document.getElementById("calendar_input_modal");
+    	 const close = document.querySelector(".modal_close");
+      		 modal.style.display = 'block';
+      
+      	close.addEventListener('click', function() {
+      	 		modal.style.display = 'none';
+      	 });
+    
+      },
+      eventClick: function(info) { // 수정 이벤트
+    	  console.log(info);
+    	  calendarSelect(info.event._def.extendedProps.calendar_id);
+    	  calendarUpdate(info.event._def.extendedProps.calendar_id);
+    	  calendarDelete(info.event._def.extendedProps.calendar_id);
+    	  
+    	 const modal = document.getElementById("calendar_update_modal");
+     	 const close = document.querySelector(".modal_close");
+       		 modal.style.display = 'block';
+       
+       	close.addEventListener('click', function() {
+       	 	modal.style.display = 'none';
+		});
+		
+      },
+      dateClick: function(info) {
+    	    info.dayEl.style.backgroundColor = '#47B5FF'; // 클릭 시 배경색 바꾸는 속성
+    	},
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: function (info, successCallback) {
+    	  
+    	  $.ajax({
+	   			url: "calendarList.do",
+	   			type: "get",
+	   			dataType: "json",
+	   			success: function(data) {
+					for(var i = 0; i < data.length; i++) {
+							data[i].section_id = data[i].section_id;
+							data[i].calendar_id = data[i].calendar_id;
+							data[i].title = data[i].calendar_title;
+							data[i].start = data[i].calendar_start_date;
+							data[i].end = data[i].calendar_end_date;	
+					}
+					successCallback(data);
+	   			}
+	   		});
+    	  
+
+    	  const search = document.getElementById('search');
+    	  
+    	  search.addEventListener('click', function() {
+		  
+	    	  $.ajax({
+	   			url: "calendarSearch.do",
+	   			type: "get",
+	   			dataType: "json",
+	   			data: {
+	   				"key": $("#key").val()
+	   			},
+	   			success: function(data) {
+					let key_id = $("#key").val();
+					console.log(key_id);
+					
+					var events = [];
+					
+					for(var i = 0; i < data.length; i++) {
+						
+						if(data[i].section_id == key_id) {
+							data[i].section_id = data[i].section_id;
+							data[i].calendar_id = data[i].calendar_id;
+							data[i].title = data[i].calendar_title;
+							data[i].start = data[i].calendar_start_date;
+							data[i].end = data[i].calendar_end_date;	
+						}
+					}		
+					console.log(data);
+					successCallback(data);
+	   			}
+	   		});
+    	  });
+      }
+    });
+    calendar.render();
+ });
+
+ 	
  	function calendarInsert(startDate) {
   		$.ajax({
   			url: "calendarInput.do",
@@ -150,6 +252,7 @@
   			dataType: "json",
   			success: function(data) {
   				location.href="calendar.do";
+  				
   			}, 
   			error: function() {
   			}
@@ -170,6 +273,7 @@
   			},
   			success: function(result) {
   				location.href="calendar.do";
+  				
   			}, 
   			error: function() {
   			}
@@ -185,12 +289,13 @@
  			},
  			dataType: "json",
  			success: function(result) {
+ 				
  				$("#calendar_id").val(result.calendar_id);
  				$("#calendar_title2").val(result.calendar_title);
  				$("#calendar_subject2").val(result.calendar_subject);
  				$("#calendar_start_date2").val(result.calendar_start_date);
  				$("#calendar_end_date2").val(result.calendar_end_date);
- 			}
+ 				}
  		});
  	}
  	
@@ -243,75 +348,6 @@
  	function key_search(key_id) {
  		
  	}
-
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth'
-      },
-      initialDate: '2022-06-15',
-      selectable: true,
-      selectMirror: true,
-      select: function(arg) { // 등록 이벤트
-    	  console.log(arg);
-    	  var start = arg.startStr;
-    	  $("#calendar_start_date").val(start);
-    	 const modal = document.getElementById("calendar_input_modal");
-    	 const close = document.querySelector(".modal_close");
-      		 modal.style.display = 'block';
-      
-      	close.addEventListener('click', function() {
-      	 		modal.style.display = 'none';
-      	 });
-    
-      },
-      eventClick: function(info) { // 수정 이벤트
-    	  console.log(info);
-    	  calendarSelect(info.event._def.extendedProps.calendar_id);
-    	  calendarUpdate(info.event._def.extendedProps.calendar_id);
-    	  calendarDelete(info.event._def.extendedProps.calendar_id);
-    	  
-    	 const modal = document.getElementById("calendar_update_modal");
-     	 const close = document.querySelector(".modal_close");
-       		 modal.style.display = 'block';
-       
-       	close.addEventListener('click', function() {
-       	 	modal.style.display = 'none';
-		});
-		
-      },
-      dateClick: function(info) {
-    	    info.dayEl.style.backgroundColor = '#47B5FF'; // 클릭 시 배경색 바꾸는 속성
-    	},
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: function (info, successCallback) {
-    	  $.ajax({
-   			url: "calendarList.do",
-   			type: "get",
-   			dataType: "json",
-   			success: function(data) {
-   					let key_id = $("#key").val();
-   					console.log(key_id);
-   				for(var i = 0; i < data.length; i++) {
-   					data[i].section_id = data[i].section_id;
-   					data[i].calendar_id = data[i].calendar_id;
-   					data[i].title = data[i].calendar_title;
-   					data[i].start = data[i].calendar_start_date;
-   					data[i].end = data[i].calendar_end_date;		
-   				}
-   					successCallback(data);
-   			}
-   		});
-      }
-    });
-
-    calendar.render();
-  });
 
   
 </script>

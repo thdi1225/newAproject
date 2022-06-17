@@ -11,8 +11,8 @@
 	<div id="main_container">
 		<div class="testbox" id="box1"></div>
 		<div class="testbox" id="box2">
-			<div class="testbox" id="box3"></div>
-			<div class="testbox" id="box4"></div>
+			<div id="box3"></div>
+			<div id="box4"></div>
 		</div>
 	</div>
 </body>

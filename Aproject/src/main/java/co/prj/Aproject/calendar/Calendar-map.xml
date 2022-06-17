@@ -3,11 +3,11 @@
 <mapper namespace="co.prj.Aproject.calendar.CalendarMapper">
 
 	<select id="calendarSelectList" resultType="co.prj.Aproject.calendar.CalendarVO">
-	 select * from calendar order by section_id asc
+	  	 select * from calendar
 	</select>
 	
 	<select id="calendarSearchList" resultType="co.prj.Aproject.calendar.CalendarVO">
- 	 select * from calendar
+		  	 select * from calendar
 	 where
 	 	<if test="key == 1">1 = 1</if>
 	 	<if test="key == 100">section_id = #{key}</if>
