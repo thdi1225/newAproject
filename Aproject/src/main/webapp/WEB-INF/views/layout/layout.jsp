@@ -37,9 +37,7 @@
 				<div>
 					<tiles:insertAttribute name="header" />
 				</div>
-
-<!-- 				<div class="container" style="min-height: 90vh;"> -->
-				<div class="main_container">
+				<div class="main_container mt-4">
 					<tiles:insertAttribute name="body" />
 				</div>
 				<div>
