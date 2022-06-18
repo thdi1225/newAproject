@@ -8,36 +8,36 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="group">
-		<label for="section_id" class="label">section</label>
-		<select id="section_id" name="section_id" class="select">
+	<div class="form-group row">
+		<label for="section_id" class="col-sm-2 col-form-label">section</label>
+		<select id="section_id" name="section_id" class="col-sm-7 form-control">
 			<c:forEach items="${sectionList}" var="list">
 				<option value="${list.section_id}">${list.section_name}</option>
 			</c:forEach>
 		</select>
 	</div>
-	<div class="group">
-		<label for="member_insert_email" class="label">email</label>
-		<input id="member_insert_email" name="member_insert_email" type="email" class="input">
+	<div class="form-group row">
+		<label for="member_insert_email" class="col-sm-2 col-form-label">email</label>
+		<input id="member_insert_email" name="member_insert_email" type="email" class="col-sm-7 input">
 	</div>
-	<div class="group">
-		<label for="member_insert_pw" class="label">Password</label>
-		<input id="member_insert_pw" name="member_insert_pw" type="password" class="input" data-type="password">
+	<div class="form-group row">
+		<label for="member_insert_pw" class="col-sm-2 col-form-label">Password</label>
+		<input id="member_insert_pw" name="member_insert_pw" type="password" class="col-sm-7 input" data-type="password">
 	</div>
-	<div class="group">
-		<label for="member_insert_name" class="label">name</label>
-		<input id="member_insert_name" name="member_insert_name" type="text" class="input">
+	<div class="form-group row">
+		<label for="member_insert_name" class="col-sm-2 col-form-label">name</label>
+		<input id="member_insert_name" name="member_insert_name" type="text" class="col-sm-7 input">
 	</div>
-	<div class="group">
-		<label for="member_insert_phone" class="label">phone</label>
-		<input id="member_insert_phone" name="member_insert_phone" type="tel" class="input">
+	<div class="form-group row">
+		<label for="member_insert_phone" class="col-sm-2 col-form-label">phone</label>
+		<input id="member_insert_phone" name="member_insert_phone" type="tel" class="col-sm-7 input">
 	</div>
-	<div class="group">
-		<label for="member_insert_job" class="label">job</label>
-		<input id="member_insert_job" name="member_insert_job" type="text" class="input">
+	<div class="form-group row">
+		<label for="member_insert_job" class="col-sm-2 col-form-label">job</label>
+		<input id="member_insert_job" name="member_insert_job" type="text" class="col-sm-7 input">
 	</div>
-	<div class="group">
-		<label for="member_insert_auth" class="label">auth</label>
+	<div class="form-group row">
+		<label for="member_insert_auth" class="col-sm-2 col-form-label">auth</label>
 		<div class="form-check form-check-inline">
 			<input class="form-check-input" type="radio" name="member_insert_auth" id="member_insert_admin" value="0">
 			<label class="form-check-label" for="member_insert_admin">관리자</label>

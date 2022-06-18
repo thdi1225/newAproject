@@ -30,7 +30,7 @@
 					<td>${list.member_date}</td>
 					<td>${list.section_id}</td>
 					<td>${list.member_job}</td>
-					<td><button type="button" onclick="memberYn('${list.member_name}', '${list.member_num}')">승인</button></td>
+					<td><button class="table-btn" type="button" onclick="memberYn('${list.member_name}', '${list.member_num}')">승인</button></td>
 				</tr>
 			</c:forEach>
 		</table>
