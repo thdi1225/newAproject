@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="css/all.css" rel="stylesheet">
 </head>
 <body>
 	<div align="center">

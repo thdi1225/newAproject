@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="css/all.css" rel="stylesheet">
 </head>
 <body>
 	<h1>이메일 로그아웃 페이지입니다.</h1>
@@ -33,7 +34,7 @@
 								dataType:"json",
 								success:function(r){
 									alert("로그아웃되었습니다.");
-									location.href='emailSend.do';
+									location.href='emailLogin.do';
 								}
 							})
 						}else{

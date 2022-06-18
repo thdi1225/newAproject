@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="css/all.css" rel="stylesheet">
 </head>
 <body>
 	<h1>이메일 로그인 페이지</h1>

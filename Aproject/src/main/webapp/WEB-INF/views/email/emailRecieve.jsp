@@ -8,33 +8,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	tbody tr:hover{
-		background-color : blue;
-		color:white;
-	}
-</style>
+<link href="css/all.css" rel="stylesheet">
+<link href="css/mail.css" rel="stylesheet">
+
 </head>
 <body>
 	<div class="spinner-border" role="status" align="center" id="loading">
 	  	<span class="visually-hidden"></span>
 	</div>
+
 	<div id = "con" align="center">
-		<input type="button" id="refreshBtn" value="새로고침">
-		<input type="button" value="선택 삭제" id="selectDelete">
+		<input type="button" id="refreshBtn" value="동기화" class ="btn-dark refreshBtn">
 		<form action="emailRecieve.do" method="post">
 			검색 : <input type="text" id="search" name="search">
-			<button type="submit">검색</button>
+			<button type="submit" class ="btn-dark">검색</button>
 		</form>
-		<table border="1" id="tb">
+		<table id="tb" class="table">
 			<thead>
 				<tr>
-					<th width="100"><input type="checkbox" id="allCheck"></th>
-					<th width="100">No.</th>
-					<th width="200">보낸사람</th>
-					<th width="300">제목</th>
-					<th width="200">전송 시간</th>
-					<th width="100">삭제</th>
+					  <th><input type="checkbox" id="allCheck"></th>
+				      <th class="span"><input type="button" id="selectDelete" value="선택삭제" class="table-btn"></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,11 +41,11 @@
 							<input type="hidden" id="emailId" value=${email.emailId}>
 							<input type="checkbox" id="oneCheck">
 						</td>
-						<td>${fn:length(emails) - status.index}</td>
 						<td>${email.emailFrom}</td>
-						<td>${email.emailTitle}</td>
+						<td style="text-align:right;"><span class="label pull-right">Email</span></td>
+						<td style="text-align:left;	width:30%">${email.emailTitle}</td>
 						<td><fmt:formatDate value="${email.emailDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-						<td><input type="button" value="삭제" id="deleteEmail"></td>
+						<td><input type="button" value="삭제" id="deleteEmail" class="table-btn"></td>
 					</tr>
 				</c:forEach>
 				
@@ -74,7 +71,8 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	
+		
+
 		//로딩 페이지
 		var loader = document.getElementById('loading');
 		var con = document.getElementById('con');
@@ -153,8 +151,19 @@
         cbxs.forEach(e => {
                     e.addEventListener('click',function(cb){
                         if(cb.target.checked==false){
-                            console.log('false');
                             document.querySelector('#allCheck').checked=false;
+                        }else{
+                        	let flag = true;
+                        	for (var i = 0; i < cbxs.length; i++) {
+                                if(cbxs[i].checked==false){
+                                	flag = false;
+                                	break;
+                                }
+                            }
+                        	if(flag){
+                        		console.log("allcheck바꿔")
+                        		document.querySelector('#allCheck').checked=true;
+                        	}
                         }
                         cb.stopPropagation();
                     })
@@ -216,7 +225,7 @@
 	            },
 	            error : function(){
 	            	loadingPageOff();
-	                console.log("실패")
+	                alert("메일을 선택해주세요.")
 	            }
 	
 	        })
