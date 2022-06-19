@@ -88,6 +88,7 @@
 							"member_num" : member_num
 						},
 						success:function(result){
+							toastr.options = { "positionClass": "toast-top-center" }
 							toastr.info(member_name+"님 회원승인이 성공하였습니다.");
 							document.getElementById("tr_"+member_num).remove();
 						}
