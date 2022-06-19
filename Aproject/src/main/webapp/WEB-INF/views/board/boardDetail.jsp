@@ -8,38 +8,61 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div align="center">
+<div align="center" class="container">
 	
-	<div><h3>상세보기</h3></div>
-	${board.board_id } : ${board.board_writer } : ${board.board_date } : ${board.hit }
-	<p>${board.board_title }</p>
-	<p>${board.board_subject }</p> 
-	<button type="button"
+	
+		
+			<table class="table" style="text-align: center; border: 1px solid #dddddd">
+				<thead>
+					<tr>
+						<th colspan="3" style="background-color: #eeeeee; text-align: center;">${board.board_id}</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="width: 20%;">글제목</td>
+						<td colspan="2">${board.board_title }</td>
+					</tr>
+					<tr>
+						<td style="background-color: #eeeeee;">작성자</td>
+						<td colspan="2" style="background-color: #eeeeee;">${board.board_writer }</td>
+					</tr>
+					<tr>
+						<td>작성일자</td>
+						<td colspan="2">${board.board_date }</td>
+					</tr>
+					<tr>
+						<td style="background-color: #eeeeee;">내용</td>
+						<td style="background-color: #eeeeee;">${board.board_subject }</td>
+					</tr>
+				</tbody>
+			</table> 
+	<button type="button" class="table-btn"
 			onclick="boardSelect(${board.board_id})" data-toggle="modal"
 			data-target="#boardUpdateModal">수정</button>
-	<button type="button"
-			onclick="boardDelete(${board.board_id})">삭제</button>
+	<button type="button" class="table-btn"
+			onclick="boardDelete(${board.board_id})">삭제</button>&nbsp;&nbsp;
 	
-
-	<table>
+	
+	<table class="table">
 			<c:forEach items="${list}" var="boardReply">
 			<tr>
 				<td>${boardReply.board_reply_subject}</td>
 				<td>${boardReply.board_reply_date}</td>
-				<td><button type="button" onclick="boardReplyId(${boardReply.board_reply_id})" data-toggle="modal" data-target="#boardReplyUpdateModal">수정</button></td>
-				<td><button type="button" onclick="boardReplyDelete(${boardReply.board_reply_id})"data-toggle="modal" data-target="#boardReplyDeleteModal">삭제</button></td>
+				<td><button type="button" onclick="boardReplyId(${boardReply.board_reply_id})" data-toggle="modal" data-target="#boardReplyUpdateModal" class="table-btn">수정</button></td>
+				<td><button type="button" onclick="boardReplyDelete(${boardReply.board_reply_id})"data-toggle="modal" data-target="#boardReplyDeleteModal" class="table-btn">삭제</button></td>
 			</tr>
 			</c:forEach>
 	</table>
 	<form method="post" action="boardReplyInsert.do">
 		<input type="text" id="board_reply_subject" name="board_reply_subject" placeholder="댓글 내용" size="30">
 		<input id="board_id" name="board_id" value="${board.board_id}" type="hidden">
-		<input type="button" onclick="boardReplyInsert()" value="등록">
+		<input class="table-btn" type="button" onclick="boardReplyInsert()" value="등록">
 		
 	</form>
 </div>
 
-<!-- 회원 수정 모달 -->
+<!-- 게시글 수정 모달 -->
 <div class="modal fade" id="boardUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -63,9 +86,9 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button"
-					data-dismiss="modal">Cancel</button>
-				<button onclick="boardUpdate()">수정</button>
+				<button class="btn btn-secondary" type="button" class="table-btn"
+					data-dismiss="modal">취소</button>
+				<button onclick="boardUpdate()" class="table-btn">수정</button>
 			</div>
 		</div>
 	</div>
@@ -89,9 +112,9 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button"
-					data-dismiss="modal">Cancel</button>
-				<button  onclick="boardReplyUpdate(${boardReply.board_reply_subject})">수정</button>
+				<button class="btn btn-secondary" type="button" class="table-btn"
+					data-dismiss="modal">취소</button>
+				<button class="table-btn" onclick="boardReplyUpdate(${boardReply.board_reply_subject})">수정</button>
 			</div>
 		</div>
 	</div>
