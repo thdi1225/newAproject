@@ -25,9 +25,9 @@
 	</form>
 	<table class="table" id="sectionList">
 		<tr>
-			<th>번호</th>
+			<th>부서코드</th>
 			<th>부서명</th>
-			<th>순서</th>
+			<th>부서순서</th>
 			<th>수정</th>
 			<th>삭제</th>
 		</tr>
@@ -80,20 +80,20 @@
 
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="section_id" class="col-sm-2 col-form-label">번호</label> 
+						<label for="section_id" class="col-sm-3 col-form-label">부서코드</label> 
 						<input id="section_id" name="section_id" type="text" class="col-sm-7 input" readonly="readonly">
 					</div>
 					<div class="form-group">
-						<label for="section_name" class="col-sm-2 col-form-label">부서명</label> 
+						<label for="section_name" class="col-sm-3 col-form-label">부서명</label> 
 						<input id="section_name" name="section_name" type="text" class="col-sm-7 input">
 					</div>
 					<div class="form-group">
-						<label for="section_sort" class="col-sm-2 col-form-label">순서</label> 
+						<label for="section_sort" class="col-sm-3 col-form-label">부서순서</label> 
 						<input id="section_sort" name="section_sort" type="text" class="col-sm-7 input">
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" onclick="sectionUpdate()">수정</button>
+					<button class="btn btn-primary" onclick="sectionUpdateCheck()">수정</button>
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>
@@ -117,48 +117,84 @@
 			});
 		}
 		
+		function sectionUpdateCheck(){
+			if($.trim($("#section_id").val()) == "") {
+				toastr.options = { "positionClass": "toast-top-center" }
+				toastr["error"]("부서코드을 입력하세요.");
+				$("#section_id").focus();
+			}else if($.trim($("#section_name").val()) == "") {
+				toastr.options = { "positionClass": "toast-top-center" }
+				toastr["error"]("부서명을 입력하세요.");
+				$("#section_name").focus();
+			}else if($.trim($("#section_sort").val()) == "") {
+				toastr.options = { "positionClass": "toast-top-center" }
+				toastr["error"]("부서순서을 입력하세요.");
+				$("#section_sort").focus();
+			}else{
+				sectionUpdate();
+			}
+		}
+		
 		function sectionUpdate(){
-			$.ajax({
-				url:"sectionUpdate.do",
-				method:"post",
-				dataType : "json",
-				data: {
-					"section_id" : $("#section_id").val(),
-					"section_name" : $("#section_name").val(),
-					"section_sort" : $("#section_sort").val()
-				},
-				dataType : "json",
-				success:function(result){
-					toastr.options = { "positionClass": "toast-top-center" }
-					toastr.info("회원 수정을 성공하였습니다.");
-					$("#sectionList").load(location.href+" #sectionList");
-					$("#sectionUpdateModal").modal("hide");
+			swal({
+				title: "정말 수정하시겠습니까?",
+				icon: "info",
+				buttons: true,
+			})
+			.then((willDelete) => {
+				if (willDelete) {
+					$.ajax({
+						url:"sectionUpdate.do",
+						method:"post",
+						dataType : "json",
+						data: {
+							"section_id" : $("#section_id").val(),
+							"section_name" : $("#section_name").val(),
+							"section_sort" : $("#section_sort").val()
+						},
+						dataType : "json",
+						success:function(result){
+							toastr.options = { "positionClass": "toast-top-center" }
+							toastr.info("회원 수정을 성공하였습니다.");
+							$("#sectionList").load(location.href+" #sectionList");
+							$("#sectionUpdateModal").modal("hide");
+						}
+					});
 				}
-			});
+			})
 		}
 		
 		function sectionDelete(section_id){
-			$.ajax({
-				url:"sectionDelete.do",
-				data: {
-					"section_id" : section_id
-				},
-				dataType : "json",
-				success:function(result){
-					if(result == 1){
-						toastr.options = { "positionClass": "toast-top-center" }
-						toastr.info("회원삭제를 성공하였습니다.");
-						document.getElementById("tr_"+section_id).remove();
-					}else{
-						toastr.options = { "positionClass": "toast-top-center" }
-						toastr.info("회원삭제를 실패하였습니다.");
-					}	
-				},
-				error:function(error){
-					toastr.options = { "positionClass": "toast-top-center" }
-					toastr.error("부서에 소속된 회원이 있습니다.");
+			swal({
+				title: "정말 삭제하시겠습니까?",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			}).then((willDelete) => {
+				if (willDelete) {
+					$.ajax({
+						url:"sectionDelete.do",
+						data: {
+							"section_id" : section_id
+						},
+						dataType : "json",
+						success:function(result){
+							if(result == 1){
+								toastr.options = { "positionClass": "toast-top-center" }
+								toastr.info("부서삭제를 성공하였습니다.");
+								document.getElementById("tr_"+section_id).remove();
+							}else{
+								toastr.options = { "positionClass": "toast-top-center" }
+								toastr.info("부서삭제를 실패하였습니다.");
+							}	
+						},
+						error:function(error){
+							toastr.options = { "positionClass": "toast-top-center" }
+							toastr.error("부서에 소속된 회원이 있습니다.");
+						}
+					});
 				}
-			});
+			})
 		}
 	</script>
 </body>

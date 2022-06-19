@@ -19,8 +19,12 @@ public class MemberDeleteCommand implements Command {
 		MemberVO vo = new MemberVO();
 		
 		vo.setMember_num(Integer.parseInt(request.getParameter("member_num")));
-		
-		int result = service.memberDelete(vo);
+		int result = 0;
+		try {
+			service.memberDelete(vo);
+		} catch (Exception e) {
+			result = 2;
+		}
 			
 		Gson gson = new GsonBuilder().create();
 		

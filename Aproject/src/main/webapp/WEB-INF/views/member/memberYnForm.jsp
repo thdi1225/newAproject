@@ -75,16 +75,25 @@
 	
 	<script type="text/javascript">
 		function memberYn(member_name, member_num){
-			$.ajax({
-				url:"memberYn.do",
-				data: {
-					"member_num" : member_num
-				},
-				success:function(result){
-					toastr.info(member_name+"님 회원승인이 성공하였습니다.");
-					document.getElementById("tr_"+member_num).remove();
+			swal({
+				title: "정말 승인하시겠습니까?",
+				icon: "info",
+				buttons: true,
+			})
+			.then((willDelete) => {
+				if (willDelete) {
+					$.ajax({
+						url:"memberYn.do",
+						data: {
+							"member_num" : member_num
+						},
+						success:function(result){
+							toastr.info(member_name+"님 회원승인이 성공하였습니다.");
+							document.getElementById("tr_"+member_num).remove();
+						}
+					});
 				}
-			});
+			})
 		}
 	</script>
 </body>

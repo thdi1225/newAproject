@@ -98,7 +98,7 @@
 				<div class="modal-body">
 					<input id="member_update_num" name="member_update_num" type="hidden" class="input">
 					<div class="form-group row">
-						<label for="section_id" class="col-sm-2 col-form-label">section</label>
+						<label for="section_id" class="col-sm-3 col-form-label">부서</label>
 						<select id="section_id" name="section_id" class="col-sm-7 form-control">
 							<c:forEach items="${sectionList}" var="list">
 								<option value="${list.section_id}">${list.section_name}</option>
@@ -106,23 +106,23 @@
 						</select>
 					</div>
 					<div class="form-group row">
-						<label for="member_update_email" class="col-sm-2 col-form-label">email</label> 
+						<label for="member_update_email" class="col-sm-3 col-form-label">이메일</label> 
 						<input id="member_update_email" name="member_update_email" type="email" class="col-sm-7 input">
 					</div>
 					<div class="form-group row">
-						<label for="member_update_name" class="col-sm-2 col-form-label">name</label> 
+						<label for="member_update_name" class="col-sm-3 col-form-label">이름</label> 
 						<input id="member_update_name" name="member_update_name" type="text" class="col-sm-7 input">
 					</div>
 					<div class="form-group row">
-						<label for="member_update_phone" class="col-sm-2 col-form-label">phone</label> 
+						<label for="member_update_phone" class="col-sm-3 col-form-label">전화번호</label> 
 						<input id="member_update_phone" name="member_update_phone" type="tel" class="col-sm-7 input">
 					</div>
 					<div class="form-group row">
-						<label for="member_update_job" class="col-sm-2 col-form-label">job</label> 
+						<label for="member_update_job" class="col-sm-3 col-form-label">직책</label> 
 						<input id="member_update_job" name="member_update_job" type="text" class="col-sm-7 input">
 					</div>
 					<div class="form-group row">
-						<label for="member_update_auth" class="col-sm-2 col-form-label">auth</label>
+						<label for="member_update_auth" class="col-sm-3 col-form-label">권한</label>
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="member_update_auth" id="member_update_admin" value="0">
 							<label class="form-check-label" for="member_update_admin">관리자</label>
@@ -135,7 +135,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" onclick="memberUpdate()">수정</button>
+					<button class="btn btn-primary" onclick="memberUpdateCheck()">수정</button>
 					<button class="btn btn-secondary" type="button"	data-dismiss="modal">Cancel</button>
 				</div>
 			</div>
@@ -167,67 +167,116 @@
 			});
 		}
 		
+		function memberUpdateCheck(){
+			if ($.trim($("#member_update_email").val()) == "") {
+				toastr.options = { "positionClass": "toast-top-center" }
+				toastr["error"]("메일을 입력하세요.");
+				$("#member_update_email").focus();
+			}else if($.trim($("#member_update_name").val()) == "") {
+				toastr.options = { "positionClass": "toast-top-center" }
+				toastr["error"]("이름을 입력하세요.");
+				$("#member_update_name").focus();
+			}else if($.trim($("#member_update_phone").val()) == "") {
+				toastr.options = { "positionClass": "toast-top-center" }
+				toastr["error"]("전화번호을 입력하세요.");
+				$("#member_update_phone").focus();
+			}else if($.trim($("#member_update_job").val()) == "") {
+				toastr.options = { "positionClass": "toast-top-center" }
+				toastr["error"]("직책을 입력하세요.");
+				$("#member_update_job").focus();
+			}else{
+				memberUpdate();
+			}
+		}
+		
 		function memberUpdate(){
-			$.ajax({
-				url:"memberUpdate.do",
-				method:"post",
-				dataType : "json",
-				data: {
-					"member_num" : $("#member_update_num").val(),
-					"section_id" : $("#section_id").val(),
-					"member_email" : $("#member_update_email").val(),
-					"member_name" : $("#member_update_name").val(),
-					"member_phone" : $("#member_update_phone").val(),
-					"member_job" : $("#member_update_job").val(),
-					"member_auth" : $("input[name='member_update_auth']:checked").val()
-				},
-				dataType : "json",
-				success:function(result){
-					toastr.options = { "positionClass": "toast-top-center" }
-					toastr["info"]("수정 되었습니다.");
-					$("#memberList").load(location.href+" #memberList");
-					$("#memberUpdateModal").modal("hide");
+			swal({
+				title: "정말 수정하시겠습니까?",
+				icon: "info",
+				buttons: true,
+			})
+			.then((willDelete) => {
+				if (willDelete) {
+					$.ajax({
+						url:"memberUpdate.do",
+							method:"post",
+							dataType : "json",
+							data: {
+								"member_num" : $("#member_update_num").val(),
+								"section_id" : $("#section_id").val(),
+								"member_email" : $("#member_update_email").val(),
+								"member_name" : $("#member_update_name").val(),
+								"member_phone" : $("#member_update_phone").val(),
+								"member_job" : $("#member_update_job").val(),
+								"member_auth" : $("input[name='member_update_auth']:checked").val()
+							},
+							dataType : "json",
+							success:function(result){
+								toastr.options = { "positionClass": "toast-top-center" }
+								toastr["info"]("수정 되었습니다.");
+								$("#memberList").load(location.href+" #memberList");
+								$("#memberUpdateModal").modal("hide");
+							}
+					});
 				}
-			});
+			})
 		}
 		
 		function memberDelete(member_num, member_name){
-			$.ajax({
-				url:"memberDelete.do",
-				data: {
-					"member_num" : member_num
-				},
-				dataType : "json",
-				success:function(result){
-					if(result == 1){
-						toastr.options = { "positionClass": "toast-top-center" }
-						toastr["info"]("삭제 되었습니다.");
-						document.getElementById("tr_"+member_num).remove();
-					}else{
-						toastr.options = { "positionClass": "toast-top-center" }
-						toastr.info("회원삭제를 실패하였습니다.");
-					}	
+			swal({
+				title: "정말 삭제하시겠습니까?",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			}).then((willDelete) => {
+				if (willDelete) {
+					$.ajax({
+						url:"memberDelete.do",
+						data: {
+							"member_num" : member_num
+						},
+						dataType : "json",
+						success:function(result){
+							if(result == 1){
+								toastr.options = { "positionClass": "toast-top-center" }
+								toastr["info"]("삭제 되었습니다.");
+								document.getElementById("tr_"+member_num).remove();
+							}else{
+								toastr.options = { "positionClass": "toast-top-center" }
+								toastr.info("회원삭제를 실패하였습니다.");
+							}	
+						}
+					});
 				}
-			});
+			})
 		}
 		
 		function memberPwReset(member_num){
-			$.ajax({
-				url:"memberPwReset.do",
-				data: {
-					"member_num" : member_num
-				},
-				dataType : "json",
-				success:function(result){
-					if(result == 1){
-						toastr.options = { "positionClass": "toast-top-center" }
-						toastr.info("비밀번호 초기화를 성공하였습니다.");
-					}else{
-						toastr.options = { "positionClass": "toast-top-center" }
-						toastr.info("비밀번호 초기화를 실패하였습니다.");
-					}	
+			swal({
+				title: "정말 비밀번호를 초기화하시겠습니까?",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			}).then((willDelete) => {
+				if (willDelete) {
+					$.ajax({
+						url:"memberPwReset.do",
+						data: {
+							"member_num" : member_num
+						},
+						dataType : "json",
+						success:function(result){
+							if(result == 1){
+								toastr.options = { "positionClass": "toast-top-center" }
+								toastr.info("비밀번호 초기화를 성공하였습니다.");
+							}else{
+								toastr.options = { "positionClass": "toast-top-center" }
+								toastr.info("비밀번호 초기화를 실패하였습니다.");
+							}	
+						}
+					});
 				}
-			});
+			})
 		}
 	</script>
 </body>
