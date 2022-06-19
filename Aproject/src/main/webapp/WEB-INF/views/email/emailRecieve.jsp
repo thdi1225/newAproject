@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="css/all.css" rel="stylesheet">
-<link href="css/mail.css" rel="stylesheet">
+<link href="css/mail/mail.css" rel="stylesheet">
 
 </head>
 <body>
@@ -18,7 +18,7 @@
 	</div>
 
 	<div id = "con" align="center">
-		<input type="button" id="refreshBtn" value="동기화" class ="btn-dark refreshBtn">
+		<input type="button" id="refreshBtn" value="동기화" class ="btn-dark">
 		<form action="emailRecieve.do" method="post">
 			검색 : <input type="text" id="search" name="search">
 			<button type="submit" class ="btn-dark">검색</button>

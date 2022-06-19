@@ -5,12 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="css/all.css" rel="stylesheet">
+<link href="css/mail/mailDetail.css" rel="stylesheet">
 </head>
 <body>
-	<h1>${email.emailTitle}</h1>
-	<p>보낸 날짜 : ${email.emailDate }</p>
-	<p>보낸 사람 : ${email.emailFrom }</p>
-	<p>${email.emailSubject}</p>
+	<div class="con">
+		<p class="floatRight miniFont">${email.emailDate }</p>
+		<div>
+			<p class="inline">From : </p>
+			<p class="toBlock inline">${email.emailFrom}</p>
+			<p class="title">${email.emailTitle}</p>
+		</div>
+		<div class="subject">
+			<p>${email.emailSubject}</p>
+		</div>
+		
+	</div>
 </body>
 </html>

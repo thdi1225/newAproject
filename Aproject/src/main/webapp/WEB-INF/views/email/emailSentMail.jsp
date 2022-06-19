@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="css/all.css" rel="stylesheet">
-<link href="css/mail.css" rel="stylesheet">
+<link href="css/mail/mail.css" rel="stylesheet">
 </head>
 <body>
 	<div align="center">
