@@ -31,6 +31,33 @@
 		ORDER BY 1
 	</select>
 
+<select id="commuteEmpSearchList" resultType="co.prj.Aproject.commute.vo.CommuteVO"  parameterType="co.prj.Aproject.commute.vo.CommuteVO">
+	
+		select * from commute 
+		WHERE 
+		<if test='key==1'>commute_date like '%'||'22/01'||'%'</if>
+		<if test='key==2'>commute_date like '%'||'22/02'||'%'</if>
+		<if test='key==3'>commute_date like '%'||'22/03'||'%'</if>
+		<if test='key==4'>commute_date like '%'||'22/04'||'%'</if>
+		<if test='key==5'>commute_date like '%'||'22/05'||'%'</if>
+		<if test='key==6'>commute_date like '%'||'22/06'||'%'</if>
+		<if test='key==7'>commute_date like '%'||'22/07'||'%'</if>
+		<if test='key==8'>commute_date like '%'||'22/08'||'%'</if>
+		<if test='key==9'>commute_date like '%'||'22/09'||'%'</if>
+		<if test='key==10'>commute_date like '%'||'22/10'||'%'</if>
+		<if test='key==11'>commute_date like '%'||'22/11'||'%'</if>
+		<if test='key==12'>commute_date like '%'||'22/12'||'%'</if>
+		
+		ORDER BY 1
+	</select>
+
+
+
+	<select id="commuteEmpSelectList" resultType="co.prj.Aproject.commute.vo.CommuteVO" parameterType="co.prj.Aproject.commute.vo.CommuteVO">
+	
+	SELECT * from commute order by 1
+	</select>
+
 
 	<insert id="commuteStartInsert" parameterType="co.prj.Aproject.member.vo.MemberVO">
 	

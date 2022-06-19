@@ -21,6 +21,16 @@ public class CommuteImpl implements CommuteService{
 	}
 
 	@Override
+	public List<CommuteVO> commuteEmpSelectList(CommuteVO vo) {
+		return map.commuteEmpSelectList(vo);
+	}
+	
+	@Override
+	public List<CommuteVO> commuteEmpSearchList(String key, String val) {
+		return map.commuteEmpSearchList(key, val);
+	}
+	
+	@Override
 	public List<CommuteVO> commuteSearchList(String key, String val,String member_num) {
 		
 		return map.commuteSearchList(key, val,member_num);
@@ -41,6 +51,7 @@ public class CommuteImpl implements CommuteService{
 	public int commuteEndUpdate(MemberVO vo) {
 		return map.commuteEndUpdate(vo);
 	}
+
 
 
 

@@ -29,7 +29,6 @@ public class CommuteSelectDate implements Command {
 		ObjectMapper mapper = new ObjectMapper();
 		String key = request.getParameter("key");
 		String val = request.getParameter("val");
-		System.out.println(key);
 		list = dao.commuteSearchList(key,val,String.valueOf(vo.getMember_num()));
 		String jsonData = "";
 		
