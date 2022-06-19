@@ -8,6 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div>
+		<small class="float-right text-underline-bold">회원관리 > 회원등록</small>
+		<h2 class="text-title">
+			회원등록
+		</h2>
+	</div>
+	
+	<div class="border rounded p-3">
 	<div class="form-group row">
 		<label for="section_id" class="col-sm-2 col-form-label">section</label>
 		<select id="section_id" name="section_id" class="col-sm-7 form-control">
@@ -47,9 +55,11 @@
 			<label class="form-check-label" for="member_insert_member">일반 사용자</label>
 		</div>
 	</div>
-	<div class="group">
-		<input type="button" class="button" onclick="memberAdminInput()" value="Sign Up">
+	<div class="group text-right">
+		<input type="button" class="table-btn" onclick="memberAdminInput()" value="Sign Up">
 	</div>
+	</div>
+	
 	<script type="text/javascript">
 		function memberAdminInput(){
 			$.ajax({

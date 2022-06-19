@@ -19,12 +19,10 @@
 					<div class="group">
 						<label for="member_email" class="label">email</label>
 						<input id="member_email" name="member_email" type="email" class="input" maxlength="20">
-						최대 20자
 					</div>
 					<div class="group">
 						<label for="member_pw" class="label">password</label>
 						<input id="member_pw" name="member_pw" type="password" class="input" data-type="password" maxlength="20">
-						최대 20자
 					</div>
 					<div class="group">
 						<input type="submit" class="button" value="Sign In">
@@ -45,27 +43,22 @@
 					<div class="group">
 						<label for="member_insert_email" class="label">email</label>
 						<input id="member_insert_email" name="member_insert_email" type="email" class="input" maxlength="20">
-						최대 20자
 					</div>
 					<div class="group">
 						<label for="member_insert_pw" class="label">Password</label>
 						<input id="member_insert_pw" name="member_insert_pw" type="password" class="input" data-type="password" maxlength="20">
-						최대 20자
 					</div>
 					<div class="group">
 						<label for="member_insert_name" class="label">name</label>
 						<input id="member_insert_name" name="member_insert_name" type="text" class="input" maxlength="10">
-						최대 10자
 					</div>
 					<div class="group">
 						<label for="member_insert_phone" class="label">phone</label>
 						<input id="member_insert_phone" name="member_insert_phone" type="tel" class="input" maxlength="20">
-						최대 20자
 					</div>
 					<div class="group">
 						<label for="member_insert_job" class="label">job</label>
 						<input id="member_insert_job" name="member_insert_job" type="text" class="input" maxlength="10">
-						최대 10자
 					</div>
 					<div class="group">
 						<input type="submit" class="button" value="Sign Up">

@@ -21,7 +21,6 @@
 		<if test='start != null &amp;&amp; start != ""'>
 			WHERE RN BETWEEN #{start} AND #{end}
 		</if>
-		
 	</select>
 	
 	<select id="memberSelectListCount" resultType="int">
@@ -75,8 +74,28 @@
 	</delete>
 	
 	<select id="memberYnSelectList" resultType="co.prj.Aproject.member.vo.MemberVO">
-		select * from member
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						select * from member
+						where member_yn = 'N'
+						<if test='search != null &amp;&amp; search != ""'>
+							and member_name like '%'||#{search}||'%'
+						</if>
+						) A
+				)
+		<if test='start != null &amp;&amp; start != ""'>
+			WHERE RN BETWEEN #{start} AND #{end}
+		</if>
+	</select>
+
+	<select id="memberYnSelectListCount" resultType="int">
+		select count(*) from member
 		where member_yn = 'N'
+		<if test='search != null &amp;&amp; search != ""'>
+			and member_name like '%'||#{search}||'%'
+		</if>
 	</select>
 	
 	<update id="memberYnUpdate" parameterType="co.prj.Aproject.member.vo.MemberVO">

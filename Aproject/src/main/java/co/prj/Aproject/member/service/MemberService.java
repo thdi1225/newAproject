@@ -18,7 +18,7 @@ public interface MemberService {
 	
 	public int memberDelete(MemberVO vo);
 
-	public List<MemberVO> memberYnSelectList();
+	public List<MemberVO> memberYnSelectList(MemberPage page);
 
 	public void memberYnUpdate(MemberVO vo);
 
@@ -29,4 +29,6 @@ public interface MemberService {
 	public int memberSelectListCount(MemberPage page);
 
 	public void memberMyPage(MemberVO vo);
+
+	public int memberYnSelectListCount(MemberPage page);
 }
