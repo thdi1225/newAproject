@@ -42,7 +42,7 @@
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {
-	width: 250px;
+	width: 450px;
 	height: 38px;
 	color: #333333;
 	padding: 10px;
