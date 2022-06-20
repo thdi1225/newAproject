@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.prj.Aproject.member.service.MemberMapper">
+	<select id="login" resultType="co.prj.Aproject.member.vo.MemberVO">
+		select * from member
+		where member_email = #{member_email}
+		and member_pw = #{member_pw}
+	</select>
+
+	<select id="memberSelectList" resultType="co.prj.Aproject.member.vo.MemberVO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						select * from member
+						<if test='search != null &amp;&amp; search != ""'>
+							where member_name like '%'||#{search}||'%'
+						</if>
+						) A
+				)
+		<if test='start != null &amp;&amp; start != ""'>
+			WHERE RN BETWEEN #{start} AND #{end}
+		</if>
+	</select>
+	
+	<select id="memberSelectListCount" resultType="int">
+		select count(*) from member
+		<if test='search != null &amp;&amp; search != ""'>
+			where member_name like '%'||#{search}||'%'
+		</if>
+	</select>
+	
+	<select id="memberSelect" parameterType="co.prj.Aproject.member.vo.MemberVO" resultType="co.prj.Aproject.member.vo.MemberVO">
+		select * from member
+		where member_num = #{member_num}
+	</select>
+	
+	<insert id="memberInsert" parameterType="co.prj.Aproject.member.vo.MemberVO">
+		insert into member (
+			member_num,
+			member_email,
+			member_pw,
+			member_name,
+			member_phone,
+			member_date,
+			member_job,
+			section_id
+		)values(
+			member_num_seq.nextval,
+			#{member_email},
+			#{member_pw},
+			#{member_name},
+			#{member_phone},
+			sysdate,
+			#{member_job},
+			#{section_id}
+		)
+	</insert>
+	
+	<update id="memberUpdate" parameterType="co.prj.Aproject.member.vo.MemberVO">
+		update member set
+			member_email = #{member_email},
+			member_name = #{member_name},
+			member_phone = #{member_phone},
+			member_job = #{member_job},
+			section_id = #{section_id},
+			member_auth = #{member_auth}
+		where member_num = #{member_num}
+	</update>
+	
+	<delete id="memberDelete" parameterType="co.prj.Aproject.member.vo.MemberVO">
+		delete from member
+		where member_num = #{member_num}
+	</delete>
+	
+	<select id="memberYnSelectList" resultType="co.prj.Aproject.member.vo.MemberVO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						select * from member
+						where member_yn = 'N'
+						<if test='search != null &amp;&amp; search != ""'>
+							and member_name like '%'||#{search}||'%'
+						</if>
+						) A
+				)
+		<if test='start != null &amp;&amp; start != ""'>
+			WHERE RN BETWEEN #{start} AND #{end}
+		</if>
+	</select>
+
+	<select id="memberYnSelectListCount" resultType="int">
+		select count(*) from member
+		where member_yn = 'N'
+		<if test='search != null &amp;&amp; search != ""'>
+			and member_name like '%'||#{search}||'%'
+		</if>
+	</select>
+	
+	<update id="memberYnUpdate" parameterType="co.prj.Aproject.member.vo.MemberVO">
+		update member set
+		member_yn = 'Y'
+		where member_num = #{member_num}
+	</update>
+	
+	<update id="memberPwReset" parameterType="co.prj.Aproject.member.vo.MemberVO">
+		update member set
+		member_pw = '1234'
+		where member_num = #{member_num} 
+	</update>
+	
+	<insert id="memberAdminInput" parameterType="co.prj.Aproject.member.vo.MemberVO">
+		insert into member (
+			member_num,
+			member_email,
+			member_pw,
+			member_name,
+			member_phone,
+			member_date,
+			member_job,
+			section_id,
+			member_yn,
+			member_auth
+		)values(
+			member_num_seq.nextval,
+			#{member_email},
+			#{member_pw},
+			#{member_name},
+			#{member_phone},
+			sysdate,
+			#{member_job},
+			#{section_id},
+			'Y',
+			#{member_auth}
+		)
+	</insert>
+	
+	<update id="memberMyPage" parameterType="co.prj.Aproject.member.vo.MemberVO">
+		update member set
+			member_email = #{member_email},
+			member_pw = #{member_pw},
+			member_name = #{member_name},
+			member_phone = #{member_phone},
+			member_job = #{member_job},
+			section_id = #{section_id}
+		where member_num = #{member_num}
+	</update>
+</mapper>

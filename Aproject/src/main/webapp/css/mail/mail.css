@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+.table{
+	margin-top:2em;
+	border-collapse:collapse;
+	border-color:black;
+	border-style:solid;
+	border-width:1px;
+
+}
+.table td{
+	border-left:none;
+	border-right:none;
+	font-weight:bold;
+}
+.table th{
+	border-left:none;
+	border-right:none;
+}
+.table tbody tr:hover{
+	background-color:rgba(194,208,234,0.2);
+	color:black;
+	cursor:pointer;
+}
+
+input[type="checkbox"]{
+	width:18px;
+	height:18px;
+	cursor:pointer;
+}
+
+.table > tbody > tr > td > span{
+	background-color:gray;
+	color:white;
+	padding:5% 10%;
+	font-weight:bolder;
+	border-radius:10%;
+}
+#refreshBtn{
+	float:right;
+	margin-right:3%;
+}
+
+.con > div{
+	width:100%;
+	text-align:center;
+}
+.con > div > p{
+	font-weight:bold;
+	margin: 0 auto;
+	text-align:center;
+	width:100%;
+}
+
+.spinner-border{
+	margin:0 auto;
+}

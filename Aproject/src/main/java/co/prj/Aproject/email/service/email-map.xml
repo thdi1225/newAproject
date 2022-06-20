@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.prj.Aproject.email.service.EmailMapper">
+	<select id="emailSelectListAll" resultType = "co.prj.Aproject.email.vo.EmailVO">
+		
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						select email_id as emailId, email_to as emailTo, email_from as emailFrom,
+						email_title as emailTitle, email_date as emailDate, member_num as memberNum,email_subject as emailSubject
+						from email
+						where member_num = #{memberNum}
+						and
+						<choose>
+							<when test="sent==1">email_from is null</when>
+							<when test="sent==0">email_to is null</when>
+						</choose>
+						<if test='search != null &amp;&amp; search != ""'>
+							and email_title like '%'||#{search}||'%'
+						</if>
+						order by email_date desc
+						) A
+				)
+		<if test='start != null &amp;&amp; start != ""'>
+			WHERE RN BETWEEN #{start} AND #{end}
+		</if>
+	</select>
+	
+	<select id="emailSelectListAllCount" parameterType="co.prj.Aproject.email.vo.EmailPage" resultType="int">
+		select count(*)
+		from email
+		where member_num = #{memberNum}
+		and
+		<choose>
+			<when test="sent==1">email_from is null</when>
+			<when test="sent==0">email_to is null</when>
+		</choose>
+		<if test='search != null and search != ""'>
+			and email_title like '%'||#{search}||'%'
+		</if>
+		order by email_date desc
+	</select>
+	
+	<select id="emailSelectOne" parameterType="co.prj.Aproject.email.vo.EmailVO" resultType="co.prj.Aproject.email.vo.EmailVO">
+		select email_id as emailId, email_to as emailTo, email_from as emailFrom,
+		email_title as emailTitle, email_date as emailDate, member_num as memberNum,email_subject as emailSubject
+		from email
+		where member_num = #{memberNum}
+		and email_id = #{emailId}
+		and email_to
+		<choose>
+			<when test="emailTo == null"> is null</when>
+			<when test="emailTo != null">is not null</when>
+		</choose>
+	</select>
+	
+	<insert id="emailInsert" parameterType="co.prj.Aproject.email.vo.EmailVO">
+		insert into email
+		values(
+		<choose>
+			<when test="emailTo == null">#{emailId},</when>
+			<otherwise>email_sent_seq.nextval,</otherwise>
+		</choose>
+		#{emailTo},#{emailFrom},#{emailTitle},
+		<choose>
+			<when test="emailTo == null">#{emailDate}</when>
+			<otherwise>sysdate</otherwise>
+		</choose>
+		,#{memberNum},#{emailSubject})
+	</insert>
+	
+	<delete id="emailDelete" parameterType="co.prj.Aproject.email.vo.EmailVO">
+		delete email
+		where email_id = #{emailId}
+		and member_num = #{memberNum}
+		and email_to
+		<choose>
+			<when test="emailTo == null"> is null</when>
+			<when test="emailTo != null">is not null</when>
+		</choose>
+	</delete>
+	
+	<select id="emailSelectFive" parameterType="int" resultType = "co.prj.Aproject.email.vo.EmailVO">
+		select * from
+		(select email_id as emailId, email_to as emailTo, email_from as emailFrom,
+						email_title as emailTitle, email_date as emailDate, member_num as memberNum,email_subject as emailSubject
+						 from email
+		where member_num = #{memberNum}
+		and email_to is null
+		order by email_date desc)
+		<![CDATA[where rownum<=5]]>
+	</select>
+	
+	
+	<update id="emailInfoUpdate" parameterType="co.prj.Aproject.member.vo.MemberVO">
+		update member set
+		member_mail_email = #{member_mail_email},
+		member_mail_pw = #{member_mail_pw}
+		where member_num = #{member_num}
+	</update>
+	
+	<select id="emailCount" resultType="int">
+		select count(*)
+		from email
+		where member_num =1
+		and email_to is null
+	</select>
+	
+</mapper>
