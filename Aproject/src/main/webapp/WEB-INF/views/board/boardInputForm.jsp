@@ -5,10 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/all.css">
 </head>
 <body>
-<div align="center" class="container">
-	<div><h1>게시글 등록</h1></div>
+<div>
+		<small class="float-right text-underline-bold">커뮤니티 > 게시글 등록</small>
+		<h2 class="text-title">
+			게시글 등록
+		</h2>
+		<hr>
+	</div>
 	<div>
 		<form id="frm" action="boardInput.do" method="post" enctype="multipart/form-data">
 			<div>
@@ -43,8 +49,6 @@
 			<div>
 				<input class="table-btn" type="submit" value="저장">&nbsp;&nbsp;
 				<input class="table-btn" type="button" value="취소" onclick="location.href='boardList.do'">
-				<button type="button" class="table-btn"
-			onclick="location.href='boardList.do'">목록</button>
 			</div>
 		</form>
 	</div>

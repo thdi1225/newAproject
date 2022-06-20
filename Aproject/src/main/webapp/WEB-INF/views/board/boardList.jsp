@@ -8,23 +8,32 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="js/jquery-3.6.0.min.js"></script>
+<style type="text/css">
+.table tr:hover{
+	background-color:rgba(194,208,234,0.2);
+	color:black;
+	cursor:pointer;
+}
+</style>
 </head>
 <body>
-	<div align="center" class="container">
-		<div>
-			<h2 class="text-title">자유게시판</h2>
-		</div>
-		<div class="input">
-			<form action="boardList.do">
+	<div>
+		<small class="float-right text-underline-bold">커뮤니티 > 게시판 목록</small>
+		<h2 class="text-title">
+			게시판 목록
+		</h2>
+		<hr>
+	</div>
+			<form action="boardList.do" method="post">
+		
 			<div class="input-group mb-3">
-				<input type="text" id="search" name="search">&nbsp; 
+				<input type="text" class="form-control" id="search" name="search">&nbsp; 
 			    <div class="input-group-append">
 				<input class="btn btn-outline-secondary" type="submit" value="검색">
 				</div>
 			</div>
+	   
 		</form>
-	</div>
-		<br />
 		<div>
 			<table class="table" id="ta">
 					<tr>
