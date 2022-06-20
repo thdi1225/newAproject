@@ -68,9 +68,12 @@
 					success:function(res){
 						loadingPageOff();
 						if(res==0){
-							alert("전송에 실패했습니다. 이메일 주소를 다시 확인해주세요.");
+							toastr.options = { "positionClass": "toast-top-center" }
+							toastr["error"]("전송에 실패했습니다. 이메일 주소를 다시 확인해주세요.");
+// 							alert("전송에 실패했습니다. 이메일 주소를 다시 확인해주세요.");
 						}else{
-							alert("전송에 성공했습니다.");
+							toastr.options = { "positionClass": "toast-top-center" }
+							toastr["success"]("전송에 성공했습니다.");
 							document.getElementById('to').value='';
 							document.getElementById('title').value='';
 							document.getElementById('subject').value='';
@@ -79,7 +82,8 @@
 					},
 					error:function(res){
 						loadingPageOff();
-						alert("전송에 실패했습니다. 이메일 주소를 다시 확인해주세요.");
+						toastr.options = { "positionClass": "toast-top-center" }
+						toastr["error"]("전송에 실패했습니다. 이메일 주소를 다시 확인해주세요.");
 					}
 				})
 			}

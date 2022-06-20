@@ -24,11 +24,15 @@ background: #fff;
     max-width: 1100px;
     margin: auto;
     margin-top: 30px;
-    /* display: flex; */
-    flex-direction: row;
-    padding-left: 30px;
-    padding-top: 30px;
-    }
+/* <<<<<<< HEAD */
+/*     /* display: flex; */ */
+/*     flex-direction: row; */
+/*     padding-left: 30px; */
+/*     padding-top: 30px; */
+/*     } */
+/* ======= */
+    flex-direction: row;}
+/* >>>>>>> refs/remotes/origin/soya */
 .frm-div form {
     display: flex;
     flex-direction: row;
@@ -138,32 +142,7 @@ background: #fff;
 			</form>
 		</div>
 	</div>
-<%-- 	<table border="1" id="ta">
-		<thead>
-			<tr>
-				<th width="150">0</th>
-				<th width="150">1</th>
-				<th width="250">2</th>
-				<th width="150">3</th>
-				<th width="100">4</th>
-				<th width="200">5</th>
-			</tr>
-		</thead>
-		<tbody id="tb">
-			<c:forEach items="${list }" var="calendar">
-				<tr>
-					<td align="center">${calendar.section_id }</td>
-					<td align="center">${calendar.calendar_id }</td>
-					<td align="center">${calendar.calendar_title }</td>
-					<td>${calendar.calendar_subject }</td>
-					<td align="center">${calendar.calendar_start_date }</td>
-					<td align="center">${calendar.calendar_end_date }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
- --%>
- 
+
  	<div class="frm-div">
 		<c:if test="${memberVO.member_auth == 0}">
 			<form id="frm">

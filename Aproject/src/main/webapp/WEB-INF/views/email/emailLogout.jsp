@@ -42,23 +42,35 @@
 				success : function(res){
 					let data = $.trim(res)
 					if(data=="true"){
-						let re = confirm("정말 로그아웃하시겠습니까?");
-						if(re==true){
-							$.ajax({
-								url:'emailLogoutService.do',
-								type:"POST",
-								data:{"mailPw":false,"logout":true},
-								dataType:"json",
-								success:function(r){
-									alert("로그아웃되었습니다.");
-									location.href='emailLogin.do';
-								}
-							})
-						}else{
-							alert("로그아웃을 취소했습니다.")
-						}
+						swal({
+							title: "정말 로그아웃 하시겠습니까?",
+							icon: "warning",
+							buttons: true,
+							dangerMode: true,
+						}).then((willDelete) => {
+							if (willDelete) {
+								$.ajax({
+									url:'emailLogoutService.do',
+									type:"POST",
+									data:{"mailPw":false,"logout":true},
+									dataType:"json",
+									success:function(r){
+										swal({
+											title: "로그아웃 되었습니다.",
+											icon: "success"
+										}).then((willDelete) => {
+											location.href='emailSend.do';
+										})
+									}
+								})
+							}else{
+								toastr.options = { "positionClass": "toast-top-center" }
+								toastr["success"]("로그아웃을 취소했습니다.");
+							}
+						})
 					}else{
-						alert("비밀번호가 틀렸습니다.");
+						toastr.options = { "positionClass": "toast-top-center" }
+						toastr["error"]("비밀번호가 틀렸습니다.");
 					}
 				},
 				error : function(){

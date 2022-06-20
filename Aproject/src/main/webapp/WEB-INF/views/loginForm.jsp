@@ -81,9 +81,16 @@
 </div>
 <script type="text/javascript">
 	let message = '${message}';
+	let success = '${success}';
+	
 	if(message != ''){
 		toastr.options = { "positionClass": "toast-top-center" }
 		toastr["error"](message);
+	}
+
+	if(success != ''){
+		toastr.options = { "positionClass": "toast-top-center" }
+		toastr["success"](success);
 	}
 	
 	function loginCheck(){
