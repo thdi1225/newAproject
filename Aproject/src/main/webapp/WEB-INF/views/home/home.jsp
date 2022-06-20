@@ -45,7 +45,7 @@
 				<span><i class="fa-solid fa-table-list"></i></span>
 				<h1>커뮤니티</h1>
 				<p>
-					<a href="#">작성한 게시글 보러 가기</a>
+					<a href="boardList.do">작성한 게시글 보러 가기</a>
 				</p>
 			</div>
 
@@ -75,7 +75,27 @@
 		</div>
 		<div id="box3">
 			<div class="h1_title">
-				<p>Community</p>
+				<p>Community</p> 
+				<table class="table" id="ta">
+					<tr>
+						<th>글번호</th>
+						<th>작성자</th>
+						<th>제목</th>
+						<th>작성일자</th>
+						<th>조회수</th>
+						<th>첨부파일</th>
+					</tr>
+					<c:forEach items="${boardList }" var="board">
+						<tr onclick="boardDetail(${board.board_id })">
+							<td align="center">${board.board_id }</td>
+							<td align="center">${board.board_writer }</td>
+							<td>${board.board_title }</td>
+							<td align="center">${board.board_date }</td>
+							<td align="center">${board.hit }</td>
+							<td>${board.fileName }</td>
+						</tr>
+					</c:forEach>
+			</table>
 			</div>
 			<div>
 				<form>

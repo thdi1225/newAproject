@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import co.prj.Aproject.board.service.BoardService;
+import co.prj.Aproject.board.serviceImpl.BoardServiceImpl;
+import co.prj.Aproject.board.vo.BoardVO;
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.commute.Impl.CommuteImpl;
 import co.prj.Aproject.commute.service.CommuteService;
@@ -37,6 +40,13 @@ public class HomeCommand implements Command {
 			request.setAttribute("cn", list.get(0).getCommute_num());
 		}
 
+		
+		//커뮤니티
+		BoardService service = new BoardServiceImpl();
+		HttpSession ses = request.getSession();
+		List<BoardVO> boardList = service.boardSelectFive(); 
+		
+		request.setAttribute("boardList", boardList);
 		
 		return "home/home";
 	}

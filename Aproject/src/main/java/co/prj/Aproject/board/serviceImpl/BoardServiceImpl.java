@@ -59,4 +59,10 @@ public class BoardServiceImpl implements BoardService {
 		return map.boardListCount(page);
 	}
 
+	@Override
+	public List<BoardVO> boardSelectFive() {
+		
+		return map.boardSelectFive();
+	}
+
 }
