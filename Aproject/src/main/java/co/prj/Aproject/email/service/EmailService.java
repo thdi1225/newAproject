@@ -9,6 +9,7 @@ import co.prj.Aproject.member.vo.MemberVO;
 public interface EmailService {
 //	List<EmailVO> emailSelectListAll(int memeberNum, int sent);
 	EmailVO emailSelectOne(EmailVO vo);
+	List<EmailVO> emailSelectFive(int memberNum);
 	
 	int emailInfoUpdate(MemberVO vo);
 	int emailInsert(EmailVO vo);

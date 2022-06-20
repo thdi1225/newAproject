@@ -12,11 +12,25 @@
 <link href="css/mail/mail.css" rel="stylesheet">
 </head>
 <body>
+	<div>
+		<small class="float-right text-underline-bold">메일관리 > 보낸 메일함</small>
+		<h2 class="text-title">보낸 메일함</h2>
+	</div>
+	<hr>
 	<div align="center">
 		<form action="emailSentMail.do" method="post">
-			검색 : <input type="text" id="search" name="search">
-			<button type="submit" class ="btn-dark">검색</button>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" id="search" name="search"
+					placeholder="이름으로 검색하실 수 있습니다." aria-label="Recipient's username"
+					aria-describedby="searchButton">
+					
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="submit"
+						id="searchButton">검색</button>
+				</div>
+			</div>
 		</form>
+
 		<table class="table">
 			<thead>
 				<tr>
@@ -81,6 +95,7 @@
             	dataType:"json",
             	success:function(res){
             		location.reload();
+            		alert("삭제 완료되었습니다.")
   			  		loadingPageOff();
             	}
             })

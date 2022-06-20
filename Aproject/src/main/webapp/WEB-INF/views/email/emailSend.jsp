@@ -10,6 +10,11 @@
 	<link href="css/mail/mailSend.css" rel="stylesheet">
 </head>
 <body>
+	<div>
+		<small class="float-right text-underline-bold">메일관리 > 메일 전송</small>
+		<h2 class="text-title">메일 전송</h2>
+	</div>
+	<hr>
 	<div class="spinner-border" role="status" align="center" id="loading">
 	  	<span class="visually-hidden"></span>
 	</div>
@@ -29,7 +34,7 @@
 					<input type="text" id="title" name="title" required placeholder="example"/>
 				</li>
 			</ul>
-			<textarea id="subject" name="subject" rows="10" cols="30"></textarea><br>
+			<textarea id="subject" name="subject" rows="17" cols="30"></textarea><br>
 			
 			<input type="reset" value="취소">
 			<input id="sendBtn" type="button" value="전송">

@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="css/mail/googleMail.css">
 </head>
 <body>
+	<div>
+		<small class="float-right text-underline-bold">메일관리 > 메일 계정 로그아웃</small>
+		<h2 class="text-title">메일 계정 로그아웃</h2>
+	</div>
+	<hr>
 	<div class="box">
 		<div class="logo">
 			<img src="img/googleLogo.png" alt="google logo">

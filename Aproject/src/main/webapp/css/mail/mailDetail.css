@@ -2,7 +2,7 @@
 
 
 .con{
-	margin: 3% auto;
+	margin: 0 auto;
 	text-align:center;
 	width:80%;
 	background-color:white;
@@ -23,7 +23,7 @@ table{
 }
 
 
-.con > div{
+.con > .titleCon{
 	padding: 2% 0;
 	border-bottom : 1px solid #e9e8eb;
 	text-align:left;
@@ -56,13 +56,15 @@ table{
 	padding: 0 3%;
 }
 .subject{
-	height:30rem;
+	height:auto;
 	margin : 0;
-	padding: 0 5%;
+	padding: 0;
 	width:100%;
+	text-align:left;
+	overflow:hidden;
+	min-height:30rem;
 }
 .subject > p{
-	margin: 0 2%;
 	width:100%;
 }
 .title{
