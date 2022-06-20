@@ -29,6 +29,7 @@ public class CommuteStartInsert implements Command {
 		for(CommuteVO commuteVO : list) {
 			if(fm.format(commuteVO.getCommute_date()).equals(fm.format(date))) {
 				check = 1;
+				
 			}else {
 				check = 0;
 			}

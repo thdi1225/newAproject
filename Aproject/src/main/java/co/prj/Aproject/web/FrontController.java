@@ -29,8 +29,9 @@ import co.prj.Aproject.calendar.CalendarSearch;
 import co.prj.Aproject.calendar.CalendarSelect;
 import co.prj.Aproject.calendar.CalendarUpdate;
 import co.prj.Aproject.calendar.command.CalendarCommand;
-import co.prj.Aproject.calendar.command.Test;
 import co.prj.Aproject.comm.Command;
+import co.prj.Aproject.commute.command.CommuteEmpSearchList;
+import co.prj.Aproject.commute.command.CommuteEmpSelectList;
 import co.prj.Aproject.commute.command.CommuteEndUpdate;
 import co.prj.Aproject.commute.command.CommuteSelectDate;
 import co.prj.Aproject.commute.command.CommuteSelectList;
@@ -153,7 +154,8 @@ public class FrontController extends HttpServlet {
 		map.put("/commuteStartInsert.do", new CommuteStartInsert());
 		map.put("/commuteEndUpdate.do", new CommuteEndUpdate());
 		map.put("/commuteSelectDate.do", new CommuteSelectDate());
-//		map.put("/commuteEndInsert.do", new CommuteEndInsert());
+		map.put("/commuteEmpSelectList.do", new CommuteEmpSelectList());
+		map.put("/commuteEmpSearchList.do", new CommuteEmpSearchList());
 		
 
 	}

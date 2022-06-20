@@ -120,7 +120,13 @@
 	            data-parent="#accordionSidebar">
 	            <div class="bg-white py-2 collapse-inner rounded">
 	            	<h6 class="collapse-header">COMMUTE</h6>
+	            	 <c:if test="${ memberVO.member_auth == 0}">
+	            	<a class="collapse-item" href="commuteEmpSelectList.do">사원 전체 출퇴근 관리</a>
+	            	</c:if>
+	            	
+	            	<c:if test="${memberVO.member_auth == 1}">
 	                <a class="collapse-item" href="commuteSelectList.do">출퇴근 관리</a>
+	                </c:if>
 	            </div>
 	        </div>
 	    </li>

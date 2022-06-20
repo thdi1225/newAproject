@@ -15,6 +15,7 @@ public class CommuteVO {
 	private Timestamp commute_start_time;
 	private Timestamp commute_end_time;
 	private int member_num;
+	private int commute_num;
 	
 
 	
