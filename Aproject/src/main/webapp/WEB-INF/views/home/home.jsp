@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +17,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Nanum+Gothic&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/1cb815469f.js" crossorigin="anonymous"></script>
   <script src="js/calendar/main.js"></script>
+  <script type="text/javascript">
+  </script>
 </head>
 <body>
   <div id="main_container">
@@ -32,8 +35,20 @@
       </div>
       <div class="sub_tab">
         <span><i class="fa-brands fa-flipboard"></i></span>
+        
+        
         <h1>출퇴근</h1>
-        <p>출근 완료/출근하러 가기</p>
+        <c:if test="${cn == 0 }">
+        <a href="commuteSelectList.do">출근하기</a>
+        </c:if>
+        <c:if test="${cn == 1 }">
+        	<a href="commuteSelectList.do">출근을 완료하였습니다</a>
+        </c:if>
+        
+        <c:if test="${cn == 2 }">
+        	<p>이미 퇴근을 완료하였습니다.</p>
+        </c:if>
+        
       </div>
     </div>
     <div id="box2">
@@ -52,7 +67,6 @@
   </div>
 
   <script>
-
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -68,6 +82,7 @@
       calendar.render();
     });
 
+    
 </script>
 
 </body>

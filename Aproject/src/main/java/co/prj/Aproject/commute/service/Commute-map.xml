@@ -68,7 +68,7 @@
 	
 	<update id="commuteEndUpdate"  parameterType="co.prj.Aproject.member.vo.MemberVO">
 	
-			UPDATE COMMUTE SET COMMUTE_END_TIME = SYSDATE, commute_num = 0
+			UPDATE COMMUTE SET COMMUTE_END_TIME = SYSDATE, commute_num = 2
 			WHERE MEMBER_NUM = #{member_num} AND to_char(SYSDATE,'YY/MM/DD') = to_char(commute_date,'YY/MM/DD')
 		
 	</update>

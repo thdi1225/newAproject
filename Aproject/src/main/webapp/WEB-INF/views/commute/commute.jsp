@@ -59,7 +59,11 @@
 <body onload="printClock()">
 
 <div class="container-box">
-
+<div style="width: 100%; height: 50px">
+<h2 style="font-size: 2rem; font-weight: 400; float: left; display: inline; line-height: 50px">출퇴근 관리</h2>
+<p style="float: right; display: inline; margin-top: 0px;font-size: 12px">출퇴근 > 출퇴근 관리</p>
+</div>
+<hr>
 	<div class="top-box">
 		<div id="clock"></div>
 		<div class= "list-btn-box">
@@ -92,11 +96,11 @@
 			<div class="bottom-box">
 				<div class="commute-list-location">
 				<div id="test2" class="commutelist-box">
-				<h1 style="display: inline;">출퇴근 전체 리스트</h1>
+				<h1 style="display: inline;  font-family: 'Roboto', sans-serif;">출퇴근 전체 리스트</h1>
 				</div>
 				<div id="test" style="width: 600px;">
 				 <button type="button" onclick="lastMonth();" class="table-btn" >지난 달</button>
-			  	<h1 style="display: inline;"><strong><span id="number" ></span></strong></h1><h1 style="display: inline;">월</h1>
+			  	<h1 style="display: inline;"><strong><span id="number" style=" font-family: 'Roboto', sans-serif;" ></span></strong></h1><h1 style="display: inline;  font-family: 'Roboto', sans-serif;">월</h1>
 				<button type="button" onclick="nextMonth();"class="table-btn">다음 달</button>
 				</div>
 				</div>			
