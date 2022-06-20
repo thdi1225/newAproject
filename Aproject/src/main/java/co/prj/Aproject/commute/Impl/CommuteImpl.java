@@ -21,9 +21,9 @@ public class CommuteImpl implements CommuteService{
 	}
 
 	@Override
-	public List<CommuteVO> commuteSearchList(String key, String val) {
+	public List<CommuteVO> commuteSearchList(String key, String val,String member_num) {
 		
-		return map.commuteSearchList(key, val);
+		return map.commuteSearchList(key, val,member_num);
 	}
 	
 	@Override

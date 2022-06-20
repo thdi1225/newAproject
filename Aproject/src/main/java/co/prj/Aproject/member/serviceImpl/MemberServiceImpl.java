@@ -51,10 +51,15 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<MemberVO> memberYnSelectList() {
-		return mapper.memberYnSelectList();
+	public List<MemberVO> memberYnSelectList(MemberPage page) {
+		return mapper.memberYnSelectList(page);
 	}
 
+	@Override
+	public int memberYnSelectListCount(MemberPage page) {
+		return mapper.memberYnSelectListCount(page);
+	}
+	
 	@Override
 	public void memberYnUpdate(MemberVO vo) {
 		mapper.memberYnUpdate(vo);
@@ -73,6 +78,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int memberSelectListCount(MemberPage page) {
 		return mapper.memberSelectListCount(page);
+	}
+
+	@Override
+	public void memberMyPage(MemberVO vo) {
+		mapper.memberMyPage(vo);
 	}
 
 }

@@ -38,6 +38,7 @@ public class CommuteStartInsert implements Command {
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("checkInt", check);
+		
 		return "ajax:"+check;
 	}
 

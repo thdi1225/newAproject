@@ -18,9 +18,9 @@ public class BoardUpdate implements Command {
 		BoardService service = new BoardServiceImpl();
 		BoardVO vo = new BoardVO();
 		
-		vo.setBoard_id(Integer.parseInt(request.getParameter("Board_id")));
-		vo.setBoard_title(request.getParameter("Board_title"));
-		vo.setBoard_subject(request.getParameter("Board_subject"));
+		vo.setBoard_id(Integer.parseInt(request.getParameter("board_id")));
+		vo.setBoard_title(request.getParameter("board_title"));
+		vo.setBoard_subject(request.getParameter("board_subject"));
 		
 		Gson gson = new GsonBuilder().create();
 		service.boardUpdate(vo);

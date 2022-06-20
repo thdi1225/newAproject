@@ -178,12 +178,13 @@
 						Logout
 					</a>
 				</div></li>
+				<a href="logout.do">logout</a>
+				<a href="myPage.do">myPage</a>
 			<li class="login-btn-li">
 					<a class="login-btn" href="logout.do">logout</a>
 			</li>
 		</ul>
 
 	</nav>
-	<!-- End of Topbar -->
 </body>
 </html>

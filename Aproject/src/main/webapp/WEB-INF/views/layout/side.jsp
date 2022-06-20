@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,97 +20,107 @@
 	    <!-- Divider -->
 	    <hr class="sidebar-divider my-0">
 	
-		<!-- Nav Item - Pages Collapse Menu -->
-	    <li class="nav-item">
-	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#memberPage"
-	            aria-expanded="true" aria-controls="collapsePages">
-	            <i class="fas fa-fw fa-folder"></i>
-	            <span>회원관리</span>
-	        </a>
-	        <div id="memberPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-	            <div class="bg-white py-2 collapse-inner rounded">
-	                <a class="collapse-item" href="memberSelectList.do">회원 목록</a>
-	                <a class="collapse-item" href="memberAdminInputForm.do">회원 등록</a>
-	                <a class="collapse-item" href="memberYnForm.do">가입 승인</a>
-	                <div class="collapse-divider"></div>
-	            </div>
-	        </div>
-	    </li>
-	    <!-- Nav Item - Pages Collapse Menu -->
-	    <li class="nav-item">
-	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-	            aria-expanded="true" aria-controls="collapsePages">
-	            <i class="fas fa-fw fa-folder"></i>
-	            <span>부서관리</span>
-	        </a>
-	        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-	            <div class="bg-white py-2 collapse-inner rounded">
-	                <a class="collapse-item" href="sectionSelectList.do">부서목록</a>
-	                <a class="collapse-item" href="sectionInsertForm.do">부서등록</a>
-	            </div>
-	        </div>
-	    </li>
+		<c:if test="${memberVO.member_auth == 0 }">
+			<!-- Nav Item - Pages Collapse Menu -->
+		    <li class="nav-item">
+		        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#memberPage"
+		            aria-expanded="true" aria-controls="collapsePages">
+		            <i class="fas fa-fw fa-folder"></i>
+		            <span>회원관리</span>
+		        </a>
+		        <div id="memberPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+		            <div class="bg-white py-2 collapse-inner rounded">
+		            	<h6 class="collapse-header">MEMBER</h6>
+		                <a class="collapse-item" href="memberSelectList.do">회원 목록</a>
+		                <a class="collapse-item" href="memberAdminInputForm.do">회원 등록</a>
+		                <a class="collapse-item" href="memberYnForm.do">가입 승인</a>
+		                <div class="collapse-divider"></div>
+		            </div>
+		        </div>
+		    </li>
+		    <!-- Nav Item - Pages Collapse Menu -->
+		    <li class="nav-item">
+		        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sectionPage"
+		            aria-expanded="true" aria-controls="collapsePages">
+		            <i class="fas fa-fw fa-folder"></i>
+		            <span>부서관리</span>
+		        </a>
+		        <div id="sectionPage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+		            <div class="bg-white py-2 collapse-inner rounded">
+		         	  	<h6 class="collapse-header">SECTION</h6>
+		                <a class="collapse-item" href="sectionSelectList.do">부서목록</a>
+		                <a class="collapse-item" href="sectionInsertForm.do">부서등록</a>
+		            </div>
+		        </div>
+		    </li>
+		</c:if>    
 	    
 	    <!-- Nav Item - Pages Collapse Menu -->
 	    <li class="nav-item">
-	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#emailPage"
 	            aria-expanded="true" aria-controls="collapseTwo">
 	            <i class="fas fa-fw fa-cog"></i>
 	            <span>메일관리</span>
 	        </a>
-	        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+	        <div id="emailPage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	            <div class="bg-white py-2 collapse-inner rounded">
 	                <h6 class="collapse-header">EMAIL</h6>
-	                <a class="collapse-item" href="emailSend.do">메일 전송</a>
-	                <a class="collapse-item" href="emailRecieve.do?type=db">받은 메일함</a>
-	                <a class="collapse-item" href="emailSentMail.do">보낸 메일함</a>
+	                <c:if test="${empty memberVO.member_mail_email}">
+		                <a class="collapse-item" href="emailLogin.do">메일 계정 로그인</a>
+	                </c:if>
+	                <c:if test="${not empty memberVO.member_mail_email}">
+	                	<a class="collapse-item" href="emailSend.do">메일 전송</a>
+	                	<a class="collapse-item" href="emailRecieve.do">받은 메일함</a>
+	                	<a class="collapse-item" href="emailSentMail.do">보낸 메일함</a>
+		                <a class="collapse-item" href="emailLogout.do">메일 계정 로그아웃</a>
+	                </c:if>
 	            </div>
 	        </div>
 	    </li>
 	
 	    <!-- Nav Item - Utilities Collapse Menu -->
 	    <li class="nav-item">
-	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#calendarPage"
 	            aria-expanded="true" aria-controls="collapseUtilities">
 	            <i class="fas fa-fw fa-wrench"></i>
-	            <span>calendar</span>
+	            <span>일정관리</span>
 	        </a>
-	        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+	        <div id="calendarPage" class="collapse" aria-labelledby="headingUtilities"
 	            data-parent="#accordionSidebar">
 	            <div class="bg-white py-2 collapse-inner rounded">
+	            	<h6 class="collapse-header">CALENDAR</h6>	
 	                <a class="collapse-item" href="calendar.do">일정</a>
 	            </div>
 	        </div>
 	    </li>
 	    <!-- Nav Item - Utilities Collapse Menu -->
 	    <li class="nav-item">
-	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#boardPage"
 	            aria-expanded="true" aria-controls="collapseUtilities">
 	            <i class="fas fa-fw fa-wrench"></i>
 	            <span>커뮤니티</span>
 	        </a>
-	        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+	        <div id="boardPage" class="collapse" aria-labelledby="headingUtilities"
 	            data-parent="#accordionSidebar">
 	            <div class="bg-white py-2 collapse-inner rounded">
-	                <h6 class="collapse-header">Custom Utilities:</h6>
-	                <a class="collapse-item" href="utilities-color.html">Colors</a>
-	                <a class="collapse-item" href="utilities-border.html">Borders</a>
-	                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-	                <a class="collapse-item" href="utilities-other.html">Other</a>
+	                <h6 class="collapse-header">BOARD</h6>
+	                <a class="collapse-item" href="boardList.do">게시판 목록</a>
+	                <a class="collapse-item" href="boardInputForm.do">게시판 등록</a>
 	            </div>
 	        </div>
 	    </li>
 	    <!-- Nav Item - Utilities Collapse Menu -->
 	    <li class="nav-item">
-	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#commutePage"
 	            aria-expanded="true" aria-controls="collapseUtilities">
 	            <i class="fas fa-fw fa-wrench"></i>
 	            <span>출퇴근</span>
 	        </a>
-	        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+	        <div id="commutePage" class="collapse" aria-labelledby="headingUtilities"
 	            data-parent="#accordionSidebar">
 	            <div class="bg-white py-2 collapse-inner rounded">
-	                <a class="collapse-item" href="commuteSelectList.do">commute</a>
+	            	<h6 class="collapse-header">COMMUTE</h6>
+	                <a class="collapse-item" href="commuteSelectList.do">출퇴근 관리</a>
 	            </div>
 	        </div>
 	    </li>

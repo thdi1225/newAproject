@@ -17,20 +17,18 @@ import javax.mail.UIDFolder;
 import co.prj.Aproject.email.vo.EmailVO;
 
 public class EmailImapRecieve {
-	String user = "";
-	String password = "";
-
 	public EmailImapRecieve() {
 	}
 
-	public List<EmailVO> getMailAll(int flag, List<Integer> idList, int memberNum) {
+	public List<EmailVO> getMailAll(int flag, List<Integer> idList, int memberNum,String user, String password) {
 		// flag가 0이면 uid만 전부 받아오기
 		// flag가 1이면 파일까지 // idList가 null이 아니라면 특정 uid의 값을 불러와서 파일까지 받아오기
 		// flag가 2면 읽지 않은 메일 가져오기
 		// flag가 3이고 idList가 null이 아니면 특정 uid값을 불러와서 지우기
+		List<EmailVO> newEmails = new ArrayList<EmailVO>();
+		
 		Folder folder = null;
 		Store store = null;
-		List<EmailVO> newEmails = new ArrayList<EmailVO>();
 		try {
 			Properties props = System.getProperties();
 			props.setProperty("mail.store.protocol", "imaps");

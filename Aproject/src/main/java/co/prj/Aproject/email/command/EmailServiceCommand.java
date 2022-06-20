@@ -18,6 +18,9 @@ public class EmailServiceCommand implements Command {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("memberVO");
 		int memberNum = member.getMember_num();
+		String mailEmail = member.getMember_mail_email();
+		String mailPw = member.getMember_mail_pw();
+		
 		
 		EmailFunc es = new EmailFunc();
 		String to = request.getParameter("to");
@@ -31,7 +34,7 @@ public class EmailServiceCommand implements Command {
 		vo.setEmailSubject(subject);
 		vo.setMemberNum(memberNum);
 		
-		boolean flag = es.gmailSend(to, title, subject);
+		boolean flag = es.gmailSend(to, title, subject,mailEmail,mailPw);
 		if(flag) {
 			System.out.println("전송완료");
 			dao.emailInsert(vo);

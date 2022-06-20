@@ -54,19 +54,41 @@
   <script>
 
     document.addEventListener('DOMContentLoaded', function() {
+    	
+    	$.ajax({
+    		url: "calendarList.do",
+    		type: "get",
+    		dataType: "json",
+    		success: function(data) {
+    			fullCalendar(data);
+    		}
+    	});
+    }); 
+    
+    function fullCalendar(data) {
+    	
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'listDay',
+        initialView: 'listWeek',
         height: 300,
         header: {
       left: '',
       center: '',
-      right: 'listDay'
+      right: 'listWeek'
     },
-        events: 'https://fullcalendar.io/demo-events.json'
+        events: function(info, successCallback) {
+        	for(var i = 0; i < data.length; i++) {
+				data[i].section_id = data[i].section_id;
+				data[i].calendar_id = data[i].calendar_id;
+				data[i].title = data[i].calendar_title;
+				data[i].start = data[i].calendar_start_date;
+				data[i].end = data[i].calendar_end_date;
+        	}
+        	successCallback(data);
+        }
       });
       calendar.render();
-    });
+    }
 
 </script>
 

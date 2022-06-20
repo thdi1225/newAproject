@@ -18,6 +18,10 @@
 <body>
 	<div align="center">
 		<input type="button" value="선택 삭제" id="selectDelete">
+		<form action="emailSentMail.do" method="post">
+			검색 : <input type="text" id="search" name="search">
+			<button type="submit">검색</button>
+		</form>
 		<table border="1">
 			<thead>
 				<tr>
@@ -46,6 +50,24 @@
 				
 			</tbody>
 		</table>
+		<div style="display: block; text-align: center;">		
+			<c:if test="${paging.startPage != 1 }">
+				<a href="emailSentMail.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+			</c:if>
+			<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+				<c:choose>
+					<c:when test="${p == paging.nowPage }">
+						<b>${p }</b>
+					</c:when>
+					<c:when test="${p != paging.nowPage }">
+						<a href="emailSentMail.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${paging.endPage != paging.lastPage}">
+				<a href="emailSentMail.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+			</c:if>
+		</div>
 	</div>
 	<script type="text/javascript">
 		
@@ -56,12 +78,16 @@
 
         function delEmail(e) {
             let emailId = e.target.parentElement.parentElement.children[0].children[0].value; //id값이 있는 위치!!
-            let param = 'emailId='+emailId+'&toFrom=from';
             e.target.parentElement.parentElement.remove();
-            fetch('emailDelete.do',{
-            	method : 'post',
-  			  	headers : {'Content-Type':'application/x-www-form-urlencoded'},
-  			  	body : param
+            $.ajax({
+            	url:"emailDelete.do",
+            	type:"post",
+            	data:{"emailId":emailId,"toFrom":"from"},
+            	dataType:"json",
+            	success:function(res){
+            		location.reload();
+  			  		loadingPageOff();
+            	}
             })
             e.stopPropagation();
         }
@@ -138,10 +164,11 @@
 	        $.ajax({
 	            url : "emailDelete.do",
 	            type: "POST",
-	            data : "emailId="+JSON.stringify(cbarr),
+	            data : {"emailId":JSON.stringify(cbarr),"toFrom":"f"},
 	            dataType : "json",
 	            success : function(res){
-	                console.log(res)
+	            	location.reload();
+	                console.log("삭제완료")
 	            },
 	            error : function(){
 	                console.log("실패")

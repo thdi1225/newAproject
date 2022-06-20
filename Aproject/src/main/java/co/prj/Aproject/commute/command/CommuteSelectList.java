@@ -24,7 +24,6 @@ public class CommuteSelectList implements Command {
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO) session.getAttribute("memberVO");
 		list = dao.commuteSelectList(vo);
-//		System.out.println(vo.toString());
 		request.setAttribute("list", list);
 		
 		return "commute/commute";

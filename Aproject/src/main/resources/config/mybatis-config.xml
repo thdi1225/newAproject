@@ -10,7 +10,7 @@
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
 				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-				<property name="username" value="Aproject" />
+				<property name="username" value="APROJECT" />
 				<property name="password" value="1234" />
 			</dataSource>
 		</environment>
@@ -22,6 +22,6 @@
 		<mapper resource="co/prj/Aproject/board/service/BoardMapper.xml" />
 		<mapper resource="co/prj/Aproject/email/service/email-map.xml"/>
 		<mapper resource="co/prj/Aproject/commute/service/Commute-map.xml" />
-		<mapper resource="co/prj/Aproject/board/service/CommentMapper.xml" />
+		<mapper resource="co/prj/Aproject/board/service/ReplyMapper.xml" />
 	</mappers>
 </configuration>

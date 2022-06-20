@@ -21,7 +21,7 @@ public class LoginCommand implements Command {
 		
 		vo = service.login(vo);
 		HttpSession session = request.getSession();
-		
+		System.out.println(vo.toString());
 		
 		if(vo != null && vo.getMember_yn().equals("Y")) {
 			session.setAttribute("memberVO", vo);

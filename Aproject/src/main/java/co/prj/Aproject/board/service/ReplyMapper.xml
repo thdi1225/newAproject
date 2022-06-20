@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.prj.Aproject.board.service.ReplyMapper">
+
+	<select id="boardReplySelect" resultType="co.prj.Aproject.board.vo.ReplyVO">
+			SELECT * FROM BOARD_REPLY
+		WHERE BOARD_ID = #{board_id}
+	</select>
+	<insert id="boardReplyInsert" parameterType="co.prj.Aproject.board.vo.ReplyVO">
+        INSERT INTO BOARD_REPLY(
+	        board_reply_id, 
+	        board_reply_subject, 
+	        board_reply_date, 
+	        board_id
+        )VALUES(
+	        BOARD_REPLY_ID_SEQ.nextval,
+	        #{board_reply_subject},
+	        SYSDATE,
+	        #{board_id}
+        )
+	</insert>
+	<update id="boardReplyUpdate" parameterType="co.prj.Aproject.board.vo.ReplyVO">
+        UPDATE BOARD_REPLY
+           SET
+           BOARD_REPLY_SUBJECT = #{board_reply_subject}
+           WHERE BOARD_REPLY_ID = #{board_reply_id}
+    </update>
+    <delete id="boardReplyDelete" parameterType="int">
+        DELETE FROM BOARD_REPLY WHERE BOARD_REPLY_ID = #{board_reply_id}
+    </delete>
+</mapper>

@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 .main_container {
-	width: 1100px;
-    height: 100%;
-    overflow: auto;
-    margin: auto;
+	width: 90%;
+	height: 90%;
+	overflow: auto;
+	margin: 0 auto;
 }
 
 .btn-dark {
@@ -42,7 +42,7 @@
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {
-	width: 250px;
+	width: 450px;
 	height: 38px;
 	color: #333333;
 	padding: 10px;

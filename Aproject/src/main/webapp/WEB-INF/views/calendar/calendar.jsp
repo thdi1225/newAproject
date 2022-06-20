@@ -15,7 +15,7 @@
 #calendar {
 	max-width: 1100px;
 	margin: 0 auto;
-	padding: 30px 30px 0 30px;
+	padding: 10px 30px 0 30px;
 	margin-bottom: 20px;
 	background: #fff;
 }
@@ -25,13 +25,24 @@ background: #fff;
     margin: auto;
     margin-top: 30px;
     /* display: flex; */
-    flex-direction: row;}
+    flex-direction: row;
+    padding-left: 30px;
+    padding-top: 30px;
+    }
 .frm-div form {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    flex-wrap: wrap;}
+    flex-wrap: wrap;
+    }
+.select-box {
+    margin-right: 10px;
+    width: 93.56px;
+    }
+.btn-dark {
+	width: 63.16px;
+}
 </style>
 </head>
 <body>

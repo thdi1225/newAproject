@@ -20,6 +20,7 @@ public class CalendarInput implements Command {
 
 		String calendar_title = request.getParameter("calendar_title");
 		String calendar_subject = request.getParameter("calendar_subject");
+		
 		Date calendar_start_date = Date.valueOf(request.getParameter("calendar_start_date"));
 		Date calendar_end_date = Date.valueOf(request.getParameter("calendar_end_date"));
 
