@@ -1,80 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	tbody tr:hover{
-		background-color : blue;
-		color:white;
-	}
-</style>
+<link href="css/all.css" rel="stylesheet">
+<link href="css/mail/mail.css" rel="stylesheet">
+
 </head>
 <body>
-	<div class="spinner-border" role="status" align="center" id="loading">
-	  	<span class="visually-hidden"></span>
+	<div>
+		<small class="float-right text-underline-bold">메일관리 > 받은 메일함</small>
+		<h2 class="text-title">받은 메일함</h2>
 	</div>
-	<div id = "con" align="center">
-		<input type="button" id="refreshBtn" value="새로고침">
-		<input type="button" value="선택 삭제" id="selectDelete">
+	<hr>
+	<div class="spinner-border" role="status" align="center" id="loading">
+		<span class="visually-hidden"></span>
+	</div>
+
+	<div id="con" align="center">
 		<form action="emailRecieve.do" method="post">
-			검색 : <input type="text" id="search" name="search">
-			<button type="submit">검색</button>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" id="search" name="search"
+					placeholder="이름으로 검색하실 수 있습니다." aria-label="Recipient's username"
+					aria-describedby="searchButton">
+
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="submit"
+						id="searchButton">검색</button>
+				</div>
+			</div>
 		</form>
-		<table border="1" id="tb">
+
+
+		<table id="tb" class="table">
 			<thead>
 				<tr>
-					<th width="100"><input type="checkbox" id="allCheck"></th>
-					<th width="100">No.</th>
-					<th width="200">보낸사람</th>
-					<th width="300">제목</th>
-					<th width="200">전송 시간</th>
-					<th width="100">삭제</th>
+					<th><input type="checkbox" id="allCheck"></th>
+					<th class="span"><input type="button" id="selectDelete"
+						value="선택삭제" class="table-btn"></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th><input type="button" id="refreshBtn" value="동기화"
+						class="btn-dark"></th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${emails}" var="email" varStatus = "status">
+				<c:forEach items="${emails}" var="email" varStatus="status">
 					<tr id="detailEmail">
-						<td>
-							<input type="hidden" id="emailId" value=${email.emailId}>
-							<input type="checkbox" id="oneCheck">
-						</td>
-						<td>${fn:length(emails) - status.index}</td>
+						<td><input type="hidden" id="emailId" value=${email.emailId}>
+							<input type="checkbox" id="oneCheck"></td>
 						<td>${email.emailFrom}</td>
-						<td>${email.emailTitle}</td>
-						<td><fmt:formatDate value="${email.emailDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-						<td><input type="button" value="삭제" id="deleteEmail"></td>
+						<td style="text-align: right;"><span class="label pull-right">Email</span></td>
+						<td style="text-align: left; width: 30%">${email.emailTitle}</td>
+						<td><fmt:formatDate value="${email.emailDate}"
+								pattern="yyyy-MM-dd hh:mm:ss" /></td>
+						<td><input type="button" value="삭제" id="deleteEmail"
+							class="table-btn"></td>
 					</tr>
 				</c:forEach>
-				
+
 			</tbody>
 		</table>
-		<div style="display: block; text-align: center;">		
+		<div style="display: block; text-align: center;">
 			<c:if test="${paging.startPage != 1 }">
-				<a href="emailRecieve.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+				<a
+					href="emailRecieve.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 			</c:if>
-			<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+				var="p">
 				<c:choose>
 					<c:when test="${p == paging.nowPage }">
 						<b>${p }</b>
 					</c:when>
 					<c:when test="${p != paging.nowPage }">
-						<a href="emailRecieve.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+						<a
+							href="emailRecieve.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
 					</c:when>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${paging.endPage != paging.lastPage}">
-				<a href="emailRecieve.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+				<a
+					href="emailRecieve.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 			</c:if>
 		</div>
 	</div>
 	<script type="text/javascript">
-	
+		
+
 		//로딩 페이지
 		var loader = document.getElementById('loading');
 		var con = document.getElementById('con');
@@ -106,6 +124,7 @@
             	dataType:"json",
             	success:function(res){
   			  		location.reload();
+  			  		alert("삭제 완료되었습니다.")
   			  		loadingPageOff();
             	}
             })
@@ -153,8 +172,19 @@
         cbxs.forEach(e => {
                     e.addEventListener('click',function(cb){
                         if(cb.target.checked==false){
-                            console.log('false');
                             document.querySelector('#allCheck').checked=false;
+                        }else{
+                        	let flag = true;
+                        	for (var i = 0; i < cbxs.length; i++) {
+                                if(cbxs[i].checked==false){
+                                	flag = false;
+                                	break;
+                                }
+                            }
+                        	if(flag){
+                        		console.log("allcheck바꿔")
+                        		document.querySelector('#allCheck').checked=true;
+                        	}
                         }
                         cb.stopPropagation();
                     })
@@ -216,12 +246,12 @@
 	            },
 	            error : function(){
 	            	loadingPageOff();
-	                console.log("실패")
+	                alert("메일을 선택해주세요.")
 	            }
 	
 	        })
 	    })
 	</script>
-    
+
 </body>
 </html>

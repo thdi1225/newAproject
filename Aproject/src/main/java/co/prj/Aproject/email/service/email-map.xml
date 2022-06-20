@@ -81,6 +81,17 @@
 		</choose>
 	</delete>
 	
+	<select id="emailSelectFive" parameterType="int" resultType = "co.prj.Aproject.email.vo.EmailVO">
+		select * from
+		(select email_id as emailId, email_to as emailTo, email_from as emailFrom,
+						email_title as emailTitle, email_date as emailDate, member_num as memberNum,email_subject as emailSubject
+						 from email
+		where member_num = #{memberNum}
+		and email_to is null
+		order by email_date desc)
+		<![CDATA[where rownum<=5]]>
+	</select>
+	
 	
 	<update id="emailInfoUpdate" parameterType="co.prj.Aproject.member.vo.MemberVO">
 		update member set
@@ -88,5 +99,12 @@
 		member_mail_pw = #{member_mail_pw}
 		where member_num = #{member_num}
 	</update>
-
+	
+	<select id="emailCount" resultType="int">
+		select count(*)
+		from email
+		where member_num =1
+		and email_to is null
+	</select>
+	
 </mapper>

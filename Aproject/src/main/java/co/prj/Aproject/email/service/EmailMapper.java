@@ -10,6 +10,8 @@ public interface EmailMapper {
 	//sent = 0 : 남들한테 받은거, 1 : 나한테 받은거
 //	List<EmailVO> emailSelectListAll(@Param("memberNum") int memeberNum,@Param("sent") int sent);
 	EmailVO emailSelectOne(EmailVO vo);
+	List<EmailVO> emailSelectFive(int memberNum);
+	int emailCount(int memberNum);
 	
 	int emailInfoUpdate(MemberVO vo);
 	int emailInsert(EmailVO vo);
@@ -17,4 +19,5 @@ public interface EmailMapper {
 	List<EmailVO> emailSelectListAll(EmailPage paging);
 
 	int emailSelectListAllCount(EmailPage paging);
+	
 }

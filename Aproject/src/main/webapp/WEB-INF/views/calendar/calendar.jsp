@@ -57,6 +57,8 @@ background: #fff;
 			<h1>일정 등록</h1>
 			<form id="frm" action="calendarInput.do" method="post"
 				enctype="application/x-www-form-urlencoded">
+				<input type="hidden" id="member_num" name="member_num" value="${memberVO.member_num}">
+				<input type="hidden" id="section_id" name="section_id" value="${memberVO.section_id}">
 				<div>
 					<h6>title</h6>
 					<input type="text" id="calendar_title" name="calendar_title"
@@ -101,6 +103,8 @@ background: #fff;
 			<form id="frm" action="calendarUpdate.do" method="post"
 				enctype="application/x-www-form-urlencoded">
 				<input type="hidden" id="calendar_id" name="calendar_id">
+				<input type="hidden" id="member_num2" name="member_num" value="${memberVO.member_num}">
+				<input type="hidden" id="section_id2" name="section_id" value="${memberVO.section_id}">
 				<div>
 					<h6>title</h6>
 					<input type="text" id="calendar_title2" name="calendar_title"
@@ -161,20 +165,34 @@ background: #fff;
  --%>
  
  	<div class="frm-div">
-	<form id="frm">
-		<select class="select-box" id="key" name="key">
-			<option value="1">전체</option>
-			<option value="100">부서1</option>
-			<option value="200">부서2</option>
-			<option value="300">부서3</option>
-		</select> <input type="button" id="search" class="btn-dark" onclick="calendarSearch();" value="검색">
-	</form>
+		<c:if test="${memberVO.member_auth == 0}">
+			<form id="frm">
+				<select class="select-box" id="key" name="key">
+					<option value="0">전체</option>
+					<c:forEach items="${sectionList}" var="section">
+						<option value="${section.section_id}">${section.section_name}</option>
+					</c:forEach>
+				</select> 
+				<input type="button" id="search" class="btn-dark" onclick="calendarSearch();" value="검색">
+			</form>
+		</c:if>
+		<c:if test="${memberVO.member_auth == 1}">
+			<form id="frm">
+				<input type="hidden" id="key" name="key" value="${memberVO.section_id}">
+			</form>
+			<input type="hidden" id="search" class="btn-dark" onclick="calendarSearch();" value="검색">
+		</c:if>
 	</div>
  
 	<div id='calendar'></div>
 
 	<script>
- 		
+	window.onload = function() {
+	 	if(${memberVO.member_auth} == 1){
+	 		document.getElementById('search').click();
+	 	}
+	}
+ 	
  	document.addEventListener('DOMContentLoaded', function() {
  		$.ajax({
    			url: "calendarList.do",
@@ -265,6 +283,8 @@ background: #fff;
   			type: "post",
   			dataType: "json",
   			data: {
+  				"member_num": $("#member_num2").val(),
+  				"section_id": $("#section_id2").val(),
   				"calendar_id": $("#calendar_id").val(),
   				"calendar_title": $("#calendar_title2").val(),
   				"calendar_subject": $("#calendar_subject2").val(),

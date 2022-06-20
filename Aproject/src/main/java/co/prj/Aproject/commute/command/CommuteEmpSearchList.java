@@ -15,21 +15,20 @@ import co.prj.Aproject.commute.Impl.CommuteImpl;
 import co.prj.Aproject.commute.service.CommuteService;
 import co.prj.Aproject.commute.vo.CommuteVO;
 import co.prj.Aproject.member.vo.MemberVO;
-import freemarker.template.SimpleDate;
 
-public class CommuteSelectDate implements Command {
+public class CommuteEmpSearchList implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		
+		System.out.println("실행");
 		CommuteService dao = new CommuteImpl();
 		List<CommuteVO> list = new ArrayList<CommuteVO>();
-		HttpSession session = request.getSession();
-		MemberVO vo = (MemberVO) session.getAttribute("memberVO");
 		ObjectMapper mapper = new ObjectMapper();
 		String key = request.getParameter("key");
 		String val = request.getParameter("val");
-		list = dao.commuteSearchList(key,val,String.valueOf(vo.getMember_num()));
+		System.out.println(key);
+		list = dao.commuteEmpSearchList(key,val);
 		String jsonData = "";
 		
 		try {
@@ -38,8 +37,8 @@ public class CommuteSelectDate implements Command {
 			e.printStackTrace();
 		}
 		
+		
 		return "ajax:"+ jsonData;
 	}
-
 
 }

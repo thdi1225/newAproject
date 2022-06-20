@@ -29,8 +29,9 @@ import co.prj.Aproject.calendar.CalendarSearch;
 import co.prj.Aproject.calendar.CalendarSelect;
 import co.prj.Aproject.calendar.CalendarUpdate;
 import co.prj.Aproject.calendar.command.CalendarCommand;
-import co.prj.Aproject.calendar.command.Test;
 import co.prj.Aproject.comm.Command;
+import co.prj.Aproject.commute.command.CommuteEmpSearchList;
+import co.prj.Aproject.commute.command.CommuteEmpSelectList;
 import co.prj.Aproject.commute.command.CommuteEndUpdate;
 import co.prj.Aproject.commute.command.CommuteSelectDate;
 import co.prj.Aproject.commute.command.CommuteSelectList;
@@ -46,6 +47,7 @@ import co.prj.Aproject.email.command.EmailRecieveCommand;
 import co.prj.Aproject.email.command.EmailSendCommand;
 import co.prj.Aproject.email.command.EmailSentMailCommand;
 import co.prj.Aproject.email.command.EmailServiceCommand;
+import co.prj.Aproject.email.command.EmailSelectFiveCommand;
 import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
 import co.prj.Aproject.member.command.LoginFormCommand;
@@ -124,6 +126,7 @@ public class FrontController extends HttpServlet {
 		map.put("/emailLogout.do", new EmailLogoutCommand());
 		map.put("/emailLogoutService.do", new EmailLogoutService());
 		map.put("/emailEmpty.do", new EmailEmptyCommand());
+		map.put("/emailSelectFive.do", new EmailSelectFiveCommand());
 		
 		//일정관리
 		map.put("/calendar.do", new CalendarCommand());
@@ -151,7 +154,8 @@ public class FrontController extends HttpServlet {
 		map.put("/commuteStartInsert.do", new CommuteStartInsert());
 		map.put("/commuteEndUpdate.do", new CommuteEndUpdate());
 		map.put("/commuteSelectDate.do", new CommuteSelectDate());
-//		map.put("/commuteEndInsert.do", new CommuteEndInsert());
+		map.put("/commuteEmpSelectList.do", new CommuteEmpSelectList());
+		map.put("/commuteEmpSearchList.do", new CommuteEmpSearchList());
 		
 
 	}

@@ -13,23 +13,20 @@ import co.prj.Aproject.commute.service.CommuteService;
 import co.prj.Aproject.commute.vo.CommuteVO;
 import co.prj.Aproject.member.vo.MemberVO;
 
-public class CommuteSelectList implements Command {
+public class CommuteEmpSelectList implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		
-
+		
 		List<CommuteVO> list = new ArrayList<CommuteVO>();
 		CommuteService dao = new CommuteImpl();
-		HttpSession session = request.getSession();
-		MemberVO vo = (MemberVO) session.getAttribute("memberVO");
-		list = dao.commuteSelectList(vo);
-		request.setAttribute("list", list);
+		CommuteVO vo = new CommuteVO();
+		list = dao.commuteEmpSelectList(vo);
 		
-		if(list.size() == 1) {
-			request.setAttribute("v", list.get(0).getCommute_num());
-		}
-		return "commute/commute";
+		request.setAttribute("emp", list);
+		return "commute/empCommute";
+		
 	}
 
 }

@@ -8,29 +8,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	tbody tr:hover{
-		background-color : blue;
-		color:white;
-	}
-</style>
+<link href="css/all.css" rel="stylesheet">
+<link href="css/mail/mail.css" rel="stylesheet">
 </head>
 <body>
+	<div>
+		<small class="float-right text-underline-bold">메일관리 > 보낸 메일함</small>
+		<h2 class="text-title">보낸 메일함</h2>
+	</div>
+	<hr>
 	<div align="center">
-		<input type="button" value="선택 삭제" id="selectDelete">
 		<form action="emailSentMail.do" method="post">
-			검색 : <input type="text" id="search" name="search">
-			<button type="submit">검색</button>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" id="search" name="search"
+					placeholder="이름으로 검색하실 수 있습니다." aria-label="Recipient's username"
+					aria-describedby="searchButton">
+					
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="submit"
+						id="searchButton">검색</button>
+				</div>
+			</div>
 		</form>
-		<table border="1">
+
+		<table class="table">
 			<thead>
 				<tr>
-					<th width="100"><input type="checkbox" id="allCheck"></th>
-					<th width="100">No.</th>
-					<th width="200">받은 사람</th>
-					<th width="300">제목</th>
-					<th width="200">전송 시간</th>
-					<th width="100">삭제</th>
+					<th><input type="checkbox" id="allCheck"></th>
+				    <th class="span"><input type="button" id="selectDelete" value="선택삭제" class="table-btn"></th>
+				    <th></th>
+				    <th></th>
+				    <th></th>
+				    <th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,11 +49,11 @@
 							<input type="hidden" id="emailId" value=${email.emailId}>
 							<input type="checkbox" id="oneCheck">
 						</td>
-						<td>${fn:length(emails) - status.index}</td>
 						<td>${email.emailTo}</td>
-						<td>${email.emailTitle}</td>
+						<td style="text-align:right;"><span class="label pull-right">Email</span></td>
+						<td style="text-align:left;	width:30%">${email.emailTitle}</td>
 						<td><fmt:formatDate value="${email.emailDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-						<td><input type="button" value="삭제" id="deleteEmail"></td>
+						<td><input type="button" value="삭제" id="deleteEmail" class="table-btn"></td>
 					</tr>
 				</c:forEach>
 				
@@ -86,6 +95,7 @@
             	dataType:"json",
             	success:function(res){
             		location.reload();
+            		alert("삭제 완료되었습니다.")
   			  		loadingPageOff();
             	}
             })
@@ -112,8 +122,18 @@
         cbxs.forEach(e => {
                     e.addEventListener('click',function(cb){
                         if(cb.target.checked==false){
-                            console.log('false');
                             document.querySelector('#allCheck').checked=false;
+                        }else{
+                        	let flag = true;
+                        	for (var i = 0; i < cbxs.length; i++) {
+                                if(cbxs[i].checked==false){
+                                	flag = false;
+                                	break;
+                                }
+                            }
+                        	if(flag){
+                        		document.querySelector('#allCheck').checked=true;
+                        	}
                         }
                         cb.stopPropagation();
                     })
@@ -171,7 +191,7 @@
 	                console.log("삭제완료")
 	            },
 	            error : function(){
-	                console.log("실패")
+	                alert("메일을 선택해주세요.")
 	            }
 	
 	        })

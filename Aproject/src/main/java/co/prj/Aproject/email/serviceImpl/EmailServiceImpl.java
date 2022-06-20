@@ -50,6 +50,18 @@ public class EmailServiceImpl implements EmailService {
 		return map.emailSelectListAllCount(paging);
 	}
 
+	@Override
+	public List<EmailVO> emailSelectFive(int memberNum) {
+		return map.emailSelectFive(memberNum);
+	}
+
+	@Override
+	public int emailCount(int memberNum) {
+		return map.emailCount(memberNum);
+	}
+
+
+
 	
 
 }

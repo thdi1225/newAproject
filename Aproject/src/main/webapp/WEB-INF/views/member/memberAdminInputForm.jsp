@@ -15,6 +15,7 @@
 		</h2>
 	</div>
 	
+
 	<div class="border rounded p-3" align="center">
 		<div class="form-group row">
 			<label for="section_id" class="col-sm-2 col-form-label">부서</label>

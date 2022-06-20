@@ -5,14 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="css/mail/mail.css" rel="stylesheet">
 </head>
 <body>
 	<div class="spinner-border" role="status" align="center" id="loading">
 	  	<span class="visually-hidden"></span>
 	</div>
 	<div id="con">
-		<input type="button" id="refreshBtn" value="새로고침">
-		<h1>메일함이 비었습니다!</h1>
+		<input type="button" id="refreshBtn" value="동기화" class="btn-dark refreshBtn">
+		<p>메일함이 비었습니다!</p>
 	</div>
 	<script>
 		var loader = document.getElementById('loading');

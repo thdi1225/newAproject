@@ -17,14 +17,26 @@ public class CommuteEndUpdate implements Command {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		
+		int timeCheck = 0;
 		CommuteService dao = new CommuteImpl();
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO) session.getAttribute("memberVO");
 		List<CommuteVO> list = dao.commuteSelectList(vo);
+		for(CommuteVO commutevo : list) {
+			if(commutevo.getCommute_start_time() != null && commutevo.getCommute_end_time() == null) {
+				timeCheck = 1;
+			}
+			else {
+				timeCheck=0;
+			}
+		}
+		if(timeCheck == 1) {
 			dao.commuteEndUpdate(vo);
+		}
+		request.setAttribute("timeCheck", timeCheck);
 		request.setAttribute("list", list);
 		
-		return "commute/commute";
+		return "ajax:"+timeCheck;
 	}
 
 }
