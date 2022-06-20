@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="board.css">
 </head>
 <body>
 <div align="center" class="container">
@@ -44,6 +43,8 @@
 			<div>
 				<input class="table-btn" type="submit" value="저장">&nbsp;&nbsp;
 				<input class="table-btn" type="button" value="취소" onclick="location.href='boardList.do'">
+				<button type="button" class="table-btn"
+			onclick="location.href='boardList.do'">목록</button>
 			</div>
 		</form>
 	</div>
