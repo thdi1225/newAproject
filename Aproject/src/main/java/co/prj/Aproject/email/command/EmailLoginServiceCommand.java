@@ -20,10 +20,8 @@ public class EmailLoginServiceCommand implements Command {
 		
 		EmailFunc ef = new EmailFunc();
 		
-		String managerEmail = "mplv261@gmail.com";
-		
 		String page;
-		boolean flag = ef.gmailSend(managerEmail, "가입요청", mailEmail+"님 가입요청합니다", mailEmail, mailPw);
+		boolean flag = ef.gmailSend(mailEmail, "가입요청", "Aproject에서 "+mailEmail+"님의 로그인을 시도했습니다.", mailEmail, mailPw);
 		if(flag) {//구글 로그인 가능
 			//Session에 저장,
 			MemberVO member = (MemberVO) session.getAttribute("memberVO");
