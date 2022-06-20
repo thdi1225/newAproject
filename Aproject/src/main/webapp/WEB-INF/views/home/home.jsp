@@ -4,14 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>home</title>
 <link href='css/home.css' rel='stylesheet' />
 <link href='css/calendar/main.css' rel='stylesheet' />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -20,9 +19,14 @@
 <script src="https://kit.fontawesome.com/1cb815469f.js"
 	crossorigin="anonymous"></script>
 <script src="js/calendar/main.js"></script>
+<script type="text/javascript">
+  </script>
+
 </head>
 <body>
+
 	<div id="main_container">
+		<!-- 		mia -->
 		<div id="box1">
 			<div class="sub_tab">
 				<span><i class="fa-solid fa-envelope"></i></span>
@@ -35,8 +39,8 @@
 						<p>회원님께 도착한 메일은 총 ${emailCnt}개 입니다.</p>
 					</c:otherwise>
 				</c:choose>
-
 			</div>
+
 			<div class="sub_tab">
 				<span><i class="fa-solid fa-table-list"></i></span>
 				<h1>커뮤니티</h1>
@@ -44,10 +48,21 @@
 					<a href="#">작성한 게시글 보러 가기</a>
 				</p>
 			</div>
+
+			<!-- 			yong -->
 			<div class="sub_tab">
 				<span><i class="fa-brands fa-flipboard"></i></span>
 				<h1>출퇴근</h1>
-				<p>출근 완료/출근하러 가기</p>
+				<c:if test="${cn == 0 }">
+					<a href="commuteSelectList.do">출근하기</a>
+				</c:if>
+				<c:if test="${cn == 1 }">
+					<a href="commuteSelectList.do">출근을 완료하였습니다</a>
+				</c:if>
+
+				<c:if test="${cn == 2 }">
+					<p>이미 퇴근을 완료하였습니다.</p>
+				</c:if>
 			</div>
 		</div>
 		<div id="box2">
@@ -68,22 +83,23 @@
 	</div>
 
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			var calendarEl = document.getElementById('calendar');
-			var calendar = new FullCalendar.Calendar(calendarEl, {
-				initialView : 'listDay',
-				height : 300,
-				header : {
-					left : '',
-					center : '',
-					right : 'listDay'
-				},
-				events : 'https://fullcalendar.io/demo-events.json'
-			});
-			calendar.render();
-			
-		});
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'listDay',
+        height: 300,
+        header: {
+      left: '',
+      center: '',
+      right: 'listDay'
+    },
+        events: 'https://fullcalendar.io/demo-events.json'
+      });
+      calendar.render();
+    });
+
 	</script>
+
 
 </body>
 </html>
