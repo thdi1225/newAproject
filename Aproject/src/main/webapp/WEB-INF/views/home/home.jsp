@@ -53,15 +53,20 @@
 			<div class="sub_tab">
 				<span><i class="fa-brands fa-flipboard"></i></span>
 				<h1>출퇴근</h1>
-				<c:if test="${cn == 0 }">
-					<a href="commuteSelectList.do">출근하기</a>
+				<c:if test="${memberVO.member_auth == 1 }">
+					<c:if test="${cn == 0 }">
+						<a href="commuteSelectList.do">출근하기</a>
+					</c:if>
+					<c:if test="${cn == 1 }">
+						<a href="commuteSelectList.do">출근을 완료하였습니다</a>
+					</c:if>
+	
+					<c:if test="${cn == 2 }">
+						<p>이미 퇴근을 완료하였습니다.</p>
+					</c:if>
 				</c:if>
-				<c:if test="${cn == 1 }">
-					<a href="commuteSelectList.do">출근을 완료하였습니다</a>
-				</c:if>
-
-				<c:if test="${cn == 2 }">
-					<p>이미 퇴근을 완료하였습니다.</p>
+				<c:if test="${memberVO.member_auth == 0 }">
+					<a href="commuteSelectList.do">출퇴근 관리</a>
 				</c:if>
 			</div>
 		</div>
