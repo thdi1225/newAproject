@@ -5,12 +5,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="css/mail/googleMail.css">
 </head>
 <body>
-	<h1>이메일 로그인 페이지</h1>
-	<input type="email" id="mailEmail" name = "mailEmail" placeholder="구글 이메일 입력">
-	<input type="password" id="mailPw" name ="mailPw" placeholder="비밀번호 입력">
-	<button type="button" id="loginBtn">로그인</button>
+	<div>
+		<small class="float-right text-underline-bold">메일관리 > 메일 계정 로그인</small>
+		<h2 class="text-title">메일 계정 로그인</h2>
+	</div>
+	<hr>
+	<div class="box">
+		<div class="logo">
+			<img src="img/googleLogo.png" alt="google logo">
+		</div>
+		<h2>Sign In</h2>
+		<p>Use your Google Account</p>
+
+		<div class="inputBox">
+			<input type="email" id="mailEmail" name="mailEmail" value="" required>
+			<label>User Email</label>
+		</div>
+		<div class="inputBox">
+			<input type="password" id="mailPw" name="mailPw" required value=""> 
+			<label>Password</label>
+		</div>
+		<input type="button" id="loginBtn" name="sign-in" value="Sign In">
+	</div>
+	
 	<script>
 		document.getElementById('loginBtn').addEventListener('click',e=>{
 			$.ajax({

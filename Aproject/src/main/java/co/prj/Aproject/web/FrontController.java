@@ -46,6 +46,7 @@ import co.prj.Aproject.email.command.EmailRecieveCommand;
 import co.prj.Aproject.email.command.EmailSendCommand;
 import co.prj.Aproject.email.command.EmailSentMailCommand;
 import co.prj.Aproject.email.command.EmailServiceCommand;
+import co.prj.Aproject.email.command.EmailSelectFiveCommand;
 import co.prj.Aproject.home.command.HomeCommand;
 import co.prj.Aproject.member.command.LoginCommand;
 import co.prj.Aproject.member.command.LoginFormCommand;
@@ -124,6 +125,7 @@ public class FrontController extends HttpServlet {
 		map.put("/emailLogout.do", new EmailLogoutCommand());
 		map.put("/emailLogoutService.do", new EmailLogoutService());
 		map.put("/emailEmpty.do", new EmailEmptyCommand());
+		map.put("/emailSelectFive.do", new EmailSelectFiveCommand());
 		
 		//일정관리
 		map.put("/calendar.do", new CalendarCommand());

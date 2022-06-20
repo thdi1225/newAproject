@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +9,7 @@
 </head>
 <body>
 	<!-- Topbar -->
-	<nav
-		class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+	<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 		<!-- Sidebar Toggle (Topbar) -->
 		<button id="sidebarToggleTop"
 			class="btn btn-link d-md-none rounded-circle mr-3">
@@ -89,7 +89,7 @@
 						All Alerts</a>
 				</div></li>
 
-			<!-- Nav Item - Messages -->
+			<!-- Nav Item - Messages !!!!!!!!!!--> 
 			<li class="nav-item dropdown no-arrow mx-1"><a
 				class="nav-link dropdown-toggle" href="#" id="messagesDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -99,7 +99,20 @@
 				<div
 					class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
 					aria-labelledby="messagesDropdown">
-					<h6 class="dropdown-header">Message Center</h6>
+					<h6 class="dropdown-header">Message Box</h6>
+					<c:forEach items="${emailList}" var="email">
+						<a class="dropdown-item d-flex align-items-center" href="#">
+							<div class="dropdown-list-image mr-3">
+								<img class="rounded-circle" src="img/undraw_profile_1.svg"
+									alt="...">
+								<div class="status-indicator bg-success"></div>
+							</div>
+							<div class="font-weight-bold">
+								<div class="text-truncate">${email.emailSubject}</div>
+								<div class="small text-gray-500">${email.emailFrom } · sysdate-${email.emailDate}</div>
+							</div>
+						</a>
+					</c:forEach>
 					<a class="dropdown-item d-flex align-items-center" href="#">
 						<div class="dropdown-list-image mr-3">
 							<img class="rounded-circle" src="img/undraw_profile_1.svg"
@@ -111,7 +124,9 @@
 								can help me with a problem I've been having.</div>
 							<div class="small text-gray-500">Emily Fowler · 58m</div>
 						</div>
-					</a> <a class="dropdown-item d-flex align-items-center" href="#">
+					</a>
+					
+					<a class="dropdown-item d-flex align-items-center" href="#">
 						<div class="dropdown-list-image mr-3">
 							<img class="rounded-circle" src="img/undraw_profile_2.svg"
 								alt="...">
@@ -122,7 +137,9 @@
 								ordered last month, how would you like them sent to you?</div>
 							<div class="small text-gray-500">Jae Chun · 1d</div>
 						</div>
-					</a> <a class="dropdown-item d-flex align-items-center" href="#">
+					</a>
+					
+					<a class="dropdown-item d-flex align-items-center" href="#">
 						<div class="dropdown-list-image mr-3">
 							<img class="rounded-circle" src="img/undraw_profile_3.svg"
 								alt="...">
@@ -133,7 +150,9 @@
 								I am very happy with the progress so far, keep up the good work!</div>
 							<div class="small text-gray-500">Morgan Alvarez · 2d</div>
 						</div>
-					</a> <a class="dropdown-item d-flex align-items-center" href="#">
+					</a>
+					
+					<a class="dropdown-item d-flex align-items-center" href="#">
 						<div class="dropdown-list-image mr-3">
 							<img class="rounded-circle"
 								src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
@@ -145,7 +164,9 @@
 								even if they aren't good...</div>
 							<div class="small text-gray-500">Chicken the Dog · 2w</div>
 						</div>
-					</a> <a class="dropdown-item text-center small text-gray-500" href="#">Read
+					</a>
+					
+					<a class="dropdown-item text-center small text-gray-500" href="emailRecieve.do">Read
 						More Messages</a>
 				</div></li>
 
@@ -186,5 +207,17 @@
 		</ul>
 
 	</nav>
+	<!-- End of Topbar -->
+	<script>
+		document.getElementById('messagesDropdown').addEventListener('click',function(e){
+			$.ajax({
+				url:"emailSelectFive.do",
+				type:"post",
+				success:function(res){
+					console.log(res);
+				}
+			})
+		})
+	</script>
 </body>
 </html>
