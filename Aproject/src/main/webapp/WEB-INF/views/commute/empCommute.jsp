@@ -10,61 +10,12 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<link rel="stylesheet" href="css/all.css">
+	<link rel="stylesheet" href="css/commute.css">
 <title>Insert title here</title>
 </head>
-<style type="text/css">
 
 
-.table {
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 2rem;
-  background-color: #fff;
-  position: absolute;
-  top: 100px;
-}
 
-.table-btn {
-    padding: 3px 15px;
-    border: 1px solid #ddd;
-    background: #f1f1f1;
-    border-radius: 5px;
-    margin-bottom: 10px;
-
-}
-
-.table-box{
-	overflow: auto;
-	height: 60vh;
-	width: 60%;
-	position: relative;
-	left: 50%;
-	margin-left: -30%;
-
-}
-
-.month-font{
-	display: inline;
-	font-size: 50px;
-}
-
-.container-box{
-	width: 100%;
-	margin:auto;
-	padding: 10px;
-	
-}
-
-.table-location{
-	width:600px;
-	height:100px;
-	position: absolute;
-	left: 50%;
-	margin-left:-200px;
-	padding: 10px;
-}
-</style>
 </head>
 
 <body>
@@ -73,8 +24,8 @@
 <div class="container-box">
 
 	
-			<div class="table-box">
-				<div class="table-location">
+			<div class="bottom-box">
+				<div class="commute-list-location">
 				<div id="test2">
 				<h1 style="display: inline; line-height: 100px; margin-right: 10px">사원 전체 리스트</h1>
 				<button style="display: inline;" class="table-btn" onclick="test1();">월별 리스트 보기</button>
@@ -88,13 +39,14 @@
 				</div>			
 				
 				<div id="test3">
-				<table class="table" id="ta">
+				<table class="tables" id="ta">
 						<thead class="thead-primary">
 							<tr>
 								<th>순번</th>
 								<th>날짜</th>
 								<th>출근 시간</th>
 								<th>퇴근 시간</th>
+								<th>회원 번호</th>
 							</tr>
 						</thead>
 						<tbody>
