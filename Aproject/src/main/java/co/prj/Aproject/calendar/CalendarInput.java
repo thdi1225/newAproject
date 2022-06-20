@@ -28,7 +28,9 @@ public class CalendarInput implements Command {
 		vo.setCalendar_subject(calendar_subject);
 		vo.setCalendar_start_date(calendar_start_date);
 		vo.setCalendar_end_date(calendar_end_date);
-
+		vo.setMember_num(Integer.parseInt(request.getParameter("member_num")));
+		vo.setSection_id(Integer.parseInt(request.getParameter("section_id")));
+		
 		int n = dao.calendarInsert(vo);
 
 		String jsonData = "";

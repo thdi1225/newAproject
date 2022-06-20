@@ -8,11 +8,9 @@
 	
 	<select id="calendarSearchList" resultType="co.prj.Aproject.calendar.CalendarVO">
 		  	 select * from calendar
-	 where
-	 	<if test="key == 1">1 = 1</if>
-	 	<if test="key == 100">section_id = #{key}</if>
-	 	<if test="key == 200">section_id = #{key}</if>
-	 	<if test="key == 300">section_id = #{key}</if>
+		where
+	 	<if test="key == 0">1 = 1</if>
+	 	<if test="key != 0">section_id = #{key}</if>
 	 	order by calendar_id asc
 	</select>
 	
@@ -22,20 +20,26 @@
 	
 	<insert id="calendarInsert" parameterType="co.prj.Aproject.calendar.CalendarVO">
 	 insert into calendar values
-	 (CALENDAR_NO_SEQ.nextval,#{calendar_title},#{calendar_subject},#{calendar_start_date},#{calendar_end_date}, 2, 200)
+	 (CALENDAR_NO_SEQ.nextval,#{calendar_title},#{calendar_subject},#{calendar_start_date},#{calendar_end_date}, #{member_num}, #{section_id})
 	</insert>
 	<update id="calendarUpdate" parameterType="co.prj.Aproject.calendar.CalendarVO">
-	 update calendar 
+	 	update calendar set
+	 	calendar_title = #{calendar_title},
+	 	calendar_subject = #{calendar_subject},
+	 	calendar_start_date = #{calendar_start_date},
+	 	calendar_end_date = #{calendar_end_date}
+	 	where calendar_id = #{calendar_id}
+	 	and section_id = #{section_id}
+	 <!-- update calendar 
 	 <set>
 	 <if test="calendar_title != null"> calendar_title = #{calendar_title}, </if>
 	 <if test="calendar_subject != null"> calendar_subject = #{calendar_subject}, </if> 
 	 <if test="calendar_start_date != null"> calendar_start_date = #{calendar_start_date}, </if> 
 	 <if test="calendar_end_date != null"> calendar_end_date = #{calendar_end_date}, </if>
-	 member_num = 1,
-	 section_id = 100
 	 </set>
-	 where calendar_id = #{calendar_id}
+	 where calendar_id = #{calendar_id} -->
 	</update>
+	
 	<delete id="calendarDelete" parameterType="co.prj.Aproject.calendar.CalendarVO">
 		delete from calendar where calendar_id = #{calendar_id}
 	</delete>
