@@ -10,6 +10,7 @@ public interface EmailService {
 //	List<EmailVO> emailSelectListAll(int memeberNum, int sent);
 	EmailVO emailSelectOne(EmailVO vo);
 	List<EmailVO> emailSelectFive(int memberNum);
+	int emailCount(int memberNum);
 	
 	int emailInfoUpdate(MemberVO vo);
 	int emailInsert(EmailVO vo);

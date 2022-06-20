@@ -100,5 +100,11 @@
 		where member_num = #{member_num}
 	</update>
 	
+	<select id="emailCount" resultType="int">
+		select count(*)
+		from email
+		where member_num =1
+		and email_to is null
+	</select>
 	
 </mapper>

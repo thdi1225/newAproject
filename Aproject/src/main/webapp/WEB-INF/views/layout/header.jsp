@@ -100,30 +100,14 @@
 					class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
 					aria-labelledby="messagesDropdown">
 					<h6 class="dropdown-header">Message Box</h6>
-					<c:forEach items="${emailList}" var="email">
-						<a class="dropdown-item d-flex align-items-center" href="#">
-							<div class="dropdown-list-image mr-3">
-								<img class="rounded-circle" src="img/undraw_profile_1.svg"
-									alt="...">
-								<div class="status-indicator bg-success"></div>
-							</div>
-							<div class="font-weight-bold">
-								<div class="text-truncate">${email.emailSubject}</div>
-								<div class="small text-gray-500">${email.emailFrom } · sysdate-${email.emailDate}</div>
-							</div>
-						</a>
-					</c:forEach>
+										
 					<a class="dropdown-item d-flex align-items-center" href="#">
 						<div class="dropdown-list-image mr-3">
 							<img class="rounded-circle" src="img/undraw_profile_1.svg"
 								alt="...">
 							<div class="status-indicator bg-success"></div>
 						</div>
-						<div class="font-weight-bold">
-							<div class="text-truncate">Hi there! I am wondering if you
-								can help me with a problem I've been having.</div>
-							<div class="small text-gray-500">Emily Fowler · 58m</div>
-						</div>
+						<div class="font-weight-bold" id="msg0"></div>
 					</a>
 					
 					<a class="dropdown-item d-flex align-items-center" href="#">
@@ -132,11 +116,7 @@
 								alt="...">
 							<div class="status-indicator"></div>
 						</div>
-						<div>
-							<div class="text-truncate">I have the photos that you
-								ordered last month, how would you like them sent to you?</div>
-							<div class="small text-gray-500">Jae Chun · 1d</div>
-						</div>
+						<div  class="font-weight-bold" id="msg1"></div>
 					</a>
 					
 					<a class="dropdown-item d-flex align-items-center" href="#">
@@ -145,11 +125,7 @@
 								alt="...">
 							<div class="status-indicator bg-warning"></div>
 						</div>
-						<div>
-							<div class="text-truncate">Last month's report looks great,
-								I am very happy with the progress so far, keep up the good work!</div>
-							<div class="small text-gray-500">Morgan Alvarez · 2d</div>
-						</div>
+						<div  class="font-weight-bold" id="msg2"></div>
 					</a>
 					
 					<a class="dropdown-item d-flex align-items-center" href="#">
@@ -158,12 +134,16 @@
 								src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
 							<div class="status-indicator bg-success"></div>
 						</div>
-						<div>
-							<div class="text-truncate">Am I a good boy? The reason I
-								ask is because someone told me that people say this to all dogs,
-								even if they aren't good...</div>
-							<div class="small text-gray-500">Chicken the Dog · 2w</div>
+						<div  class="font-weight-bold" id="msg3"></div>
+					</a>
+					
+					<a class="dropdown-item d-flex align-items-center" href="#">
+						<div class="dropdown-list-image mr-3">
+							<img class="rounded-circle" src="img/undraw_profile_1.svg"
+								alt="...">
+							<div class="status-indicator bg-success"></div>
 						</div>
+						<div  class="font-weight-bold" id="msg4"></div>
 					</a>
 					
 					<a class="dropdown-item text-center small text-gray-500" href="emailRecieve.do">Read
@@ -213,8 +193,23 @@
 			$.ajax({
 				url:"emailSelectFive.do",
 				type:"post",
+				dataType:"json",
 				success:function(res){
+					for(let i = 0; i<5;i++){
+						$("#msg"+i).empty();
+					}
 					console.log(res);
+					$.each(res,function(idx,item){
+						console.log(item);
+						let div = document.createElement('div');
+						div.setAttribute('class','text-truncate');
+						div.innerText = item.emailTitle+"";
+						$("#msg"+idx).append(div);
+						div = document.createElement('div');
+						div.setAttribute('class','small text-gray-500');
+						div.innerText = item.emailFrom+"";
+						$("#msg"+idx).append(div);
+					})
 				}
 			})
 		})
