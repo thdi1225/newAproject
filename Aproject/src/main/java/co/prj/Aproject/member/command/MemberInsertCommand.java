@@ -23,9 +23,13 @@ public class MemberInsertCommand implements Command {
 		vo.setMember_phone(request.getParameter("member_insert_phone"));
 		vo.setMember_job(request.getParameter("member_insert_job"));
 		
-		System.out.println(vo.toString());
+		try {
+			service.memberInsert(vo);
+		} catch (Exception e) {
+			request.setAttribute("message", "이미 등록된 이메일입니다.");
+			return "loginForm";
+		}
 		
-		service.memberInsert(vo);
 		return "loginForm";
 	}
 

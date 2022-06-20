@@ -7,29 +7,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div align="center">
+<div align="center" class="container">
 	<div><h1>게시글 등록</h1></div>
 	<div>
 		<form id="frm" action="boardInput.do" method="post" enctype="multipart/form-data">
 			<div>
 			<input type="hidden" id="member_num" name="member_num" value="${memberVO.member_num}">
-				<table border="1">
+				<table class="table">
 					<tr>
-						<th width="150">작성자</th>
-						<td width="150">							
+						<th>작성자</th>
+						<td>							
 							<input type="text" id="writer" name="writer" required="required">
 						</td>
 					</tr>
 					<tr>
 						<th>제목</th>
 						<td colspan="3">
-							<input type="text" size="66" id="title" name="title" required="required">
+							<input type="text" size="120" id="title" name="title" required="required">
 						</td>
 					</tr>
 					<tr>
 						<th>내용</th>
 						<td colspan="3">
-							<textarea rows="10" cols="66" id="subject" name="subject"></textarea>
+							<textarea rows="10" cols="120" id="subject" name="subject"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -41,8 +41,10 @@
 				</table>
 			</div><br/>
 			<div>
-				<input type="submit" value="저장">&nbsp;&nbsp;
-				<input type="button" value="취소" onclick="location.href='boardList.do'">
+				<input class="table-btn" type="submit" value="저장">&nbsp;&nbsp;
+				<input class="table-btn" type="button" value="취소" onclick="location.href='boardList.do'">
+				<button type="button" class="table-btn"
+			onclick="location.href='boardList.do'">목록</button>
 			</div>
 		</form>
 	</div>

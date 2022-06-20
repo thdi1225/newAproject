@@ -5,14 +5,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/mail/googleMail.css">
 </head>
 <body>
-	<h1>이메일 로그아웃 페이지입니다.</h1>
-	<div >
-		<a>현재 로그인 이메일 : ${memberVO.member_mail_email}</a>
-		<input type="password" id="mailPw" name="mailPw" placeholder="비밀번호">
-		<input type="button" id="logoutBtn" value="구글 계정 로그아웃">
+	<div>
+		<small class="float-right text-underline-bold">메일관리 > 메일 계정 로그아웃</small>
+		<h2 class="text-title">메일 계정 로그아웃</h2>
 	</div>
+	<hr>
+	<div class="box">
+		<div class="logo">
+			<img src="img/googleLogo.png" alt="google logo">
+		</div>
+		<h2>Sign Out</h2>
+		<p>Good Bye!</p>
+
+		<div class="inputBox">
+			<input type="email" id="mailEmail"name="email" value="${memberVO.member_mail_email}" disabled>
+			<label>User Email</label>
+		</div>
+		<div class="inputBox">
+			<input type="password" id="mailPw" required value="">
+			<label>Password</label>
+		</div>
+		<input type="button" id="logoutBtn" name="sign-in" value="Sign Out">
+	</div>
+
 
 	<script>
 		document.getElementById('logoutBtn').addEventListener('click',e=>{
@@ -33,7 +51,7 @@
 								dataType:"json",
 								success:function(r){
 									alert("로그아웃되었습니다.");
-									location.href='emailSend.do';
+									location.href='emailLogin.do';
 								}
 							})
 						}else{

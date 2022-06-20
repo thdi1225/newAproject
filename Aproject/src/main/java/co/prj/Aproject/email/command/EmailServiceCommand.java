@@ -38,10 +38,11 @@ public class EmailServiceCommand implements Command {
 		if(flag) {
 			System.out.println("전송완료");
 			dao.emailInsert(vo);
+			return "ajax:1";
 		}else {
 			System.out.println("전송실패");
+			return "ajax:0";
 		}
-		return "email/emailService";
 	}
 
 }

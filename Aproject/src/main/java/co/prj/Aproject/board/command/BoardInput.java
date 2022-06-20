@@ -53,7 +53,7 @@ public class BoardInput implements Command {
 			list = dao.boardSelectList(null);
 			request.setAttribute("list", list);
 			
-			return "board/boardList";
+			return "boardList.do";
 		}
 
 	}
