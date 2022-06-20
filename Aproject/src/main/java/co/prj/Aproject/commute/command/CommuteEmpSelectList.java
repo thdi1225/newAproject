@@ -25,7 +25,6 @@ public class CommuteEmpSelectList implements Command {
 		list = dao.commuteEmpSelectList(vo);
 		
 		request.setAttribute("emp", list);
-		
 		return "commute/empCommute";
 		
 	}

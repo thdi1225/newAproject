@@ -7,14 +7,12 @@
 <head>
 <meta charset="UTF-8">
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
-
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-	<link rel="stylesheet" href="css/all.css">
+	<link rel="stylesheet" href="css/commute.css">
 <title>Insert title here</title>
 <style type="text/css">
 
-.select-box {
+ .select-box {
 	display: block;
 	font-size: 18px;
 	color: #60666d;
@@ -24,8 +22,8 @@
 	font-size: 14px;
 	position: absolute;
 	left:50%;
-	width: 100px;
-	margin-left: -50px;
+	width: 200px;
+	margin-left: -100px;
 	
 	
 }
@@ -39,7 +37,7 @@ background: #68718b;
   margin-bottom: 2rem;
   background-color: #fff;
   position: absolute;
-  top: 70px;
+  top: 80px;
 }
 .table-btn {
     padding: 3px 15px;
@@ -50,26 +48,26 @@ background: #68718b;
 
 }
 
-.table-box{
+.bottom-box{
 	overflow: auto;
 	height: 60vh;
-	width: 60%;
+	width: 100%;
 	position: relative;
 
 }
 #clock {
-	width: 500px;
+	width: 800px;
 	height: 250px;
 	line-height: 250px;
 	color: #666;
-	font-size: 80px;
+	font-size: 100px;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.left-box {
-	width: 40%;
+.top-box {
+	width: 100%;
 	height:400px;
 	position: relative;
 }
@@ -85,16 +83,15 @@ background: #68718b;
 	width: 100%;
 	margin: 0;
 	padding: 10px;
-	display: flex;
 	
 }
-.table-location{
+.commute-list-location{
 	width:600px;
 	position: absolute;
 	left: 50%;
-	margin-left:-150px;
+	margin-left:-200px;
 	padding: 10px;
-}
+} 
 </style>
 </head>
 <script>
@@ -146,44 +143,37 @@ background: #68718b;
 
 <div class="container-box">
 
-	<div class="left-box">
+	<div class="top-box">
 		<div id="clock"></div>
 		
-		
-<div class="sec7-text-box" id ="timer">
-  <p class="font15 time-title"></p>
-  <div class="time font40">
-    <span class="hours"></span>
-    <span class="col">:</span>
-    <span class="minutes"></span>
-    <span class="col">:</span>
-    <span class="seconds"></span>
-  </div>
-
-</div>
 		
 		
 		<div id="sumbit-box">
 		
 			<input type="hidden" value="${checkInt}" id="commuteCheck">
-		
+			<input type= "hidden" value="${timeCheck}"  id ="timeCheck">
+
+			<c:if test="${v != 1 }">
 			<form action="commuteStartInsert.do" method="post">
 				<input type="button" id="startButton" value="출근하기"  onclick="start_button();" class="select-box">
 			</form>
+			</c:if>
 			
+			<c:if test="${v == 1}">
 			<form action="commuteEndUpdate.do" method="post"
 				style="display: inline-block;">
 				<input type="button" id="endButton"  value="퇴근하기"  onclick="end_button();" class="select-box">
 			</form>
+			</c:if>
 			
 			
 		</div>
 	</div>
 	
-			<div class="table-box">
-				<div class="table-location">
-				<div id="test2">
-				<h1 style="display: inline;">전체 리스트</h1>
+			<div class="bottom-box">
+				<div class="commute-list-location">
+				<div id="test2" class="commutelist-box">
+				<h1 style="display: inline;">출퇴근 전체 리스트</h1>
 				<button style="display: inline;" class="table-btn" onclick="test1();">월별 리스트 보기</button>
 				</div>
 				<div id="test" style="width: 600px;">
@@ -196,7 +186,7 @@ background: #68718b;
 				
 				<div id="test3">
 				<table class="table" id="ta">
-						<thead class="thead-primary">
+						<thead>
 							<tr>
 								<th>순번</th>
 								<th>날짜</th>
@@ -219,10 +209,9 @@ background: #68718b;
 					</div>
 					
 			</div>
+			
 <script type="text/javascript">
-	$("#timer").hide();
 	$("#test").hide();
-	$("#endButton").hide();
 	let today = new Date();
 	let month = today.getMonth() + 1;
 	document.getElementById("number").textContent = month;
@@ -307,35 +296,17 @@ background: #68718b;
 	 
 	 
 	 function start_button(){
+	
 		  $.ajax({
 			  url:"commuteStartInsert.do",
 				success:function(result){
 					if(result == 0){
 						$("#ta").load(location.href+" #ta")
+						$("#sumbit-box").load(location.href+" #sumbit-box")
 						alert("좋은 아침입니다");
-						$("#startButton").hide();
-						$("#endButton").hide();
-						$("#clock").hide();
-						$("#timer").show();
 						
-						setTimeout(function(){
-							$("#endButton").show();
-							$("#timer").hide();
-							$("clock").show();
-							
-						}, 9000*60*60);
 					}else{
 						alert("이미 출근하셨습니다.");
-						$("#endButton").hide();
-						$("#startButton").hide();
-						$("#clock").hide();
-						$("#timer").show();
-						
-						setTimeout(function(){
-							$("#endButton").show();
-							$("#timer").hide();
-							$("clock").show();
-						}, 9000*60*60);
 					}
 				},
 				error: function(){
@@ -347,19 +318,18 @@ background: #68718b;
 	 
 	 
 	 function end_button(){
+		 let chk	= document.getElementById("timeCheck").value
 		 $.ajax({
 			  url:"commuteEndUpdate.do",
-			  success: function(result){
-				  if(result == 1){
+			  success: function(chk){
+				  if(chk == 1){
 					$("#ta").load(location.href+" #ta")
-					$("#startButton").show();
-					$("#endButton").hide();
+					$("#sumbit-box").load(location.href+" #sumbit-box")
 					alert("오늘 하루도 수고하셨습니다.");
+					
 				  }
-				  else{
-						$("#startButton").hide();
-						$("#endButton").hide();
-						alert("퇴근체크 완료 되어있습니다")
+				  else if(chk == 0){
+						alert("이미 퇴근체크 완료 되어있습니다")
 				  }
 				},
 				error: function(){
@@ -368,41 +338,8 @@ background: #68718b;
 		});
 		
 	 }
-	 
-	 function remaindTime() {
-		    var now = new Date();
-		    var end = new Date(now.getFullYear(),now.getMonth(),now.getDate(),18,00,00);
-		    var open = new Date(now.getFullYear(),now.getMonth(),now.getDate(),09,00,00);
-		  
-		    var nt = now.getTime();
-		    var ot = open.getTime();
-		    var et = end.getTime();
-		  
-		  
-		    if(nt>et){
-		    $("p.time-title").html("퇴근 시간");
-		    $(".time").fadeOut();
-		   }else {
-		       $(".time").fadeIn();
-		     $("p.time-title").html("퇴근까지 남은 시간");
-		     sec =parseInt(et - nt) / 1000;
-		     day  = parseInt(sec/60/60/24);
-		     sec = (sec - (day * 60 * 60 * 24));
-		     hour = parseInt(sec/60/60);
-		     sec = (sec - (hour*60*60));
-		     min = parseInt(sec/60);
-		     sec = parseInt(sec-(min*60));
-		     if(hour<10){hour="0"+hour;}
-		     if(min<10){min="0"+min;}
-		     if(sec<10){sec="0"+sec;}
-		      $(".hours").html(hour);
-		      $(".minutes").html(min);
-		      $(".seconds").html(sec);
-		   }
-		 }
-		 setInterval(remaindTime,1000);
-	 
-	 
+
+
 </script>	
 <script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>

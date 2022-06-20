@@ -26,6 +26,9 @@ public class CommuteSelectList implements Command {
 		list = dao.commuteSelectList(vo);
 		request.setAttribute("list", list);
 		
+		if(list.size() == 1) {
+			request.setAttribute("v", list.get(0).getCommute_num());
+		}
 		return "commute/commute";
 	}
 

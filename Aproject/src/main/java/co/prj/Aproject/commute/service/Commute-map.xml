@@ -61,14 +61,14 @@
 
 	<insert id="commuteStartInsert" parameterType="co.prj.Aproject.member.vo.MemberVO">
 	
-		    INSERT INTO COMMUTE(COMMUTE_ID,COMMUTE_DATE,COMMUTE_START_TIME ,MEMBER_NUM)
-		VALUES(COMMUTE_SEQ.NEXTVAL,SYSDATE,SYSDATE,#{member_num})
+		    INSERT INTO COMMUTE(COMMUTE_ID,COMMUTE_DATE,COMMUTE_START_TIME ,MEMBER_NUM,COMMUTE_NUM)
+		VALUES(COMMUTE_SEQ.NEXTVAL,SYSDATE,SYSDATE,#{member_num},DEFAULT)
 	</insert>
 	
 	
 	<update id="commuteEndUpdate"  parameterType="co.prj.Aproject.member.vo.MemberVO">
 	
-			UPDATE COMMUTE SET COMMUTE_END_TIME = SYSDATE
+			UPDATE COMMUTE SET COMMUTE_END_TIME = SYSDATE, commute_num = 0
 			WHERE MEMBER_NUM = #{member_num} AND to_char(SYSDATE,'YY/MM/DD') = to_char(commute_date,'YY/MM/DD')
 		
 	</update>

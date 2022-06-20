@@ -23,7 +23,7 @@ public class CommuteEndUpdate implements Command {
 		MemberVO vo = (MemberVO) session.getAttribute("memberVO");
 		List<CommuteVO> list = dao.commuteSelectList(vo);
 		for(CommuteVO commutevo : list) {
-			if(commutevo.getCommute_start_time() != null) {
+			if(commutevo.getCommute_start_time() != null && commutevo.getCommute_end_time() == null) {
 				timeCheck = 1;
 			}
 			else {
@@ -36,7 +36,7 @@ public class CommuteEndUpdate implements Command {
 		request.setAttribute("timeCheck", timeCheck);
 		request.setAttribute("list", list);
 		
-		return "commute/commute";
+		return "ajax:"+timeCheck;
 	}
 
 }
