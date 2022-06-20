@@ -13,18 +13,19 @@
 			부서등록
 		</h2>
 	</div>
+	<hr>
 	<div class="border rounded p-3">
 		<div class="form-group">
 			<label for="section_id" class="col-sm-2 col-form-label">부서코드</label>
-			<input id="section_id" name="section_id" type="text" class="col-sm-7 input">
+			<input id="section_id" name="section_id" type="text" class="col-sm-5 input">
 		</div>
 		<div class="form-group">
 			<label for="section_name" class="col-sm-2 col-form-label">부서명</label>
-			<input id="section_name" name="section_name" type="text" class="col-sm-7 input">
+			<input id="section_name" name="section_name" type="text" class="col-sm-5 input">
 		</div>
 		<div class="form-group">
 			<label for="section_sort" class="col-sm-2 col-form-label">부서순서</label>
-			<input id="section_sort" name="section_sort" type="text" class="col-sm-7 input">
+			<input id="section_sort" name="section_sort" type="text" class="col-sm-5 input">
 		</div>
 		<div class="form-group text-right">
 			<input type="button" class="table-btn" onclick="memberUpdateCheck()" value="등록">
