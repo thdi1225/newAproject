@@ -1,6 +1,4 @@
-
-<<<<<<< HEAD
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -93,7 +91,7 @@
 		frmm.submit();
 	}
 </script>
-=======
+======= --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -182,11 +180,16 @@
 		
 	</div>
 	<script type="text/javascript">
+	let message = "${message}"
+	if(message != null && message != ''){
+		toastr.options = { "positionClass": "toast-top-center" }
+		toastr["success"](message);
+	}
+	
 	function boardDetail(board_id){
 		frmm.board_id.value = board_id;
 		frmm.submit();
 	}
 </script>
->>>>>>> branch 'main' of https://github.com/thdi1225/newAproject.git
 </body>
 </html>

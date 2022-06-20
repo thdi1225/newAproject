@@ -224,10 +224,12 @@
 					if(result == 0){
 						$("#ta").load(location.href+" #ta")
 						$("#sumbit-box").load(location.href+" #sumbit-box")
-						alert("좋은 아침입니다");
 						
+						toastr.options = { "positionClass": "toast-top-center" }
+						toastr["success"]("출근 하였습니다.");
 					}else{
-						alert("이미 출근하셨습니다.");
+						toastr.options = { "positionClass": "toast-top-center" }
+						toastr["error"]("이미 출근하셨습니다.");
 					}
 				},
 				error: function(){
@@ -246,11 +248,13 @@
 				  if(chk == 1){
 					$("#ta").load(location.href+" #ta")
 					$("#sumbit-box").load(location.href+" #sumbit-box")
-					alert("오늘 하루도 수고하셨습니다.");
+					toastr.options = { "positionClass": "toast-top-center" }
+					toastr["success"]("퇴근하셨습니다..");
 					
 				  }
 				  else if(chk == 0){
-						alert("이미 퇴근체크 완료 되어있습니다")
+					  	toastr.options = { "positionClass": "toast-top-center" }
+						toastr["success"]("이미 퇴근하셨습니다.");
 				  }
 				},
 				error: function(){

@@ -88,8 +88,7 @@
 						Logout
 					</a>
 				</div></li>
-			<a href="logout.do">logout</a>
-			<a href="myPage.do">myPage</a>
+			<li class="login-btn-li"><a class="login-btn" href="myPage.do">my Page</a>
 			<li class="login-btn-li"><a class="login-btn" href="logout.do">logout</a>
 			</li>
 		</ul>
@@ -141,27 +140,25 @@
 			a.setAttribute('id','amsg');
 			$("#dropdownMsg").append(a);
 		}
-		document.getElementById('messagesDropdown').addEventListener(
-				'click',
-				function(e) {
-					$.ajax({
-						url : "emailSelectFive.do",
-						type : "post",
-						dataType : "json",
-						success : function(res) {
-							let li =document.querySelectorAll("#amsg");
-							li.forEach(e=>{
-								console.log(e);
-								e.remove();
-							})
-							$.each(res, function(idx, item) {
-								console.log(item);
-								makeDiv(item.emailTitle,item.emailFrom);
-							})
-							makeFin();
-						}
+		document.getElementById('messagesDropdown').addEventListener('click', function(e) {
+			$.ajax({
+				url : "emailSelectFive.do",
+				type : "post",
+				dataType : "json",
+				success : function(res) {
+					let li =document.querySelectorAll("#amsg");
+					li.forEach(e=>{
+						console.log(e);
+						e.remove();
 					})
-				})
+					$.each(res, function(idx, item) {
+						console.log(item);
+						makeDiv(item.emailTitle,item.emailFrom);
+					})
+					makeFin();
+				}
+			})
+		})
 	</script>
 </body>
 </html>
