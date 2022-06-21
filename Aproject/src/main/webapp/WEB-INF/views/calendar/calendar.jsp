@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%@page import="co.prj.Aproject.calendar.CalendarVO"%>
+<%@page import="co.prj.Aproject.calendar.vo.CalendarVO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -46,7 +46,7 @@
 </style>
 </head>
 <body>
-	<div class="modal fade" id="calendar_insert_modal" tabindex="-1"
+	<div class="modal fade" id="calendar_input_modal" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -90,7 +90,7 @@
 						<div class="modal-footer">
 							<input type="button" id="add" class="btn-dark"
 								onclick="calendarInsert();" value="등록"> <input
-								type="button" class="btn-dark modal_close" value="취소">
+								type="reset" class="btn-dark" value="취소">
 						</div>
 					</form>
 				</div>
@@ -140,7 +140,7 @@
 								name="calendar_end_date" required="required">
 						</div>
 						<br />
-						<div class="modal-footer">
+						<div  class="modal-footer">
 							<input type="button" class="btn-dark" id="update"
 								onclick="calendarUpdate();" value="수정"> <input
 								type="reset" class="modal_close btn-dark"
@@ -151,31 +151,6 @@
 			</div>
 		</div>
 	</div>
-	<%-- 	<table border="1" id="ta">
-		<thead>
-			<tr>
-				<th width="150">0</th>
-				<th width="150">1</th>
-				<th width="250">2</th>
-				<th width="150">3</th>
-				<th width="100">4</th>
-				<th width="200">5</th>
-			</tr>
-		</thead>
-		<tbody id="tb">
-			<c:forEach items="${list }" var="calendar">
-				<tr>
-					<td align="center">${calendar.section_id }</td>
-					<td align="center">${calendar.calendar_id }</td>
-					<td align="center">${calendar.calendar_title }</td>
-					<td>${calendar.calendar_subject }</td>
-					<td align="center">${calendar.calendar_start_date }</td>
-					<td align="center">${calendar.calendar_end_date }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
- --%>
 
 	<div class="frm-div">
 		<c:if test="${memberVO.member_auth == 0}">
@@ -229,14 +204,15 @@
 	        center: 'title',
 	        right: 'dayGridMonth'
 	      },
-	      initialDate: '2022-06-15',
 	      selectable: true,
 	      selectMirror: true,
 	      select: function(arg) { // 등록 이벤트
-	      	$("#calendar_insert_modal").modal("show");
-	      
+	    	  
+	    	  console.log(arg);
 	    	  var start = arg.startStr;
 	    	  $("#calendar_start_date").val(start);
+	    	  
+	    	  $("#calendar_input_modal").modal("show");
 	    
 	      },
 	      eventClick: function(info) { // 수정 이벤트
@@ -246,9 +222,10 @@
 	    	  calendarDelete(info.event._def.extendedProps.calendar_id);
 	    	  
 	    	  $("#calendar_update_modal").modal("show");
+			
 	      },
 	      dateClick: function(info) {
-	    	    info.dayEl.style.backgroundColor = '#DAEAF1'; // 클릭 시 배경색 바꾸는 속성
+	    	    info.dayEl.style.backgroundColor = '#47B5FF'; // 클릭 시 배경색 바꾸는 속성
 	    	},
 	      dayMaxEvents: true, // allow "more" link when too many events
 	      events: function (info, successCallback) {

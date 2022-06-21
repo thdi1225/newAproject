@@ -1,4 +1,7 @@
-package co.prj.Aproject.calendar;
+package co.prj.Aproject.calendar.command;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,38 +9,30 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import co.prj.Aproject.calendar.service.CalenderService;
+import co.prj.Aproject.calendar.serviceImpl.CalendarServiceImpl;
+import co.prj.Aproject.calendar.vo.CalendarVO;
 import co.prj.Aproject.comm.Command;
 
-public class CalendarDelete implements Command {
-
+public class CalendarSearch implements Command {
+	
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		CalenderService dao = new CalendarServiceImpl();
-		CalendarVO vo = new CalendarVO();
+		List<CalendarVO> list = new ArrayList<CalendarVO>();
 		ObjectMapper mapper = new ObjectMapper();
 		
-		vo.setCalendar_id(Integer.valueOf(request.getParameter("calendar_id")));
-		
-		int n = dao.calendarDelete(vo);
-		
+		String key = request.getParameter("key");
+		list = dao.calendarSearchList(key);
 		String jsonData = "";
 		
 		try {
-			jsonData = mapper.writeValueAsString(vo);
+			jsonData = mapper.writeValueAsString(list);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println("Delete!!!!!!!!!!!!" + jsonData);
-		
-		if (n != 0) {
-			request.setAttribute("message", "삭제 완료");
-		} else {
-			request.setAttribute("message", "삭제 실패");
-		}
-
+		System.out.println(jsonData);
 		return "ajax:" + jsonData;
-		
 	}
 
 }

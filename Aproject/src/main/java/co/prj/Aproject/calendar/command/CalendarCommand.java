@@ -6,9 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.prj.Aproject.calendar.CalendarServiceImpl;
-import co.prj.Aproject.calendar.CalendarVO;
-import co.prj.Aproject.calendar.CalenderService;
+import co.prj.Aproject.calendar.service.CalenderService;
+import co.prj.Aproject.calendar.serviceImpl.CalendarServiceImpl;
+import co.prj.Aproject.calendar.vo.CalendarVO;
 import co.prj.Aproject.comm.Command;
 import co.prj.Aproject.section.service.SectionService;
 import co.prj.Aproject.section.serviceImpl.SectionServiceImpl;

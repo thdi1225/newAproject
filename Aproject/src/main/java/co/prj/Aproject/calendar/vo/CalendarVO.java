@@ -1,4 +1,4 @@
-package co.prj.Aproject.calendar;
+package co.prj.Aproject.calendar.vo;
 
 import java.sql.Date;
 

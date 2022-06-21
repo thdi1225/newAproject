@@ -1,4 +1,4 @@
-package co.prj.Aproject.calendar;
+package co.prj.Aproject.calendar.command;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,18 +9,25 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import co.prj.Aproject.calendar.service.CalenderService;
+import co.prj.Aproject.calendar.serviceImpl.CalendarServiceImpl;
+import co.prj.Aproject.calendar.vo.CalendarVO;
 import co.prj.Aproject.comm.Command;
 
-public class CalendarSearch implements Command {
-	
+public class CalendarList implements Command {
+
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		CalenderService dao = new CalendarServiceImpl();
+		CalendarVO vo = new CalendarVO();
 		List<CalendarVO> list = new ArrayList<CalendarVO>();
 		ObjectMapper mapper = new ObjectMapper();
+
+		// 목록 불러오기
+
+		list = dao.calendarSelectList();
+		request.setAttribute("list", list);
 		
-		String key = request.getParameter("key");
-		list = dao.calendarSearchList(key);
 		String jsonData = "";
 		
 		try {
@@ -28,7 +35,9 @@ public class CalendarSearch implements Command {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.println(jsonData);
+		
+		System.out.println("commend!!!!!!!!!!!" + jsonData);
+
 		return "ajax:" + jsonData;
 	}
 
