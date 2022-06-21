@@ -237,14 +237,17 @@
 						},
 						dataType : "json",
 						success:function(result){
-							if(result == 1){
+// 							console.log(result)
+// 							if(result == 1){
 								toastr.options = { "positionClass": "toast-top-center" }
 								toastr["info"]("삭제 되었습니다.");
 								document.getElementById("tr_"+member_num).remove();
-							}else{
-								toastr.options = { "positionClass": "toast-top-center" }
-								toastr.info("회원삭제를 실패하였습니다.");
-							}	
+// 							}else{
+// 								toastr.options = { "positionClass": "toast-top-center" }
+// 								toastr.info("회원삭제를 실패하였습니다.");
+// 							}	
+						},error:function(error){
+							console.log(error)
 						}
 					});
 				}

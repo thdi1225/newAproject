@@ -94,9 +94,14 @@
             	data:{"emailId":emailId,"toFrom":"from"},
             	dataType:"json",
             	success:function(res){
-            		location.reload();
-            		toastr.options = { "positionClass": "toast-top-center" }
-					toastr["success"]("삭제를 완료하였습니다.");
+            		swal({
+						title: "삭제를 완료하였습니다.",
+						icon: "success"
+					}).then((willDelete) => {
+						location.reload();
+					})
+//             		toastr.options = { "positionClass": "toast-top-center" }
+// 					toastr["success"]("삭제를 완료하였습니다.");
   			  		loadingPageOff();
             	}
             })
@@ -188,15 +193,17 @@
 	            data : {"emailId":JSON.stringify(cbarr),"toFrom":"f"},
 	            dataType : "json",
 	            success : function(res){
-	            	location.reload();
-	            	toastr.options = { "positionClass": "toast-top-center" }
-					toastr["success"]("삭제를 완료하였습니다.");
+	            	swal({
+						title: "삭제를 완료하였습니다.",
+						icon: "success"
+					}).then((willDelete) => {
+						location.reload();
+					})
 	            },
 	            error : function(){
 	            	toastr.options = { "positionClass": "toast-top-center" }
-					toastr.info("메일을 선택해 주세요.");
+					toastr.error("메일을 선택해 주세요.");
 	            }
-	
 	        })
 	    })
 	</script>

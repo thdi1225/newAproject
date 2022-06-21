@@ -23,6 +23,7 @@ public class MemberDeleteCommand implements Command {
 		try {
 			service.memberDelete(vo);
 		} catch (Exception e) {
+			e.printStackTrace();
 			result = 2;
 		}
 			

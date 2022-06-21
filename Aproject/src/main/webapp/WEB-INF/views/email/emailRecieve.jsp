@@ -123,10 +123,13 @@
             	data:{"emailId":emailId,"toFrom":"to"},
             	dataType:"json",
             	success:function(res){
-  			  		location.reload();
-	  			  	toastr.options = { "positionClass": "toast-top-center" }
-					toastr["success"]("삭제를 완료하였습니다.");
-  			  		loadingPageOff();
+            		swal({
+						title: "삭제를 완료하였습니다.",
+						icon: "success"
+					}).then((willDelete) => {
+						location.reload();
+		  			  	loadingPageOff();
+					})
             	}
             })
             
@@ -241,13 +244,18 @@
 	            data : {"emailId":JSON.stringify(cbarr),"toFrom":"to"},
 	            dataType : "json",
 	            success : function(res){
-	            	location.reload();
+	            	swal({
+						title: "삭제를 완료하였습니다.",
+						icon: "success"
+					}).then((willDelete) => {
+						location.reload();
+					})
 	                loadingPageOff();
 	            },
 	            error : function(){
 	            	loadingPageOff();
 	            	toastr.options = { "positionClass": "toast-top-center" }
-					toastr.info("메일을 선택해 주세요.");
+					toastr.error("메일을 선택해 주세요.");
 	            }
 	
 	        })

@@ -177,16 +177,24 @@
 	</table>
  --%>
 
-	<div class="frm-div">
+<!-- 	<div class="frm-div"> -->
 		<c:if test="${memberVO.member_auth == 0}">
 			<form id="frm">
-				<select class="select-box" id="key" name="key">
-					<option value="0">전체</option>
+				<div class="form-group row">
+					<label for="key" class="col-sm-1 col-form-label">부서</label>
+					<select id="key" name="key" class="col-sm-5 form-control" style="margin-right: 10px;">
+						<option value="0">전체</option>
+						<c:forEach items="${sectionList}" var="list">
+							<option value="${list.section_id}">${list.section_name}</option>
+						</c:forEach>
+					</select>
+					<input type="button" id="search" class="btn-dark" onclick="calendarSearch()" value="검색">
+				</div>
+				<%-- <select class="select-box" id="key" name="key">
 					<c:forEach items="${sectionList}" var="section">
 						<option value="${section.section_id}">${section.section_name}</option>
 					</c:forEach>
-				</select> <input type="button" id="search" class="btn-dark"
-					onclick="calendarSearch();" value="검색">
+				</select>  --%>
 			</form>
 		</c:if>
 		<c:if test="${memberVO.member_auth == 1}">
@@ -197,7 +205,7 @@
 			<input type="hidden" id="search" class="btn-dark"
 				onclick="calendarSearch();" value="검색">
 		</c:if>
-	</div>
+<!-- 	</div> -->
 
 	<div id='calendar'></div>
 
@@ -272,7 +280,12 @@
   			data: $('#frm').serialize(),
   			dataType: "json",
   			success: function(data) {
-  				location.href="calendar.do";
+  				swal({
+					title: "일정이 등록되었습니다.",
+					icon: "success"
+				}).then((willDelete) => {
+					location.href="calendar.do";
+				})
   			}, 
   			error: function() {
   			}
@@ -294,7 +307,12 @@
   				"calendar_end_date": $("#calendar_end_date2").val()
   			},
   			success: function(result) {
-  				location.href="calendar.do";
+  				swal({
+					title: "일정이 수정되었습니다.",
+					icon: "success"
+				}).then((willDelete) => {
+  					location.href="calendar.do";
+				})
   				
   			}, 
   			error: function() {
@@ -317,7 +335,7 @@
  				$("#calendar_subject2").val(result.calendar_subject);
  				$("#calendar_start_date2").val(result.calendar_start_date);
  				$("#calendar_end_date2").val(result.calendar_end_date);
- 				}
+ 			}
  		});
  	}
  	
@@ -330,7 +348,13 @@
  			},
  			dataType: "json",
  			success: function(result) {
- 				location.href="calendar.do";
+ 				swal({
+					title: "일정이 삭제되었습니다.",
+					icon: "success"
+				}).then((willDelete) => {
+					location.href="calendar.do";
+				})
+ 				
  			}
  		});
  	}
