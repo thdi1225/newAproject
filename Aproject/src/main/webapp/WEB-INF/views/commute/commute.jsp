@@ -76,19 +76,21 @@
 			<input type="hidden" value="${checkInt}" id="commuteCheck">
 			<input type= "hidden" value="${timeCheck}"  id ="timeCheck">
 
-			<c:if test="${v != 1 }">
+			<c:if test="${v == null}">
 			<form action="commuteStartInsert.do" method="post">
 				<input type="button" id="startButton" value="출근하기"  onclick="start_button();" class="commutebutton">
 			</form>
 			</c:if>
-			
-			<c:if test="${v == 1}">
+			<c:if test="${v == 1 && todayCheck == 1}">
 			<form action="commuteEndUpdate.do" method="post"
 				style="display: inline-block;">
 				<input type="button" id="endButton"  value="퇴근하기"  onclick="end_button();" class="commutebutton">
 			</form>
 			</c:if>
 			
+			<c:if test="${v == 2  && todayCheck == 1}">
+				<p style="text-align: center; font-size: 18px;">퇴근을 완료 하셨습니다 오늘 하루도 고생하셨습니다.</p>				
+			</c:if>
 			
 		</div>
 	</div>

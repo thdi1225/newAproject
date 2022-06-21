@@ -38,14 +38,23 @@
         
         
         <h1>출퇴근</h1>
-        <c:if test="${cn == 0 }">
+        <c:if test="${cn == null}">
+        <c:if test="${memberVO.member_auth == 1 }">
         <a href="commuteSelectList.do">출근하기</a>
         </c:if>
-        <c:if test="${cn == 1 }">
-        	<a href="commuteSelectList.do">출근을 완료하였습니다</a>
         </c:if>
         
-        <c:if test="${cn == 2 }">
+        
+        <c:if test="${cn == 1 && homeCk == 1}">
+	 	<c:if test="${memberVO.member_auth == 1 }">
+       	 <a href="commuteSelectList.do">출근완료가 되었습니다.</a>
+        </c:if>
+       	<c:if test="${memberVO.member_auth == 0 }">
+         	<a href="commuteEmpSelectList.do">출근완료가 되었습니다.</a>
+        </c:if>        
+        </c:if>
+        
+        <c:if test="${cn == 2  && homeCk == 1 }">
         	<p>이미 퇴근을 완료하였습니다.</p>
         </c:if>
         
