@@ -41,7 +41,7 @@
 			</div>
 
 			<div class="sub_tab">
-				<span><i class="fa-solid fa-table-list"></i></span>
+				<span><i class="fa-solid fa-comments"></i></span>
 				<h1>커뮤니티</h1>
 				<p>
 					<a href="boardList.do">작성한 게시글 보러 가기</a>
@@ -50,7 +50,7 @@
 
 			<!-- yong -->
 			<div class="sub_tab">
-		        <span><i class="fa-brands fa-flipboard"></i></span>
+		        <span><i class="fa-solid fa-user-plus"></i></span>
 		        
 		        <h1>출퇴근</h1>
 		 		<c:if test="${memberVO.member_auth == 0}">

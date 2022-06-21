@@ -59,7 +59,7 @@
 	    <li class="nav-item">
 	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#emailPage"
 	            aria-expanded="true" aria-controls="collapseTwo">
-	            <i class="fas fa-fw fa-cog"></i>
+	            <i class="fa-solid fa-envelope" style="padding-left: 2px;"></i>
 	            <span>메일관리</span>
 	        </a>
 	        <div id="emailPage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -82,7 +82,7 @@
 	    <li class="nav-item">
 	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#calendarPage"
 	            aria-expanded="true" aria-controls="collapseUtilities">
-	            <i class="fas fa-fw fa-wrench"></i>
+	            <i class="fa-solid fa-calendar" style="padding-left: 2px;"></i>
 	            <span>일정관리</span>
 	        </a>
 	        <div id="calendarPage" class="collapse" aria-labelledby="headingUtilities"
@@ -97,7 +97,7 @@
 	    <li class="nav-item">
 	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#boardPage"
 	            aria-expanded="true" aria-controls="collapseUtilities">
-	            <i class="fas fa-fw fa-wrench"></i>
+	            <i class="fa-solid fa-comments" style="padding-left: 2px;"></i>
 	            <span>커뮤니티</span>
 	        </a>
 	        <div id="boardPage" class="collapse" aria-labelledby="headingUtilities"
@@ -113,7 +113,7 @@
 	    <li class="nav-item">
 	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#commutePage"
 	            aria-expanded="true" aria-controls="collapseUtilities">
-	            <i class="fas fa-fw fa-wrench"></i>
+	            <i class="fa-solid fa-user-plus" style="padding-left: 2px;"></i>
 	            <span>출퇴근</span>
 	        </a>
 	        <div id="commutePage" class="collapse" aria-labelledby="headingUtilities"

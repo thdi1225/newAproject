@@ -28,7 +28,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <body>
 	<div id="wrapper">
-
 		<tiles:insertAttribute name="side" />
 
 		<div id="content-wrapper" class="d-flex flex-column">
