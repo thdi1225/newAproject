@@ -15,10 +15,12 @@
 			<c:if test="${empty email.emailFrom}">
 				<p class="inline">TO :</p>
 				<p id="to" class="toBlock inline">${email.emailTo}</p>
+				<input id="reBtn" name="reBtn" type="button" value="다시 보내기">
 			</c:if>
 			<c:if test="${empty email.emailTo}">
 				<p class="inline">FROM :</p>
 				<p class="toBlock inline">${email.emailFrom}</p>
+				<input id="reBtn" name="reBtn" type="button" value="답장">
 			</c:if>
 			<p class="title">${email.emailTitle}</p>
 		</div>
@@ -26,6 +28,12 @@
 			<p>${email.emailSubject}</p>
 		</div>
 	</div>
+	<script>
+		document.querySelector('#reBtn').addEventListener('click', moveToSend);
+		function moveToSend(e) {
+
+		}
+	</script>
 
 </body>
 </html>

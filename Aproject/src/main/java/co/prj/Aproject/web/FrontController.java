@@ -156,6 +156,7 @@ public class FrontController extends HttpServlet {
 		map.put("/commuteSelectDate.do", new CommuteSelectDate());
 		map.put("/commuteEmpSelectList.do", new CommuteEmpSelectList());
 		map.put("/commuteEmpSearchList.do", new CommuteEmpSearchList());
+		
 
 	}
 
@@ -169,6 +170,7 @@ public class FrontController extends HttpServlet {
 		
 		Command command = map.get(page);
 		String viewPage = command.exec(request, response);
+
 		if(viewPage == null) {
 	         viewPage = "404/404page.tiles";
 	    }else if(viewPage.startsWith("ajax:")) {

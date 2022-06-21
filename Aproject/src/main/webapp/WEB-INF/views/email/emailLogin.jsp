@@ -63,14 +63,10 @@
 					loadingPageOff();
 					let data = $.trim(res);
 					if(data=="true"){
-						swal({
-							title: "메일 계정 로그인되었습니다.",
-							icon: "success"
-						}).then((willDelete) => {
-							location.href='emailSend.do';
-						})
+						alert("메일 계정 로그인되었습니다.");
+						location.href='emailSend.do';
 					}else{
-						swal('아이디 또는 비밀번호를 다시 확인해주세요.', '', "warning");
+						alert("아이디 또는 비밀번호를 다시 확인해주세요.");
 						document.getElementById('mailEmail').value="";
 						document.getElementById('mailPw').value="";
 					}

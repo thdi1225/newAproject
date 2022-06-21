@@ -10,6 +10,89 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/commute.css">
 <title>Insert title here</title>
+<style type="text/css">
+
+ .select-box {
+	display: block;
+	font-size: 18px;
+	color: #60666d;
+	border: 2px solid #60666d;
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 14px;
+	position: absolute;
+	left:50%;
+	width: 200px;
+	margin-left: -100px;
+	
+	
+}
+.select-box:hover{
+background: #68718b;
+	color: #fff;
+}
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  position: absolute;
+  top: 80px;
+}
+.table-btn {
+    padding: 3px 15px;
+    border: 1px solid #ddd;
+    background: #f1f1f1;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+}
+
+.bottom-box{
+	overflow: auto;
+	height: 60vh;
+	width: 100%;
+	position: relative;
+
+}
+#clock {
+	width: 800px;
+	height: 250px;
+	line-height: 250px;
+	color: #666;
+	font-size: 100px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.top-box {
+	width: 100%;
+	height:400px;
+	position: relative;
+}
+
+
+
+.month-font{
+	display: inline;
+	font-size: 50px;
+}
+
+.container-box{
+	width: 100%;
+	margin: 0;
+	padding: 10px;
+	
+}
+.commute-list-location{
+	width:600px;
+	position: absolute;
+	left: 50%;
+	margin-left:-200px;
+	padding: 10px;
+} 
+</style>
 </head>
 <script>
 	function printClock() {
@@ -59,17 +142,11 @@
 <body onload="printClock()">
 
 <div class="container-box">
-<div style="width: 100%; height: 50px">
-<h2 style="font-size: 2rem; font-weight: 400; float: left; display: inline; line-height: 50px">출퇴근 관리</h2>
-<p style="float: right; display: inline; margin-top: 0px;font-size: 12px">출퇴근 > 출퇴근 관리</p>
-</div>
-<hr>
+
 	<div class="top-box">
 		<div id="clock"></div>
-		<div class= "list-btn-box">
-			<button class="list-btn" onclick="test1();">month-list</button>
-			<button class=list-btn onclick="test2();">all-list</button>
-		</div>
+		
+		
 		
 		<div id="sumbit-box">
 		
@@ -78,14 +155,14 @@
 
 			<c:if test="${v != 1 }">
 			<form action="commuteStartInsert.do" method="post">
-				<input type="button" id="startButton" value="출근하기"  onclick="start_button();" class="commutebutton">
+				<input type="button" id="startButton" value="출근하기"  onclick="start_button();" class="select-box">
 			</form>
 			</c:if>
 			
 			<c:if test="${v == 1}">
 			<form action="commuteEndUpdate.do" method="post"
 				style="display: inline-block;">
-				<input type="button" id="endButton"  value="퇴근하기"  onclick="end_button();" class="commutebutton">
+				<input type="button" id="endButton"  value="퇴근하기"  onclick="end_button();" class="select-box">
 			</form>
 			</c:if>
 			
@@ -96,17 +173,19 @@
 			<div class="bottom-box">
 				<div class="commute-list-location">
 				<div id="test2" class="commutelist-box">
-				<h1 style="display: inline;  font-family: 'Roboto', sans-serif;">출퇴근 전체 리스트</h1>
+				<h1 style="display: inline;">출퇴근 전체 리스트</h1>
+				<button style="display: inline;" class="table-btn" onclick="test1();">월별 리스트 보기</button>
 				</div>
 				<div id="test" style="width: 600px;">
-				 <button type="button" onclick="lastMonth();" class="table-btn" >지난 달</button>
-			  	<h1 style="display: inline;"><strong><span id="number" style=" font-family: 'Roboto', sans-serif;" ></span></strong></h1><h1 style="display: inline;  font-family: 'Roboto', sans-serif;">월</h1>
+				<button type="button" onclick="lastMonth();" class="table-btn" >지난 달</button>
+			  	<h1 style="display: inline;"><strong><span id="number" ></span></strong></h1><h1 style="display: inline;">월</h1>
 				<button type="button" onclick="nextMonth();"class="table-btn">다음 달</button>
+				<button class="table-btn" onclick="test2();">전체 리스트 보기</button>
 				</div>
 				</div>			
 				
 				<div id="test3">
-				<table class="tables" id="ta" style="top: 80px;">
+				<table class="table" id="ta">
 						<thead>
 							<tr>
 								<th>순번</th>
@@ -224,12 +303,10 @@
 					if(result == 0){
 						$("#ta").load(location.href+" #ta")
 						$("#sumbit-box").load(location.href+" #sumbit-box")
+						alert("좋은 아침입니다");
 						
-						toastr.options = { "positionClass": "toast-top-center" }
-						toastr["success"]("출근 하였습니다.");
 					}else{
-						toastr.options = { "positionClass": "toast-top-center" }
-						toastr["error"]("이미 출근하셨습니다.");
+						alert("이미 출근하셨습니다.");
 					}
 				},
 				error: function(){
@@ -248,13 +325,11 @@
 				  if(chk == 1){
 					$("#ta").load(location.href+" #ta")
 					$("#sumbit-box").load(location.href+" #sumbit-box")
-					toastr.options = { "positionClass": "toast-top-center" }
-					toastr["success"]("퇴근하셨습니다..");
+					alert("오늘 하루도 수고하셨습니다.");
 					
 				  }
 				  else if(chk == 0){
-					  	toastr.options = { "positionClass": "toast-top-center" }
-						toastr["success"]("이미 퇴근하셨습니다.");
+						alert("이미 퇴근체크 완료 되어있습니다")
 				  }
 				},
 				error: function(){

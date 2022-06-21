@@ -124,8 +124,7 @@
             	dataType:"json",
             	success:function(res){
   			  		location.reload();
-	  			  	toastr.options = { "positionClass": "toast-top-center" }
-					toastr["success"]("삭제를 완료하였습니다.");
+  			  		alert("삭제 완료되었습니다.")
   			  		loadingPageOff();
             	}
             })
@@ -146,6 +145,7 @@
 					location.reload();
         		},
         		error:function(){
+        			console.log("data가 없다...");
         			location.href='emailEmpty.do';
         		}
         	})
@@ -246,8 +246,7 @@
 	            },
 	            error : function(){
 	            	loadingPageOff();
-	            	toastr.options = { "positionClass": "toast-top-center" }
-					toastr.info("메일을 선택해 주세요.");
+	                alert("메일을 선택해주세요.")
 	            }
 	
 	        })

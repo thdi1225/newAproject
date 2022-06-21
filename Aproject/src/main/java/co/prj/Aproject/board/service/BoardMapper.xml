@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.prj.Aproject.board.service.BoardMapper">
-<select id="boardSelectFive" parameterType="int" resultType = "co.prj.Aproject.board.vo.BoardVO">
-		select * from
-		(select * from board
-		ORDER BY BOARD_ID DESC)
-		<![CDATA[where rownum<=3]]>
-	</select>	
+	
 
     <select id="boardSelectList" resultType="co.prj.Aproject.board.vo.BoardVO">
 		SELECT * 

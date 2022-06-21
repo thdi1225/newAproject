@@ -97,7 +97,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="tel
     border: none;
 }
 
-.table > thead > tr > th {
+table > thead > tr > th {
   font-weight: 400;
   color: #757575;
   vertical-align: bottom;

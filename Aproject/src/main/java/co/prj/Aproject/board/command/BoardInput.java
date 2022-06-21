@@ -50,11 +50,8 @@ public class BoardInput implements Command {
 			int n = dao.boardInsert(vo);
 			
 			List<BoardVO> list = new ArrayList<BoardVO>();
-			
 			list = dao.boardSelectList(null);
-			
 			request.setAttribute("list", list);
-			request.setAttribute("message", "등록되었습니다.");
 			
 			return "boardList.do";
 		}

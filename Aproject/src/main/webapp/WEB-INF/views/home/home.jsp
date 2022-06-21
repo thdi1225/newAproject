@@ -60,7 +60,7 @@
 					<c:if test="${cn == 1 }">
 						<a href="commuteSelectList.do">출근을 완료하였습니다</a>
 					</c:if>
-	
+
 					<c:if test="${cn == 2 }">
 						<p>이미 퇴근을 완료하였습니다.</p>
 					</c:if>
@@ -75,7 +75,7 @@
 		</div>
 		<div id="box3">
 			<div class="h1_title">
-				<p>Community</p> 
+				<p>Community</p>
 				<table class="table" id="ta">
 					<tr>
 						<th>글번호</th>
@@ -95,7 +95,7 @@
 							<td>${board.fileName }</td>
 						</tr>
 					</c:forEach>
-			</table>
+				</table>
 			</div>
 			<div>
 				<form>
@@ -109,6 +109,17 @@
 
 	<script>
     document.addEventListener('DOMContentLoaded', function() {
+    	$.ajax({
+    		url: "calendarList.do",
+    		type: "get",
+    		dataType: "json",
+    		success: function(data) {
+    			fullCalendar(data);
+    		}
+    	});
+    	
+    });
+    	function fullCalendar(data) {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'listDay',
@@ -118,10 +129,19 @@
       center: '',
       right: 'listDay'
     },
-        events: 'https://fullcalendar.io/demo-events.json'
+    events: function (info, successCallback) {
+		for(var i = 0; i < data.length; i++) {
+			data[i].section_id = data[i].section_id;
+			data[i].calendar_id = data[i].calendar_id;
+			data[i].title = data[i].calendar_title;
+			data[i].start = data[i].calendar_start_date;
+			data[i].end = data[i].calendar_end_date;	
+		}
+	    successCallback(data);
+  } 
       });
       calendar.render();
-    });
+    	}
 
 	</script>
 
