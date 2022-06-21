@@ -8,7 +8,6 @@
 <head>
 <meta charset='utf-8' />
 <link href='css/calendar/main.css' rel='stylesheet' />
-<link href='css/calendar/modal.css' rel='stylesheet' />
 <link href='css/all.css' rel='stylesheet' />
 <script src='js/calendar/main.js'></script>
 <style>
@@ -19,126 +18,143 @@
 	margin-bottom: 20px;
 	background: #fff;
 }
+
 .frm-div {
-background: #fff;
-    max-width: 1100px;
-    margin: auto;
-    margin-top: 30px;
-    /* display: flex; */
-    flex-direction: row;
-    padding-left: 30px;
-    padding-top: 30px;
-    }
+	background: #fff;
+	max-width: 1100px;
+	margin: auto;
+	margin-top: 30px;
+	/* display: flex; */
+	flex-direction: row;
+	padding-left: 30px;
+	padding-top: 30px;
+}
+
 .frm-div form {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-    }
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
 .select-box {
-    margin-right: 10px;
-    width: 93.56px;
-    }
+	margin-right: 10px;
+	width: 93.56px;
+}
+
 .btn-dark {
 	width: 63.16px;
 }
 </style>
 </head>
 <body>
-	<div id="calendar_input_modal" class="hidden">
-		<div id="calendar_input_modal_body">
-			<div>
-				<h1>${message }</h1>
+	<div class="modal fade" id="calendar_insert_modal" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">일정 등록</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="frm" action="calendarInput.do" method="post"
+						enctype="application/x-www-form-urlencoded">
+						<input type="hidden" id="member_num" name="member_num"
+							value="${memberVO.member_num}"> <input type="hidden"
+							id="section_id" name="section_id" value="${memberVO.section_id}">
+						<div>
+							<h6>title</h6>
+							<input type="text" id="calendar_title" name="calendar_title"
+								required="required">
+						</div>
+						<br />
+						<div>
+							<h6>subject</h6>
+							<input type="text" id="calendar_subject" name="calendar_subject"
+								required="required">
+						</div>
+						<br />
+						<div>
+							<h6>start-date</h6>
+							<input type="date" id="calendar_start_date"
+								name="calendar_start_date" required="required">
+						</div>
+						<br />
+						<div>
+							<h6>end-date</h6>
+							<input type="date" id="calendar_end_date"
+								name="calendar_end_date" required="required">
+						</div>
+						<br />
+						<div class="modal-footer">
+							<input type="button" id="add" class="btn-dark"
+								onclick="calendarInsert();" value="등록"> <input
+								type="button" class="btn-dark modal_close" value="취소">
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="modal_close">
-				<span>X</span>
-			</div>
-			<h1>일정 등록</h1>
-			<form id="frm" action="calendarInput.do" method="post"
-				enctype="application/x-www-form-urlencoded">
-				<input type="hidden" id="member_num" name="member_num" value="${memberVO.member_num}">
-				<input type="hidden" id="section_id" name="section_id" value="${memberVO.section_id}">
-				<div>
-					<h6>title</h6>
-					<input type="text" id="calendar_title" name="calendar_title"
-						required="required">
-				</div>
-				<br />
-				<div>
-					<h6>subject</h6>
-					<input type="text" id="calendar_subject" name="calendar_subject"
-						required="required">
-				</div>
-				<br />
-				<div>
-					<h6>start-date</h6>
-					<input type="date" id="calendar_start_date"
-						name="calendar_start_date" required="required">
-				</div>
-				<br />
-				<div>
-					<h6>end-date</h6>
-					<input type="date" id="calendar_end_date" name="calendar_end_date"
-						required="required">
-				</div>
-				<br />
-				<div>
-					<input type="button" id="add" class="btn-dark" onclick="calendarInsert();"
-						value="등록" > <input type="reset" class="btn-dark" value="취소">
-				</div>
-			</form>
 		</div>
 	</div>
 
-	<div id="calendar_update_modal" class="hidden">
-		<div id="calendar_update_modal_body">
-			<div>
-				<h1>${message }</h1>
+	<div class="modal fade" id="calendar_update_modal" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">일정 수정</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="frm" action="calendarUpdate.do" method="post"
+						enctype="application/x-www-form-urlencoded">
+						<input type="hidden" id="calendar_id" name="calendar_id">
+						<input type="hidden" id="member_num2" name="member_num"
+							value="${memberVO.member_num}"> <input type="hidden"
+							id="section_id2" name="section_id" value="${memberVO.section_id}">
+						<div>
+							<h6>title</h6>
+							<input type="text" id="calendar_title2" name="calendar_title"
+								required="required">
+						</div>
+						<br />
+						<div>
+							<h6>subject</h6>
+							<input type="text" id="calendar_subject2" name="calendar_subject"
+								required="required">
+						</div>
+						<br />
+						<div>
+							<h6>start-date</h6>
+							<input type="date" id="calendar_start_date2"
+								name="calendar_start_date" required="required">
+						</div>
+						<br />
+						<div>
+							<h6>end-date</h6>
+							<input type="date" id="calendar_end_date2"
+								name="calendar_end_date" required="required">
+						</div>
+						<br />
+						<div class="modal-footer">
+							<input type="button" class="btn-dark" id="update"
+								onclick="calendarUpdate();" value="수정"> <input
+								type="reset" class="modal_close btn-dark"
+								onclick="calendarDelete();" value="삭제">
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="modal_close">
-				<span>X</span>
-			</div>
-			<h1>일정 수정</h1>
-			<form id="frm" action="calendarUpdate.do" method="post"
-				enctype="application/x-www-form-urlencoded">
-				<input type="hidden" id="calendar_id" name="calendar_id">
-				<input type="hidden" id="member_num2" name="member_num" value="${memberVO.member_num}">
-				<input type="hidden" id="section_id2" name="section_id" value="${memberVO.section_id}">
-				<div>
-					<h6>title</h6>
-					<input type="text" id="calendar_title2" name="calendar_title"
-						required="required">
-				</div>
-				<br />
-				<div>
-					<h6>subject</h6>
-					<input type="text" id="calendar_subject2" name="calendar_subject"
-						required="required">
-				</div>
-				<br />
-				<div>
-					<h6>start-date</h6>
-					<input type="date" id="calendar_start_date2"
-						name="calendar_start_date" required="required">
-				</div>
-				<br />
-				<div>
-					<h6>end-date</h6>
-					<input type="date" id="calendar_end_date2" name="calendar_end_date"
-						required="required">
-				</div>
-				<br />
-				<div>
-
-					<input type="button" class="btn-dark" id="update" onclick="calendarUpdate();"
-						value="수정"> <input type="reset" class="modal_close btn-dark"
-						onclick="calendarDelete();" value="삭제">
-				</div>
-			</form>
 		</div>
 	</div>
-<%-- 	<table border="1" id="ta">
+	<%-- 	<table border="1" id="ta">
 		<thead>
 			<tr>
 				<th width="150">0</th>
@@ -163,8 +179,8 @@ background: #fff;
 		</tbody>
 	</table>
  --%>
- 
- 	<div class="frm-div">
+
+	<div class="frm-div">
 		<c:if test="${memberVO.member_auth == 0}">
 			<form id="frm">
 				<select class="select-box" id="key" name="key">
@@ -172,18 +188,20 @@ background: #fff;
 					<c:forEach items="${sectionList}" var="section">
 						<option value="${section.section_id}">${section.section_name}</option>
 					</c:forEach>
-				</select> 
-				<input type="button" id="search" class="btn-dark" onclick="calendarSearch();" value="검색">
+				</select> <input type="button" id="search" class="btn-dark"
+					onclick="calendarSearch();" value="검색">
 			</form>
 		</c:if>
 		<c:if test="${memberVO.member_auth == 1}">
 			<form id="frm">
-				<input type="hidden" id="key" name="key" value="${memberVO.section_id}">
+				<input type="hidden" id="key" name="key"
+					value="${memberVO.section_id}">
 			</form>
-			<input type="hidden" id="search" class="btn-dark" onclick="calendarSearch();" value="검색">
+			<input type="hidden" id="search" class="btn-dark"
+				onclick="calendarSearch();" value="검색">
 		</c:if>
 	</div>
- 
+
 	<div id='calendar'></div>
 
 	<script>
@@ -218,16 +236,10 @@ background: #fff;
 	      selectable: true,
 	      selectMirror: true,
 	      select: function(arg) { // 등록 이벤트
-	    	  console.log(arg);
+	      	$("#calendar_insert_modal").modal("show");
+	      
 	    	  var start = arg.startStr;
 	    	  $("#calendar_start_date").val(start);
-	    	 const modal = document.getElementById("calendar_input_modal");
-	    	 const close = document.querySelector(".modal_close");
-	      		 modal.style.display = 'block';
-	      
-	      	close.addEventListener('click', function() {
-	      	 		modal.style.display = 'none';
-	      	 });
 	    
 	      },
 	      eventClick: function(info) { // 수정 이벤트
@@ -236,17 +248,10 @@ background: #fff;
 	    	  calendarUpdate(info.event._def.extendedProps.calendar_id);
 	    	  calendarDelete(info.event._def.extendedProps.calendar_id);
 	    	  
-	    	 const modal = document.getElementById("calendar_update_modal");
-	     	 const close = document.querySelector(".modal_close");
-	       		 modal.style.display = 'block';
-	       
-	       	close.addEventListener('click', function() {
-	       	 	modal.style.display = 'none';
-			});
-			
+	    	  $("#calendar_update_modal").modal("show");
 	      },
 	      dateClick: function(info) {
-	    	    info.dayEl.style.backgroundColor = '#47B5FF'; // 클릭 시 배경색 바꾸는 속성
+	    	    info.dayEl.style.backgroundColor = '#DAEAF1'; // 클릭 시 배경색 바꾸는 속성
 	    	},
 	      dayMaxEvents: true, // allow "more" link when too many events
 	      events: function (info, successCallback) {

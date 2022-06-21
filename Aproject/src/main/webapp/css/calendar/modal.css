@@ -18,13 +18,17 @@
 	width: 400px;
 	height: 600px;
 	padding: 40px;
-	text-align: center;
 	background-color: #fff;
 	border-radius: 5px;
 	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-	transform: translateX(-50%) translateY(-80%);
+	transform: translateX(-50%) translateY(-50%);
 	z-index: 99;
 }
+
+#calendar_input_modal #calendar_input_modal_body h5 {
+	float: left;
+}
+
 .hidden {
 	display: none;
 } 
