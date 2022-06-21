@@ -26,6 +26,12 @@
 	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Nanum+Gothic&display=swap"
+	rel="stylesheet">
+<script src="https://kit.fontawesome.com/1cb815469f.js"
+	crossorigin="anonymous"></script>
 <body>
 	<div id="wrapper">
 		<tiles:insertAttribute name="side" />
