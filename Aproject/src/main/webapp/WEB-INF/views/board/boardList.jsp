@@ -41,7 +41,7 @@
 						<th>제목</th>
 						<th>작성일자</th>
 						<th>조회수</th>
-						<th>첨부파일</th>
+<!-- 						<th>첨부파일</th> -->
 					</tr>
 					<c:forEach items="${list }" var="board">
 						<tr onclick="boardDetail(${board.board_id })">
@@ -50,7 +50,7 @@
 							<td>${board.board_title }</td>
 							<td align="center">${board.board_date }</td>
 							<td align="center">${board.hit }</td>
-							<td>${board.fileName }</td>
+<%-- 							<td>${board.fileName }</td> --%>
 						</tr>
 					</c:forEach>
 			</table>

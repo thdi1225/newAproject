@@ -38,12 +38,12 @@
 							<textarea rows="10" cols="120" id="subject" name="subject"></textarea>
 						</td>
 					</tr>
-					<tr>
-						<th>첨부파일</th>
-						<td colspan="3">
-							<input type="file" id="file" name="file">
-						</td>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<th>첨부파일</th> -->
+<!-- 						<td colspan="3"> -->
+<!-- 							<input type="file" id="file" name="file"> -->
+<!-- 						</td> -->
+<!-- 					</tr> -->
 				</table>
 			</div><br/>
 			<div>

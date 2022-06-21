@@ -39,7 +39,7 @@
 
     <insert id="boardInsert" parameterType="co.prj.Aproject.board.vo.BoardVO">
         INSERT INTO BOARD
-                     VALUES(board_id_seq.nextval,#{board_title},#{board_subject},default,#{member_num},#{hit},#{fileName},#{dirFileName},#{board_writer}) 
+                     VALUES(board_id_seq.nextval,#{board_title},#{board_subject},sysdate,#{member_num},#{hit},#{fileName},#{dirFileName},#{board_writer}) 
     </insert>
 
     <update id="boardUpdate" parameterType="co.prj.Aproject.board.vo.BoardVO">

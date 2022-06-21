@@ -70,7 +70,7 @@
 					class="mr-2 d-none d-lg-inline text-gray-600 small">${memberVO.member_name}</span> <img class="img-profile rounded-circle"
 					src="img/undraw_profile.svg">
 			</a> <!-- Dropdown - User Information -->
-				<div
+				<!-- <div
 					class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 					aria-labelledby="userDropdown">
 					<a class="dropdown-item" href="#"> <i
@@ -87,8 +87,9 @@
 						class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 						Logout
 					</a>
-				</div></li>
-			<li class="login-btn-li"><a class="login-btn" href="myPage.do">my Page</a>
+				</div>-->
+			</li> 
+			<li class="login-btn-li"><a class="login-btn" href="myPage.do" style="margin-right: 10px;">my Page</a>
 			<li class="login-btn-li"><a class="login-btn" href="logout.do">logout</a>
 			</li>
 		</ul>
