@@ -24,10 +24,7 @@
 	max-width: 1100px;
 	margin: auto;
 	margin-top: 30px;
-	/* display: flex; */
 	flex-direction: row;
-	padding-left: 30px;
-	padding-top: 30px;
 }
 
 .frm-div form {
