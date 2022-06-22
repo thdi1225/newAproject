@@ -7,17 +7,37 @@
 <head>
 <meta charset="UTF-8">
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
-
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
 	<link rel="stylesheet" href="css/commute.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
+<style type="text/css">
+
+.list-title{
+	
+	display: inline;
+	font-family: 'Roboto', sans-serif;
+	  
+}
+
+@media screen and (max-width : 1500px)  {
+
+	.title-box{
+		width: 100%;
+		position: absolute;
+		top: 70px;
+	
+	}
+	.emp-list-btn-box{
+		position: absolute;
+		top:10px;
+		right: 10px;
+	}
+}
+
+
+</style>
 </head>
-
-
-
-</head>
-
 <body>
 
 
@@ -38,9 +58,13 @@
 			<button class="list-btn" onclick="test1();">month-list</button>
 			<button class=list-btn onclick="test2();">all-list</button>
 		</div>
+		
+		
+				<div class="title-box">
+		
 				<div class="commute-list-location">
 				<div id="test2" class="commutelist-box">
-				<h1 style="display: inline;  font-family: 'Roboto', sans-serif;">출퇴근 전체 리스트</h1>
+				<h1 class="list-title">출퇴근 전체 리스트</h1>
 				</div>
 				<div id="test" style="width: 600px;">
 				 <button type="button" onclick="lastMonth();" class="table-btn" >지난 달</button>
@@ -74,7 +98,7 @@
 					</table>
 				</div>
 					</div>
-					
+					</div>
 			</div>
 			
 			
